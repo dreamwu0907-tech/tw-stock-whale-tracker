@@ -22,19 +22,20 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 <div class="top"><div><h1>台股大戶動向觀察站</h1><p class="sub">免費公開資料｜收盤後更新｜以籌碼與量價訊號篩選觀察股</p></div><span class="pill">MVP v0.1 · 上市股票</span></div>
 <div class="cards">
  <div class="card"><div class="k">資料日期</div><div class="v" id="date">—</div></div>
- <div class="card"><div class="k">符合條件股票</div><div class="v" id="count">—</div></div>
- <div class="card"><div class="k">偏多觀察股</div><div class="v" id="bull">—</div></div>
+ <div class="card"><div class="k">策略合格股票</div><div class="v" id="count">—</div></div>
+ <div class="card"><div class="k">優先觀察（80分以上）</div><div class="v" id="bull">—</div></div>
  <div class="card"><div class="k">資料更新時間</div><div class="v" style="font-size:16px" id="updated">—</div></div>
 </div>
 <section class="panel">
 <h2>每日籌碼觀察排行</h2>
-<div class="filters"><input id="search" placeholder="輸入代號或名稱搜尋"><select id="sort"><option value="score">依觀察分數排序</option><option value="foreign">外資買超排序</option><option value="trust">投信買超排序</option><option value="volume">成交量比排序</option><option value="change">漲跌幅排序</option></select><button id="refresh">重新載入</button></div>
-<div class="scroll"><table><thead><tr><th>排名</th><th>代號／名稱</th><th>收盤價</th><th>漲跌%</th><th>成交量比</th><th>外資買賣超(張)</th><th>投信買賣超(張)</th><th>觀察分數</th><th>訊號摘要</th></tr></thead><tbody id="rows"><tr><td colspan="9" class="muted" style="text-align:center">正在載入資料…</td></tr></tbody></table></div>
+<div class="filters"><input id="search" placeholder="輸入代號或名稱搜尋"><select id="filter"><option value="all">全部股票</option><option value="qualified">只看策略合格</option><option value="complete">只看資料完整</option></select><select id="sort"><option value="score">依總分排序</option><option value="foreign_5d">外資近5日買超排序</option><option value="trust_5d">投信近5日買超排序</option><option value="return_5d_pct">近5日漲幅排序</option><option value="volume_ratio">成交量比排序</option></select><button id="refresh">重新載入</button></div>
+<div class="scroll"><table><thead><tr><th>排名</th><th>代號／名稱</th><th>收盤價</th><th>漲跌%</th><th>近5日漲幅</th><th>外資近5日(張)</th><th>投信近5日(張)</th><th>法人方向</th><th>DMI</th><th>總分</th><th>策略資格</th><th>訊號摘要</th></tr></thead><tbody id="rows"><tr><td colspan="12" class="muted" style="text-align:center">正在載入資料…</td></tr></tbody></table></div>
 <div class="status" id="status">資料讀取中。</div>
 </section>
-<section class="panel"><h2>如何解讀這份排行</h2>
-<p>分數是「量價＋法人」的觀察分數，不代表能辨識真實大戶，也不是買賣建議。上市股票的三大法人資料每日盤後更新；本版本尚未接入集保每週股權分散資料與券商分點資料。</p>
-<p class="note">注意：外資、投信買賣超以張數表示；成交量比為當日成交量相對於近 20 個交易日平均量的倍數。資料缺漏時會顯示 —。休市日或上游資料格式變更時，更新時間可能延後。</p>
+<section class="panel"><h2>計分規則與資格判斷</h2>
+<p>總分100分：投信20、外資15、DMI 35、價格位置20、交易品質與風險10。分級為80–100「優先觀察」、65–79「持續追蹤」、0–64「一般觀察」。</p>
+<p>「策略合格」是額外條件，不只看總分：+DI(14)須在最近3個交易日內上穿-DI(14)；-DI(14)與ADX(14)均須最近3個交易日逐日下降；近5日漲幅須≤5%。資料不足不會視為訊號成立。</p>
+<p class="note">法人近5日累計以張數表示；DMI採14期 Wilder 平滑。歷史技術資料目前只涵蓋成交量前250檔且需有足夠日線，因此其他股票可能顯示資料不足。公開法人資料不能辨識真實大戶，排行也不是買賣建議。</p>
 </section>
 <section class="panel"><h2>資料來源與更新頻率</h2>
 <table><thead><tr><th>資料</th><th>來源</th><th>頻率</th><th>用途</th></tr></thead><tbody>
@@ -53,15 +54,20 @@ const fmt=(v,d=2)=>v===null||v===undefined||!Number.isFinite(Number(v))?'—':Nu
 function render(){
  const q=document.getElementById('search').value.trim().toLowerCase();
  const key=document.getElementById('sort').value;
- let rows=allRows.filter(x=>String(x.code).toLowerCase().includes(q)||String(x.name).toLowerCase().includes(q));
+ const filter=document.getElementById('filter').value;
+ let rows=allRows.filter(x=>(String(x.code).toLowerCase().includes(q)||String(x.name).toLowerCase().includes(q))&&(filter==='all'||(filter==='qualified'&&x.strategy_qualified)||(filter==='complete'&&x.data_complete)));
  rows.sort((a,b)=>(Number(b[key]??-Infinity)-Number(a[key]??-Infinity)));
  const tbody=document.getElementById('rows');
- if(!rows.length){tbody.innerHTML='<tr><td colspan="9" class="muted" style="text-align:center">沒有符合的資料，或尚未成功更新資料。</td></tr>';return}
- tbody.innerHTML=rows.slice(0,300).map((x,i)=>`<tr>
- <td>${i+1}</td><td><strong>${x.code}</strong><br><span class="muted">${x.name||''}</span></td>
+ if(!rows.length){tbody.innerHTML='<tr><td colspan="12" class="muted" style="text-align:center">沒有符合的資料，或尚未成功更新資料。</td></tr>';return}
+ tbody.innerHTML=rows.slice(0,300).map((x,i)=>{
+ const dmi=x.dmi_cross_valid&&x.minus_di_declining&&x.adx_declining?'完整':x.dmi_cross_valid?'交叉已成立':'未完成';
+ const qualified=x.strategy_qualified?'合格':(x.return_5d_pct!=null&&x.return_5d_pct>5?'漲幅超標':'未合格');
+ return `<tr><td>${i+1}</td><td><strong>${x.code}</strong><br><span class="muted">${x.name||''}</span></td>
  <td>${fmt(x.close)}</td><td class="${Number(x.change_pct)>=0?'pos':'neg'}">${fmt(x.change_pct)}%</td>
- <td>${x.volume_ratio==null?'—':fmt(x.volume_ratio)+'x'}</td><td class="${Number(x.foreign)>=0?'pos':'neg'}">${fmt(x.foreign,0)}</td>
- <td class="${Number(x.trust)>=0?'pos':'neg'}">${fmt(x.trust,0)}</td><td><span class="score">${fmt(x.score,0)}</span></td><td class="muted">${x.signal||'—'}</td></tr>`).join('');
+ <td class="${Number(x.return_5d_pct)>5?'neg':''}">${fmt(x.return_5d_pct)}%</td>
+ <td class="${Number(x.foreign_5d)>=0?'pos':'neg'}">${fmt(x.foreign_5d,0)}</td><td class="${Number(x.trust_5d)>=0?'pos':'neg'}">${fmt(x.trust_5d,0)}</td>
+ <td>${x.institutional_label||'—'}</td><td>${dmi}</td><td><span class="score">${fmt(x.score,0)}</span><br><span class="muted">${x.tier||''}</span></td>
+ <td class="${x.strategy_qualified?'pos':'muted'}">${qualified}${x.data_complete?'':'*'}</td><td class="muted">${x.signal||'—'}</td></tr>`}).join('');
 }
 async function load(){
  document.getElementById('status').textContent='正在讀取最近一次自動產生的資料…';
@@ -70,8 +76,8 @@ async function load(){
   if(!r.ok)throw new Error('找不到 ranking.json（HTTP '+r.status+'）');
   const d=await r.json();allRows=d.rows||[];
   document.getElementById('date').textContent=d.data_date||'—';
-  document.getElementById('count').textContent=allRows.length;
-  document.getElementById('bull').textContent=allRows.filter(x=>x.score>=60).length;
+  document.getElementById('count').textContent=allRows.filter(x=>x.strategy_qualified).length;
+  document.getElementById('bull').textContent=allRows.filter(x=>x.score>=80).length;
   document.getElementById('updated').textContent=d.updated_at||'—';
   document.getElementById('status').textContent='已載入 '+allRows.length+' 檔資料。'+(d.note?' '+d.note:'');
   render();
@@ -82,6 +88,7 @@ async function load(){
 }
 document.getElementById('refresh').addEventListener('click',load);
 document.getElementById('search').addEventListener('input',render);
+document.getElementById('filter').addEventListener('change',render);
 document.getElementById('sort').addEventListener('change',render);
 load();
 </script></body></html>

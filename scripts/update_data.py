@@ -117,12 +117,27 @@ def fetch_history(code, yyyymm):
         obj = get_json(url)
         fields = obj.get("fields", obj.get("titles", []))
         data = obj.get("data", [])
+        # Resolve OHLC columns by field names instead of assuming fixed positions.
+        # This prevents reading the daily change (e.g. +25.00) as the close (e.g. 423.00).
+        normalized = [str(x).replace(" ", "") for x in fields]
+        def field_index(*names):
+            for i, label in enumerate(normalized):
+                if any(name in label for name in names):
+                    return i
+            return None
+        date_i = field_index("日期")
+        volume_i = field_index("成交股數", "成交量")
+        open_i = field_index("開盤價")
+        high_i = field_index("最高價")
+        low_i = field_index("最低價")
+        close_i = field_index("收盤價")
+        if any(i is None for i in (date_i, volume_i, open_i, high_i, low_i, close_i)):
+            return []
         rows = []
         for row in data:
-            if len(row) < 8: continue
-            # TWSE STOCK_DAY: date, volume, value, transactions, open, high, low, close
-            date = parse_twse_date(row[0])
-            vals = [num(row[i]) for i in (1, 4, 5, 6, 7)]
+            if len(row) <= max(date_i, volume_i, open_i, high_i, low_i, close_i): continue
+            date = parse_twse_date(row[date_i])
+            vals = [num(row[i]) for i in (volume_i, open_i, high_i, low_i, close_i)]
             if date is None or any(v is None for v in vals): continue
             rows.append({"date": date, "volume": vals[0], "open": vals[1], "high": vals[2],
                          "low": vals[3], "close": vals[4]})
@@ -313,11 +328,18 @@ def build():
     # endpoint can temporarily lag while end-of-day data is being published.
     today = now.strftime("%Y%m%d")
     price_overrides = 0
+    price_history_mismatches = 0
     for code, history in histories.items():
         if code in quotes and len(history) >= 2 and history[-1].get("date") == today:
             latest_close = history[-1]["close"]
             previous_close = history[-2]["close"]
-            if quotes[code]["close"] != latest_close:
+            quote_close = quotes[code]["close"]
+            # Reject implausible mismatches instead of publishing an obviously wrong price.
+            relative_diff = abs(latest_close - quote_close) / quote_close if quote_close else 1
+            if relative_diff > 0.12:
+                price_history_mismatches += 1
+                continue
+            if quote_close != latest_close:
                 price_overrides += 1
             quotes[code]["close"] = latest_close
             quotes[code]["change"] = latest_close - previous_close
@@ -353,6 +375,7 @@ def build():
         "institutional_data_date": sessions[0][0] if sessions else None,
         "updated_at": now.strftime("%Y-%m-%d %H:%M Taipei"),
         "price_history_overrides": price_overrides,
+        "price_history_mismatches": price_history_mismatches,
         "market_scope": "TWSE listed stocks only",
         "score_version": "DMI+institutional v1.0",
         "score_weights": {"trust":20,"foreign":15,"dmi":35,"price":20,"risk":10},
@@ -361,7 +384,7 @@ def build():
         "rows": rows
     }
     (DATA_DIR / "ranking.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Wrote {len(rows)} rows; historical coverage={len(histories)}; institutional sessions={len(sessions)}; price data date={price_data_date}; same-day history price overrides={price_overrides}; 2492 close={quotes.get('2492', {}).get('close')}")
+    print(f"Wrote {len(rows)} rows; historical coverage={len(histories)}; institutional sessions={len(sessions)}; price data date={price_data_date}; same-day history price overrides={price_overrides}; rejected price mismatches={price_history_mismatches}; 2492 close={quotes.get('2492', {}).get('close')}")
 
 if __name__ == "__main__":
     build()

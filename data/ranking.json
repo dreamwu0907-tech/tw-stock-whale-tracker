@@ -1,0 +1,7 @@
+{
+  "data_date": "等待首次更新",
+  "updated_at": "尚未更新",
+  "market_scope": "TWSE listed stocks only",
+  "note": "這是空白初始檔，請先在 GitHub Actions 手動執行 Update stock data。",
+  "rows": []
+}

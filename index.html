@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股大戶動向觀察站｜免費版</title>
+<style>
+:root{--bg:#0b1220;--panel:#121c2e;--muted:#9fb0c7;--text:#e9f0fa;--line:#27354a;--green:#45d6a0;--red:#ff7b86;--blue:#78aaff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1200px;margin:auto;padding:24px 16px 48px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+h1{font-size:clamp(24px,4vw,34px);margin:0 0 6px}.sub{color:var(--muted);margin:0}.pill{border:1px solid var(--line);border-radius:99px;padding:6px 11px;color:var(--muted);font-size:12px}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:22px 0}
+.card,.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}.k{color:var(--muted);font-size:12px}.v{font-size:24px;font-weight:700;margin-top:6px}
+.panel{margin-top:14px}.panel h2{font-size:17px;margin:0 0 12px}.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+input,select,button{background:#0b1424;border:1px solid var(--line);color:var(--text);border-radius:9px;padding:10px 12px;font:inherit}input{min-width:220px;flex:1}button{cursor:pointer;background:#203a60}
+table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:right}th{font-size:12px;color:var(--muted);font-weight:600}th:nth-child(1),td:nth-child(1),th:nth-child(2),td:nth-child(2){text-align:left}
+.scroll{overflow:auto}.score{display:inline-block;min-width:44px;text-align:center;border-radius:7px;padding:3px 7px;background:#203a60;font-weight:700}.pos{color:var(--green)}.neg{color:var(--red)}.muted{color:var(--muted)}.note{font-size:13px;color:var(--muted)}
+.status{margin-top:12px;padding:10px 12px;background:#0b1424;border-radius:9px;color:var(--muted);font-size:13px}
+@media(max-width:800px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:420px){.cards{grid-template-columns:1fr 1fr}.v{font-size:20px}}
+</style>
+</head>
+<body><main>
+<div class="top"><div><h1>台股大戶動向觀察站</h1><p class="sub">免費公開資料｜收盤後更新｜以籌碼與量價訊號篩選觀察股</p></div><span class="pill">MVP v0.1 · 上市股票</span></div>
+<div class="cards">
+ <div class="card"><div class="k">資料日期</div><div class="v" id="date">—</div></div>
+ <div class="card"><div class="k">符合條件股票</div><div class="v" id="count">—</div></div>
+ <div class="card"><div class="k">偏多觀察股</div><div class="v" id="bull">—</div></div>
+ <div class="card"><div class="k">資料更新時間</div><div class="v" style="font-size:16px" id="updated">—</div></div>
+</div>
+<section class="panel">
+<h2>每日籌碼觀察排行</h2>
+<div class="filters"><input id="search" placeholder="輸入代號或名稱搜尋"><select id="sort"><option value="score">依觀察分數排序</option><option value="foreign">外資買超排序</option><option value="trust">投信買超排序</option><option value="volume">成交量比排序</option><option value="change">漲跌幅排序</option></select><button id="refresh">重新載入</button></div>
+<div class="scroll"><table><thead><tr><th>排名</th><th>代號／名稱</th><th>收盤價</th><th>漲跌%</th><th>成交量比</th><th>外資買賣超(張)</th><th>投信買賣超(張)</th><th>觀察分數</th><th>訊號摘要</th></tr></thead><tbody id="rows"><tr><td colspan="9" class="muted" style="text-align:center">正在載入資料…</td></tr></tbody></table></div>
+<div class="status" id="status">資料讀取中。</div>
+</section>
+<section class="panel"><h2>如何解讀這份排行</h2>
+<p>分數是「量價＋法人」的觀察分數，不代表能辨識真實大戶，也不是買賣建議。上市股票的三大法人資料每日盤後更新；本版本尚未接入集保每週股權分散資料與券商分點資料。</p>
+<p class="note">注意：外資、投信買賣超以張數表示；成交量比為當日成交量相對於近 20 個交易日平均量的倍數。資料缺漏時會顯示 —。休市日或上游資料格式變更時，更新時間可能延後。</p>
+</section>
+<section class="panel"><h2>資料來源與更新頻率</h2>
+<table><thead><tr><th>資料</th><th>來源</th><th>頻率</th><th>用途</th></tr></thead><tbody>
+<tr><td>上市股票日行情</td><td><a href="https://openapi.twse.com.tw/" target="_blank" rel="noreferrer">證交所 OpenAPI</a></td><td>每日盤後</td><td>價格、成交量、量價變化</td></tr>
+<tr><td>三大法人買賣超</td><td><a href="https://www.twse.com.tw/" target="_blank" rel="noreferrer">證交所盤後資料</a></td><td>每日盤後</td><td>外資、投信、自營商方向</td></tr>
+<tr><td>集保股權分散表</td><td><a href="https://www.tdcc.com.tw/portal/zh/smWeb/qryStock" target="_blank" rel="noreferrer">集保結算所</a></td><td>每週</td><td>大額持股級距變化（未接入本版）</td></tr>
+<tr><td>券商分點進出</td><td>各市場公開資料／資料供應商</td><td>視來源而定</td><td>本版未接入；不可把法人資料等同分點主力</td></tr>
+</tbody></table>
+</section>
+<p class="note" style="margin-top:18px">這是個人研究工具。資料來源或 API 可能調整，請勿單憑單一訊號交易。</p>
+</main>
+<script>
+const DATA_URL = './data/ranking.json';
+let allRows=[];
+const fmt=(v,d=2)=>v===null||v===undefined||!Number.isFinite(Number(v))?'—':Number(v).toLocaleString('zh-TW',{maximumFractionDigits:d,minimumFractionDigits:0});
+function render(){
+ const q=document.getElementById('search').value.trim().toLowerCase();
+ const key=document.getElementById('sort').value;
+ let rows=allRows.filter(x=>String(x.code).toLowerCase().includes(q)||String(x.name).toLowerCase().includes(q));
+ rows.sort((a,b)=>(Number(b[key]??-Infinity)-Number(a[key]??-Infinity)));
+ const tbody=document.getElementById('rows');
+ if(!rows.length){tbody.innerHTML='<tr><td colspan="9" class="muted" style="text-align:center">沒有符合的資料，或尚未成功更新資料。</td></tr>';return}
+ tbody.innerHTML=rows.slice(0,300).map((x,i)=>`<tr>
+ <td>${i+1}</td><td><strong>${x.code}</strong><br><span class="muted">${x.name||''}</span></td>
+ <td>${fmt(x.close)}</td><td class="${Number(x.change_pct)>=0?'pos':'neg'}">${fmt(x.change_pct)}%</td>
+ <td>${x.volume_ratio==null?'—':fmt(x.volume_ratio)+'x'}</td><td class="${Number(x.foreign)>=0?'pos':'neg'}">${fmt(x.foreign,0)}</td>
+ <td class="${Number(x.trust)>=0?'pos':'neg'}">${fmt(x.trust,0)}</td><td><span class="score">${fmt(x.score,0)}</span></td><td class="muted">${x.signal||'—'}</td></tr>`).join('');
+}
+async function load(){
+ document.getElementById('status').textContent='正在讀取最近一次自動產生的資料…';
+ try{
+  const r=await fetch(DATA_URL+'?t='+Date.now(),{cache:'no-store'});
+  if(!r.ok)throw new Error('找不到 ranking.json（HTTP '+r.status+'）');
+  const d=await r.json();allRows=d.rows||[];
+  document.getElementById('date').textContent=d.data_date||'—';
+  document.getElementById('count').textContent=allRows.length;
+  document.getElementById('bull').textContent=allRows.filter(x=>x.score>=60).length;
+  document.getElementById('updated').textContent=d.updated_at||'—';
+  document.getElementById('status').textContent='已載入 '+allRows.length+' 檔資料。'+(d.note?' '+d.note:'');
+  render();
+ }catch(e){
+  document.getElementById('rows').innerHTML='<tr><td colspan="9" style="text-align:center;color:#ff7b86">尚未取得資料：'+e.message+'</td></tr>';
+  document.getElementById('status').textContent='第一次部署後，請先執行 GitHub Actions 的 Update stock data 工作流程；或查看 README 排除 API／部署問題。';
+ }
+}
+document.getElementById('refresh').addEventListener('click',load);
+document.getElementById('search').addEventListener('input',render);
+document.getElementById('sort').addEventListener('change',render);
+load();
+</script></body></html>

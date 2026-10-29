@@ -1,9 +1,13 @@
 name: Update stock data
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "scripts/update_data.py"
+      - ".github/workflows/update.yml"
   schedule:
-    # 08:15 UTC = 16:15 Taiwan time, Monday-Friday. Data may not be ready on every day.
-    - cron: "15 8 * * 1-5"
+    # 10:30 UTC = 18:30 Taiwan time, Monday-Friday, after end-of-day data is more likely available.
+    - cron: "30 10 * * 1-5"
 permissions:
   contents: write
 jobs:

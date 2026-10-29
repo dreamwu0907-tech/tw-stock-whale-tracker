@@ -15,7 +15,9 @@ input,select,button{background:#0b1424;border:1px solid var(--line);color:var(--
 table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:right}th{font-size:12px;color:var(--muted);font-weight:600}th:nth-child(1),td:nth-child(1),th:nth-child(2),td:nth-child(2){text-align:left}
 .scroll{overflow:auto}.score{display:inline-block;min-width:44px;text-align:center;border-radius:7px;padding:3px 7px;background:#203a60;font-weight:700}.pos{color:var(--green)}.neg{color:var(--red)}.muted{color:var(--muted)}.note{font-size:13px;color:var(--muted)}
 .status{margin-top:12px;padding:10px 12px;background:#0b1424;border-radius:9px;color:var(--muted);font-size:13px}
-@media(max-width:800px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:420px){.cards{grid-template-columns:1fr 1fr}.v{font-size:20px}}
+.mobile-list{display:none;gap:10px}.stock-card{background:#0b1424;border:1px solid var(--line);border-radius:12px;padding:13px;min-width:0}.stock-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.stock-identity{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.stock-rank{font-size:12px;color:var(--muted);background:#1b2940;border-radius:6px;padding:2px 6px}.stock-name{min-width:0;overflow-wrap:anywhere}.stock-name strong{font-size:16px}.stock-score{text-align:right;flex-shrink:0}.stock-score .score{font-size:16px;padding:4px 9px}.stock-score .muted{font-size:11px;margin-top:4px}.stock-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:13px 0}.stock-metric{background:#111d30;border-radius:8px;padding:9px;min-width:0}.stock-metric span{display:block;color:var(--muted);font-size:11px}.stock-metric strong{display:block;font-size:15px;margin-top:3px;overflow-wrap:anywhere}.stock-metric small{font-size:11px}.stock-footer{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px}.stock-tag{display:inline-flex;align-items:center;border-radius:6px;padding:4px 7px;font-size:12px;background:#1b2940;color:var(--muted)}.stock-tag.good{background:#12382f;color:var(--green)}.stock-tag.bad{background:#3a202b;color:var(--red)}.stock-signal{font-size:12px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}.load-more{width:100%;margin-top:10px;padding:12px}
+@media(max-width:800px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){main{padding:15px 10px 30px}.top{align-items:flex-start;gap:8px}.top .pill{margin-top:4px}.cards{gap:8px;margin:14px 0}.card{padding:11px}.v{font-size:20px}.panel{padding:12px;margin-top:10px}.filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.filters input{min-width:0;width:100%;grid-column:1/-1}.filters select,.filters button{width:100%;min-width:0;padding:10px 7px;font-size:13px}.rank-table-wrap{display:none}.mobile-list{display:grid}.panel h2{font-size:16px}.stock-card{padding:12px}.status{overflow-wrap:anywhere}}
 </style>
 </head>
 <body><main>
@@ -29,7 +31,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 <section class="panel">
 <h2>每日籌碼觀察排行</h2>
 <div class="filters"><input id="search" placeholder="輸入代號或名稱搜尋"><select id="filter"><option value="all">全部股票</option><option value="qualified">只看策略合格</option><option value="complete">只看資料完整</option></select><select id="sort"><option value="score">依總分排序</option><option value="foreign_5d">外資近5日買超排序</option><option value="trust_5d">投信近5日買超排序</option><option value="return_5d_pct">近5日漲幅排序</option><option value="volume_ratio">成交量比排序</option></select><button id="refresh">重新載入</button></div>
-<div class="scroll"><table><thead><tr><th>排名</th><th>代號／名稱</th><th>收盤價</th><th>漲跌%</th><th>近5日漲幅</th><th>外資近5日(張)</th><th>投信近5日(張)</th><th>法人方向</th><th>DMI</th><th>總分</th><th>策略資格</th><th>訊號摘要</th></tr></thead><tbody id="rows"><tr><td colspan="12" class="muted" style="text-align:center">正在載入資料…</td></tr></tbody></table></div>
+<div class="rank-table-wrap scroll"><table><thead><tr><th>排名</th><th>代號／名稱</th><th>收盤價</th><th>漲跌%</th><th>近5日漲幅</th><th>外資近5日(張)</th><th>投信近5日(張)</th><th>法人方向</th><th>DMI</th><th>總分</th><th>策略資格</th><th>訊號摘要</th></tr></thead><tbody id="rows"><tr><td colspan="12" class="muted" style="text-align:center">正在載入資料…</td></tr></tbody></table></div><div class="mobile-list" id="mobileRows"><div class="muted">正在載入資料…</div></div>
 <div class="status" id="status">資料讀取中。</div>
 </section>
 <section class="panel"><h2>計分規則與資格判斷</h2>
@@ -50,6 +52,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 <script>
 const DATA_URL = './data/ranking.json';
 let allRows=[];
+let mobileLimit=50;
 const fmt=(v,d=2)=>v===null||v===undefined||!Number.isFinite(Number(v))?'—':Number(v).toLocaleString('zh-TW',{maximumFractionDigits:d,minimumFractionDigits:0});
 function render(){
  const q=document.getElementById('search').value.trim().toLowerCase();
@@ -58,7 +61,7 @@ function render(){
  let rows=allRows.filter(x=>(String(x.code).toLowerCase().includes(q)||String(x.name).toLowerCase().includes(q))&&(filter==='all'||(filter==='qualified'&&x.strategy_qualified)||(filter==='complete'&&x.data_complete)));
  rows.sort((a,b)=>(Number(b[key]??-Infinity)-Number(a[key]??-Infinity)));
  const tbody=document.getElementById('rows');
- if(!rows.length){tbody.innerHTML='<tr><td colspan="12" class="muted" style="text-align:center">沒有符合的資料，或尚未成功更新資料。</td></tr>';return}
+ if(!rows.length){tbody.innerHTML='<tr><td colspan="12" class="muted" style="text-align:center">沒有符合的資料，或尚未成功更新資料。</td></tr>';document.getElementById('mobileRows').innerHTML='<div class="muted">沒有符合的資料，請調整搜尋或篩選條件。</div>';return}
  tbody.innerHTML=rows.slice(0,300).map((x,i)=>{
  const dmi=x.dmi_cross_valid&&x.minus_di_declining&&x.adx_declining?'完整':x.dmi_cross_valid?'交叉已成立':'未完成';
  const qualified=x.strategy_qualified?'合格':(x.return_5d_pct!=null&&x.return_5d_pct>5?'漲幅超標':'未合格');
@@ -68,6 +71,27 @@ function render(){
  <td class="${Number(x.foreign_5d)>=0?'pos':'neg'}">${fmt(x.foreign_5d,0)}</td><td class="${Number(x.trust_5d)>=0?'pos':'neg'}">${fmt(x.trust_5d,0)}</td>
  <td>${x.institutional_label||'—'}</td><td>${dmi}</td><td><span class="score">${fmt(x.score,0)}</span><br><span class="muted">${x.tier||''}</span></td>
  <td class="${x.strategy_qualified?'pos':'muted'}">${qualified}${x.data_complete?'':'*'}</td><td class="muted">${x.signal||'—'}</td></tr>`}).join('');
+ const mobile=document.getElementById('mobileRows');
+ mobile.innerHTML=rows.slice(0,mobileLimit).map((x,i)=>{
+  const changes=[x.dmi_cross_valid,x.minus_di_declining,x.adx_declining].filter(Boolean).length;
+  const qualified=!!x.strategy_qualified;
+  return `<article class="stock-card">
+   <div class="stock-card-head">
+    <div class="stock-name"><div class="stock-identity"><span class="stock-rank">#${i+1}</span><strong>${x.code}</strong><span>${x.name||''}</span></div><div class="muted" style="font-size:12px;margin-top:5px">${x.institutional_label||'法人資料不足'}</div></div>
+    <div class="stock-score"><span class="score">${fmt(x.score,0)}</span><div class="muted">${x.tier||'—'}</div></div>
+   </div>
+   <div class="stock-metrics">
+    <div class="stock-metric"><span>收盤價</span><strong>${fmt(x.close)}</strong><small class="${Number(x.change_pct)>=0?'pos':'neg'}">今日 ${fmt(x.change_pct)}%</small></div>
+    <div class="stock-metric"><span>近 5 日漲幅</span><strong class="${Number(x.return_5d_pct)>5?'neg':''}">${fmt(x.return_5d_pct)}%</strong><small class="muted">策略門檻 ≤ 5%</small></div>
+    <div class="stock-metric"><span>外資近 5 日（張）</span><strong class="${Number(x.foreign_5d)>=0?'pos':'neg'}">${fmt(x.foreign_5d,0)}</strong></div>
+    <div class="stock-metric"><span>投信近 5 日（張）</span><strong class="${Number(x.trust_5d)>=0?'pos':'neg'}">${fmt(x.trust_5d,0)}</strong></div>
+   </div>
+   <div class="stock-footer"><span class="stock-tag ${qualified?'good':'bad'}">策略：${qualified?'合格':'未合格'}${x.data_complete?'':'*'}</span><span class="stock-tag ${changes===3?'good':''}">DMI 條件 ${changes}/3</span></div>
+   <div class="stock-signal">${x.signal||'目前沒有額外訊號'}${x.data_complete?'':'｜部分歷史資料不足'}</div>
+  </article>`;
+ }).join('')+(rows.length>mobileLimit?`<button class="load-more" id="showMore">顯示更多（目前 ${Math.min(mobileLimit,rows.length)} / ${rows.length} 檔）</button>`:'');
+ const more=document.getElementById('showMore');
+ if(more) more.addEventListener('click',()=>{mobileLimit+=50;render();});
 }
 async function load(){
  document.getElementById('status').textContent='正在讀取最近一次自動產生的資料…';
@@ -87,8 +111,8 @@ async function load(){
  }
 }
 document.getElementById('refresh').addEventListener('click',load);
-document.getElementById('search').addEventListener('input',render);
-document.getElementById('filter').addEventListener('change',render);
-document.getElementById('sort').addEventListener('change',render);
+document.getElementById('search').addEventListener('input',()=>{mobileLimit=50;render()});
+document.getElementById('filter').addEventListener('change',()=>{mobileLimit=50;render()});
+document.getElementById('sort').addEventListener('change',()=>{mobileLimit=50;render()});
 load();
 </script></body></html>

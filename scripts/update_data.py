@@ -232,15 +232,27 @@ def calc_score(q, history, sessions, code):
     ma_dev = (closes[-1] / ma20 - 1) * 100 if ma20 else None
     dmis = dmi_series(history)
     pdi = mdi = adx = None
-    cross_valid = di_declining = adx_declining = False
+    cross_valid = di_declining = adx_declining = early_warning = False
+    adx_flattening = False
     if dmis and len(dmis) >= 3:
         pdi, mdi, adx = dmis[-1]
-        # Cross on the latest session or either of the two prior sessions (3 sessions including cross day).
+        # Confirmed +DI/-DI bullish cross within the latest three sessions.
         for j in range(max(1, len(dmis)-3), len(dmis)):
             if dmis[j-1][0] <= dmis[j-1][1] and dmis[j][0] > dmis[j][1]:
                 cross_valid = True
         di_declining = dmis[-3][1] > dmis[-2][1] > dmis[-1][1]
-        adx_declining = dmis[-3][2] is not None and dmis[-2][2] is not None and dmis[-1][2] is not None and dmis[-3][2] > dmis[-2][2] > dmis[-1][2]
+        adx_declining = all(v is not None for v in (dmis[-3][2], dmis[-2][2], dmis[-1][2])) and dmis[-3][2] > dmis[-2][2] > dmis[-1][2]
+        # Early-warning setup: +DI is still below -DI but within 5 points;
+        # +DI rises, -DI falls, and the gap narrows over the latest 3 sessions.
+        pdi_rising = dmis[-3][0] < dmis[-2][0] < dmis[-1][0]
+        mdi_falling = dmis[-3][1] > dmis[-2][1] > dmis[-1][1]
+        gaps = [x[1] - x[0] for x in dmis[-3:]]
+        gap_narrowing = gaps[0] > gaps[1] > gaps[2]
+        adx_flattening = (dmis[-2][2] is not None and dmis[-1][2] is not None
+                          and dmis[-1][2] <= dmis[-2][2] + 1.5)
+        early_warning = (not cross_valid and pdi < mdi and (mdi - pdi) <= 5
+                         and pdi_rising and mdi_falling and gap_narrowing
+                         and (adx_declining or adx_flattening))
 
     volume5 = sum(volumes[-5:]) if len(volumes) >= 5 else None
     trust_score, trust_streak, trust5 = score_institutional(sessions, code, "trust", 20, volume5)
@@ -277,14 +289,15 @@ def calc_score(q, history, sessions, code):
     reasons = []
     if trust_streak: reasons.append(f"投信連買{trust_streak}日")
     if foreign_streak: reasons.append(f"外資連買{foreign_streak}日")
-    if cross_valid: reasons.append("DMI黃金交叉有效")
+    if early_warning: reasons.append("DMI起漲預警：+DI上升、-DI下降且差距≤5")
+    elif cross_valid: reasons.append("DMI多方交叉已成立")
     if di_declining: reasons.append("-DI連3日下降")
     if adx_declining: reasons.append("ADX連3日下降")
     if five_ret is not None and five_ret <= 5: reasons.append("5日漲幅未超5%")
     if not reasons: reasons.append("條件尚未完整")
     dmi_complete = dmis is not None and len(dmis) >= 3
     price_complete = five_ret is not None and twenty_ret is not None and ma_dev is not None
-    strategy_qualified = bool(dmi_complete and cross_valid and di_declining and adx_declining and five_ret is not None and five_ret <= 5)
+    strategy_qualified = bool(dmi_complete and (early_warning or (cross_valid and di_declining and adx_declining)) and five_ret is not None and five_ret <= 5)
     tier = "優先觀察" if score >= 80 else "持續追蹤" if score >= 65 else "一般觀察"
     return {
         "score": int(round(score)), "trust_score": trust_score, "foreign_score": foreign_score,
@@ -295,7 +308,9 @@ def calc_score(q, history, sessions, code):
         "plus_di": round(pdi, 2) if pdi is not None else None,
         "minus_di": round(mdi, 2) if mdi is not None else None,
         "adx": round(adx, 2) if adx is not None else None,
-        "dmi_cross_valid": cross_valid, "minus_di_declining": di_declining, "adx_declining": adx_declining,
+        "dmi_cross_valid": cross_valid, "dmi_early_warning": early_warning,
+        "dmi_signal_label": "起漲預警" if early_warning else "多方交叉已成立" if cross_valid else "等待訊號",
+        "minus_di_declining": di_declining, "adx_declining": adx_declining,
         "return_5d_pct": round(five_ret, 2) if five_ret is not None else None,
         "return_20d_pct": round(twenty_ret, 2) if twenty_ret is not None else None,
         "ma20_deviation_pct": round(ma_dev, 2) if ma_dev is not None else None,

@@ -36,7 +36,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 </section>
 <section class="panel"><h2>計分規則與資格判斷</h2>
 <p>總分100分：投信20、外資15、DMI 35、價格位置20、交易品質與風險10。分級為80–100「優先觀察」、65–79「持續追蹤」、0–64「一般觀察」。</p>
-<p>「策略合格」是額外條件，不只看總分：+DI(14)須在最近3個交易日內上穿-DI(14)；-DI(14)與ADX(14)均須最近3個交易日逐日下降；近5日漲幅須≤5%。資料不足不會視為訊號成立。</p>
+<p>「策略合格」包含兩類訊號：①起漲預警：+DI(14)仍低於-DI(14)但差距≤5、+DI連3日上升、-DI連3日下降且兩者差距持續縮小，ADX下降或開始走平；②多方交叉確認：+DI近3個交易日上穿-DI。兩類均要求近5日漲幅≤5%。</p>
 <p class="note">法人近5日累計以張數表示；DMI採14期 Wilder 平滑。歷史技術資料目前只涵蓋成交量前250檔且需有足夠日線，因此其他股票可能顯示資料不足。公開法人資料不能辨識真實大戶，排行也不是買賣建議。</p>
 </section>
 <section class="panel"><h2>資料來源與更新頻率</h2>
@@ -63,7 +63,7 @@ function render(){
  const tbody=document.getElementById('rows');
  if(!rows.length){tbody.innerHTML='<tr><td colspan="12" class="muted" style="text-align:center">沒有符合的資料，或尚未成功更新資料。</td></tr>';document.getElementById('mobileRows').innerHTML='<div class="muted">沒有符合的資料，請調整搜尋或篩選條件。</div>';return}
  tbody.innerHTML=rows.slice(0,300).map((x,i)=>{
- const dmi=x.dmi_cross_valid&&x.minus_di_declining&&x.adx_declining?'完整':x.dmi_cross_valid?'交叉已成立':'未完成';
+ const dmi=x.dmi_early_warning?'起漲預警':x.dmi_cross_valid?'多方交叉已成立':'等待訊號';
  const qualified=x.strategy_qualified?'合格':(x.return_5d_pct!=null&&x.return_5d_pct>5?'漲幅超標':'未合格');
  return `<tr><td>${i+1}</td><td><strong>${x.code}</strong><br><span class="muted">${x.name||''}</span></td>
  <td>${fmt(x.close)}</td><td class="${Number(x.change_pct)>=0?'pos':'neg'}">${fmt(x.change_pct)}%</td>
@@ -86,7 +86,7 @@ function render(){
     <div class="stock-metric"><span>外資近 5 日（張）</span><strong class="${Number(x.foreign_5d)>=0?'pos':'neg'}">${fmt(x.foreign_5d,0)}</strong></div>
     <div class="stock-metric"><span>投信近 5 日（張）</span><strong class="${Number(x.trust_5d)>=0?'pos':'neg'}">${fmt(x.trust_5d,0)}</strong></div>
    </div>
-   <div class="stock-footer"><span class="stock-tag ${qualified?'good':'bad'}">策略：${qualified?'合格':'未合格'}${x.data_complete?'':'*'}</span><span class="stock-tag ${changes===3?'good':''}">DMI 條件 ${changes}/3</span></div>
+   <div class="stock-footer"><span class="stock-tag ${qualified?'good':'bad'}">策略：${qualified?'合格':'未合格'}${x.data_complete?'':'*'}</span><span class="stock-tag ${changes===3?'good':''}">DMI：${x.dmi_signal_label||dmi}</span></div>
    <div class="stock-signal">${x.signal||'目前沒有額外訊號'}${x.data_complete?'':'｜部分歷史資料不足'}</div>
   </article>`;
  }).join('')+(rows.length>mobileLimit?`<button class="load-more" id="showMore">顯示更多（目前 ${Math.min(mobileLimit,rows.length)} / ${rows.length} 檔）</button>`:'');

@@ -100,6 +100,17 @@ def fetch_institutional_history():
             continue
     return sessions
 
+def parse_twse_date(value):
+    # TWSE daily history commonly uses ROC years, e.g. 115/10/29.
+    parts = re.split(r"[/\\-]", str(value).strip())
+    if len(parts) != 3: return None
+    try:
+        year, month, day = (int(x) for x in parts)
+        if year < 1911: year += 1911
+        return f"{year:04d}{month:02d}{day:02d}"
+    except (ValueError, TypeError):
+        return None
+
 def fetch_history(code, yyyymm):
     url = f"{BASE}/afterTrading/STOCK_DAY?response=json&date={yyyymm}01&stockNo={code}"
     try:
@@ -110,9 +121,10 @@ def fetch_history(code, yyyymm):
         for row in data:
             if len(row) < 8: continue
             # TWSE STOCK_DAY: date, volume, value, transactions, open, high, low, close
+            date = parse_twse_date(row[0])
             vals = [num(row[i]) for i in (1, 4, 5, 6, 7)]
-            if any(v is None for v in vals): continue
-            rows.append({"volume": vals[0], "open": vals[1], "high": vals[2],
+            if date is None or any(v is None for v in vals): continue
+            rows.append({"date": date, "volume": vals[0], "open": vals[1], "high": vals[2],
                          "low": vals[3], "close": vals[4]})
         return rows
     except Exception:
@@ -296,6 +308,23 @@ def build():
         if i and i % 20 == 0:
             time.sleep(0.2)
 
+    # When the daily history endpoint has today's completed bar, use its closing
+    # price as a cross-check/fallback for the most liquid stocks. The bulk quote
+    # endpoint can temporarily lag while end-of-day data is being published.
+    today = now.strftime("%Y%m%d")
+    price_overrides = 0
+    for code, history in histories.items():
+        if code in quotes and len(history) >= 2 and history[-1].get("date") == today:
+            latest_close = history[-1]["close"]
+            previous_close = history[-2]["close"]
+            if quotes[code]["close"] != latest_close:
+                price_overrides += 1
+            quotes[code]["close"] = latest_close
+            quotes[code]["change"] = latest_close - previous_close
+
+    verified_dates = [h[-1]["date"] for h in histories.values() if h and h[-1].get("date")]
+    price_data_date = max(verified_dates) if verified_dates else None
+
     rows = []
     for code, q in quotes.items():
         history = histories.get(code, [])
@@ -320,8 +349,10 @@ def build():
         })
     rows.sort(key=lambda x: (x["strategy_qualified"], x["score"], x["foreign"] or 0), reverse=True)
     out = {
-        "data_date": sessions[0][0] if sessions else now.strftime("%Y%m%d"),
+        "data_date": price_data_date or (sessions[0][0] if sessions else now.strftime("%Y%m%d")),
+        "institutional_data_date": sessions[0][0] if sessions else None,
         "updated_at": now.strftime("%Y-%m-%d %H:%M Taipei"),
+        "price_history_overrides": price_overrides,
         "market_scope": "TWSE listed stocks only",
         "score_version": "DMI+institutional v1.0",
         "score_weights": {"trust":20,"foreign":15,"dmi":35,"price":20,"risk":10},
@@ -330,7 +361,7 @@ def build():
         "rows": rows
     }
     (DATA_DIR / "ranking.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Wrote {len(rows)} rows; historical coverage={len(histories)}; institutional sessions={len(sessions)}")
+    print(f"Wrote {len(rows)} rows; historical coverage={len(histories)}; institutional sessions={len(sessions)}; price data date={price_data_date}; same-day history price overrides={price_overrides}; 2492 close={quotes.get('2492', {}).get('close')}")
 
 if __name__ == "__main__":
     build()

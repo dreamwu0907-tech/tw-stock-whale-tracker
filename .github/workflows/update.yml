@@ -6,8 +6,8 @@ on:
       - "scripts/update_data.py"
       - ".github/workflows/update.yml"
   schedule:
-    # 10:30 UTC = 18:30 Taiwan time, Monday-Friday, after end-of-day data is more likely available.
-    - cron: "30 10 * * 1-5"
+    # 10:00 UTC = 18:00 Taiwan time, Monday-Friday; TWSE daily closing data is produced again around 17:30.
+    - cron: "0 10 * * 1-5"
 permissions:
   contents: write
 jobs:

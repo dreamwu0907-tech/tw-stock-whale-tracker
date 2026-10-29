@@ -1,6 +1,6 @@
 {
   "data_date": "20261028",
-  "updated_at": "2026-10-29 14:13 Taipei",
+  "updated_at": "2026-10-29 14:20 Taipei",
   "market_scope": "TWSE listed stocks only",
   "note": "本版為上市股票 MVP；未接入上櫃市場、集保週資料與券商分點。資料日期以法人資料為準。",
   "rows": [

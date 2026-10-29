@@ -23,7 +23,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 <body><main>
 <div class="top"><div><h1>台股大戶動向觀察站</h1><p class="sub">免費公開資料｜收盤後更新｜以籌碼與量價訊號篩選觀察股</p></div><span class="pill">MVP v0.1 · 上市股票</span></div>
 <div class="cards">
- <div class="card"><div class="k">資料日期</div><div class="v" id="date">—</div></div>
+ <div class="card"><div class="k">行情資料日期</div><div class="v" id="date">—</div></div>
  <div class="card"><div class="k">策略合格股票</div><div class="v" id="count">—</div></div>
  <div class="card"><div class="k">優先觀察（80分以上）</div><div class="v" id="bull">—</div></div>
  <div class="card"><div class="k">資料更新時間</div><div class="v" style="font-size:16px" id="updated">—</div></div>
@@ -103,7 +103,7 @@ async function load(){
   document.getElementById('count').textContent=allRows.filter(x=>x.strategy_qualified).length;
   document.getElementById('bull').textContent=allRows.filter(x=>x.score>=80).length;
   document.getElementById('updated').textContent=d.updated_at||'—';
-  document.getElementById('status').textContent='已載入 '+allRows.length+' 檔資料。'+(d.note?' '+d.note:'');
+  document.getElementById('status').textContent='已載入 '+allRows.length+' 檔資料；行情參考日：'+(d.data_date||'—')+'；法人資料日：'+(d.institutional_data_date||'—')+'；同日歷史收盤價校正：'+Number(d.price_history_overrides||0)+' 檔。'+(d.note?' '+d.note:'');
   render();
  }catch(e){
   document.getElementById('rows').innerHTML='<tr><td colspan="9" style="text-align:center;color:#ff7b86">尚未取得資料：'+e.message+'</td></tr>';

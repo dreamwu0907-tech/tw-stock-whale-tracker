@@ -15,7 +15,7 @@ input,select,button{background:#0b1424;border:1px solid var(--line);color:var(--
 table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:right}th{font-size:12px;color:var(--muted);font-weight:600}th:nth-child(1),td:nth-child(1),th:nth-child(2),td:nth-child(2){text-align:left}
 .scroll{overflow:auto}.score{display:inline-block;min-width:44px;text-align:center;border-radius:7px;padding:3px 7px;background:#203a60;font-weight:700}.pos{color:var(--green)}.neg{color:var(--red)}.muted{color:var(--muted)}.note{font-size:13px;color:var(--muted)}
 .status{margin-top:12px;padding:10px 12px;background:#0b1424;border-radius:9px;color:var(--muted);font-size:13px}
-.mobile-list{display:none;gap:10px}.stock-card{background:#0b1424;border:1px solid var(--line);border-radius:12px;padding:13px;min-width:0}.stock-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.stock-identity{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.stock-rank{font-size:12px;color:var(--muted);background:#1b2940;border-radius:6px;padding:2px 6px}.stock-name{min-width:0;overflow-wrap:anywhere}.stock-name strong{font-size:16px}.stock-score{text-align:right;flex-shrink:0}.stock-score .score{font-size:16px;padding:4px 9px}.stock-score .muted{font-size:11px;margin-top:4px}.stock-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:13px 0}.stock-metric{background:#111d30;border-radius:8px;padding:9px;min-width:0}.stock-metric span{display:block;color:var(--muted);font-size:11px}.stock-metric strong{display:block;font-size:15px;margin-top:3px;overflow-wrap:anywhere}.stock-metric small{font-size:11px}.stock-footer{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px}.stock-tag{display:inline-flex;align-items:center;border-radius:6px;padding:4px 7px;font-size:12px;background:#1b2940;color:var(--muted)}.stock-tag.good{background:#12382f;color:var(--green)}.stock-tag.bad{background:#3a202b;color:var(--red)}.stock-signal{font-size:12px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}.load-more{width:100%;margin-top:10px;padding:12px}
+.mobile-list{display:none;gap:10px}.stock-card{background:#0b1424;border:1px solid var(--line);border-radius:12px;padding:13px;min-width:0}.stock-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.stock-identity{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.stock-rank{font-size:12px;color:var(--muted);background:#1b2940;border-radius:6px;padding:2px 6px}.stock-name{min-width:0;overflow-wrap:anywhere}.stock-name strong{font-size:16px}.stock-score{text-align:right;flex-shrink:0}.stock-score .score{font-size:16px;padding:4px 9px}.stock-score .muted{font-size:11px;margin-top:4px}.stock-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:13px 0}.stock-metric{background:#111d30;border-radius:8px;padding:9px;min-width:0}.stock-metric span{display:block;color:var(--muted);font-size:11px}.stock-metric strong{display:block;font-size:15px;margin-top:3px;overflow-wrap:anywhere}.stock-metric small{font-size:11px}.stock-footer{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px}.stock-tag{display:inline-flex;align-items:center;border-radius:6px;padding:4px 7px;font-size:12px;background:#1b2940;color:var(--muted)}.stock-tag.good{background:#12382f;color:var(--green)}.stock-tag.bad{background:#3a202b;color:var(--red)}.stock-signal{font-size:12px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}.load-more{width:100%;margin-top:10px;padding:12px}.dmi-picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.dmi-pick{background:#0b1424;border:1px solid var(--line);border-radius:11px;padding:13px;min-width:0}.dmi-pick h3{font-size:16px;margin:0 0 5px}.dmi-pick .pick-price{font-size:22px;font-weight:700}.dmi-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}.dmi-stat{background:#0b1424;border:1px solid var(--line);border-radius:10px;padding:12px}.dmi-stat strong{display:block;font-size:20px;margin-top:4px}.dmi-log{width:100%;border-collapse:collapse}.dmi-log td,.dmi-log th{text-align:left;white-space:normal}.dmi-log-wrap{overflow:auto}@media(max-width:700px){.dmi-picks{grid-template-columns:1fr}.dmi-stats{grid-template-columns:repeat(3,minmax(0,1fr))}.dmi-stat{padding:9px}.dmi-stat strong{font-size:17px}}
 @media(max-width:800px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){main{padding:15px 10px 30px}.top{align-items:flex-start;gap:8px}.top .pill{margin-top:4px}.cards{gap:8px;margin:14px 0}.card{padding:11px}.v{font-size:20px}.panel{padding:12px;margin-top:10px}.filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.filters input{min-width:0;width:100%;grid-column:1/-1}.filters select,.filters button{width:100%;min-width:0;padding:10px 7px;font-size:13px}.rank-table-wrap{display:none}.mobile-list{display:grid}.panel h2{font-size:16px}.stock-card{padding:12px}.status{overflow-wrap:anywhere}}
 </style>
@@ -28,6 +28,15 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
  <div class="card"><div class="k">優先觀察（80分以上）</div><div class="v" id="bull">—</div></div>
  <div class="card"><div class="k">資料更新時間</div><div class="v" style="font-size:16px" id="updated">—</div></div>
 </div>
+<section class="panel" id="dmiWatchPanel">
+<h2>每日 DMI 精選（最多 3 檔）</h2>
+<p class="note">只從目前策略合格且資料完整的股票中挑選，依 DMI 力道排序；不足 3 檔時不放寬條件。近 10 個交易日已入選的股票不重複列為新訊號。</p>
+<div id="dmiPicks" class="dmi-picks"><div class="muted">讀取每日精選中…</div></div>
+<h2 style="margin-top:18px">DMI 模型績效追蹤</h2>
+<div id="dmiStats" class="dmi-stats"></div>
+<p class="note">勝率以訊號後第 5／10／15 個交易日收盤價高於入選日收盤價計算；同一檔股票 10 個交易日內不重複建立新訊號。樣本尚未成熟時會顯示待累積，不以未完成樣本計算。</p>
+<div class="dmi-log-wrap"><table class="dmi-log"><thead><tr><th>選股日期</th><th>每日精選</th></tr></thead><tbody id="dmiLog"><tr><td colspan="2" class="muted">等待資料</td></tr></tbody></table></div>
+</section>
 <section class="panel">
 <h2>每日籌碼觀察排行</h2>
 <div class="filters"><input id="search" placeholder="輸入代號或名稱搜尋"><select id="filter"><option value="all">全部股票</option><option value="qualified">只看策略合格</option><option value="complete">只看資料完整</option></select><select id="sort"><option value="score">依總分排序</option><option value="foreign_5d">外資近5日買超排序</option><option value="trust_5d">投信近5日買超排序</option><option value="return_5d_pct">近5日漲幅排序</option><option value="volume_ratio">成交量比排序</option></select><button id="refresh">重新載入</button></div>
@@ -51,6 +60,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 </main>
 <script>
 const DATA_URL = './data/ranking.json';
+const TRACK_URL = './data/dmi_watch_history.json';
 let allRows=[];
 let mobileLimit=50;
 const fmt=(v,d=2)=>v===null||v===undefined||!Number.isFinite(Number(v))?'—':Number(v).toLocaleString('zh-TW',{maximumFractionDigits:d,minimumFractionDigits:0});
@@ -93,12 +103,33 @@ function render(){
  const more=document.getElementById('showMore');
  if(more) more.addEventListener('click',()=>{mobileLimit+=50;render();});
 }
+function renderDmiTracking(d, tracking){
+ const picks=(d.dmi_daily_picks||[]);
+ const picksEl=document.getElementById('dmiPicks');
+ picksEl.innerHTML=picks.length?picks.map((x,i)=>`<article class="dmi-pick">
+  <div class="stock-rank">DMI 精選 #${i+1}</div>
+  <h3>${x.code} ${x.name||''}</h3>
+  <div class="pick-price">${fmt(x.close)}</div>
+  <div class="note">入選收盤價｜DMI ${fmt(x.dmi_pick_score,0)} 分</div>
+  <div class="stock-footer" style="margin-top:9px"><span class="stock-tag good">${x.dmi_signal_label||'DMI 訊號'}</span></div>
+  <div class="note">+DI ${fmt(x.plus_di)}｜−DI ${fmt(x.minus_di)}｜ADX ${fmt(x.adx)}</div>
+ </article>`).join(''):'<div class="muted">今日沒有符合條件的精選股票。模型不會為了湊足三檔而降低門檻。</div>';
+ const stats=(tracking&&tracking.stats)||d.dmi_watch_stats||{};
+ document.getElementById('dmiStats').innerHTML=[5,10,15].map(n=>{
+  const x=stats[String(n)]||{};
+  return `<div class="dmi-stat"><div class="k">${n} 日勝率</div><strong>${x.win_rate_pct==null?'待累積':fmt(x.win_rate_pct,1)+'%'}</strong><div class="note">完成樣本 ${x.sample_size||0}｜平均報酬 ${x.average_return_pct==null?'—':fmt(x.average_return_pct)+'%'}</div></div>`;
+ }).join('');
+ const days=(tracking&&tracking.daily||[]).slice().reverse().slice(0,15);
+ document.getElementById('dmiLog').innerHTML=days.length?days.map(day=>`<tr><td>${day.date}</td><td>${(day.stocks||[]).map(x=>`${x.code} ${x.name||''}（${fmt(x.close)}）`).join('、')||'當日無符合標的'}</td></tr>`).join(''):'<tr><td colspan="2" class="muted">尚無歷史紀錄；首次成功更新後開始累積。</td></tr>';
+}
 async function load(){
  document.getElementById('status').textContent='正在讀取最近一次自動產生的資料…';
  try{
   const r=await fetch(DATA_URL+'?t='+Date.now(),{cache:'no-store'});
   if(!r.ok)throw new Error('找不到 ranking.json（HTTP '+r.status+'）');
   const d=await r.json();allRows=d.rows||[];
+  let tracking=null;try{const tr=await fetch(TRACK_URL+'?t='+Date.now(),{cache:'no-store'});if(tr.ok)tracking=await tr.json();}catch(_){}
+  renderDmiTracking(d,tracking);
   document.getElementById('date').textContent=d.data_date||'—';
   document.getElementById('count').textContent=allRows.filter(x=>x.strategy_qualified).length;
   document.getElementById('bull').textContent=allRows.filter(x=>x.score>=80).length;

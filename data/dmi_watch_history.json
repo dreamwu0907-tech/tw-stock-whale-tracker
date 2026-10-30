@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "daily": [
+    {
+      "date": "20261030",
+      "stocks": [
+        {
+          "code": "00712",
+          "name": "復華富時不動產",
+          "close": 7.26,
+          "dmi_pick_score": 100,
+          "dmi_signal_label": "起漲預警",
+          "plus_di": 36.93,
+          "minus_di": 41.55,
+          "adx": 50.77,
+          "score": 54
+        },
+        {
+          "code": "6719",
+          "name": "力智",
+          "close": 184.0,
+          "dmi_pick_score": 85,
+          "dmi_signal_label": "多方交叉已成立",
+          "plus_di": 30.29,
+          "minus_di": 20.89,
+          "adx": 18.46,
+          "score": 62
+        }
+      ]
+    }
+  ],
+  "picks": [
+    {
+      "date": "20261030",
+      "code": "00712",
+      "name": "復華富時不動產",
+      "entry_close": 7.26,
+      "dmi_pick_score": 100,
+      "signal": "起漲預警",
+      "observations": [
+        {
+          "date": "20261030",
+          "close": 7.26
+        }
+      ],
+      "outcomes": {}
+    },
+    {
+      "date": "20261030",
+      "code": "6719",
+      "name": "力智",
+      "entry_close": 184.0,
+      "dmi_pick_score": 85,
+      "signal": "多方交叉已成立",
+      "observations": [
+        {
+          "date": "20261030",
+          "close": 184.0
+        }
+      ],
+      "outcomes": {}
+    }
+  ],
+  "stats": {
+    "5": {
+      "sample_size": 0,
+      "win_rate_pct": null,
+      "average_return_pct": null
+    },
+    "10": {
+      "sample_size": 0,
+      "win_rate_pct": null,
+      "average_return_pct": null
+    },
+    "15": {
+      "sample_size": 0,
+      "win_rate_pct": null,
+      "average_return_pct": null
+    }
+  },
+  "updated_at": "2026-10-30 16:17 Taipei"
+}

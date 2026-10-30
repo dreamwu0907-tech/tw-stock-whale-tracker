@@ -8,6 +8,7 @@ from urllib.request import Request, urlopen
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
 DATA_DIR.mkdir(exist_ok=True)
+TRACK_PATH = DATA_DIR / "dmi_watch_history.json"
 TZ = timezone(timedelta(hours=8))
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; TWStockWatchlist/0.2)"}
 BASE = "https://www.twse.com.tw/rwd/zh"
@@ -232,8 +233,11 @@ def calc_score(q, history, sessions, code):
     ma_dev = (closes[-1] / ma20 - 1) * 100 if ma20 else None
     dmis = dmi_series(history)
     pdi = mdi = adx = None
+    pdi_rising = mdi_falling = gap_narrowing = False
+    gap_now = gap_change_3d = pdi_change_3d = mdi_drop_3d = None
     cross_valid = di_declining = adx_declining = early_warning = False
     adx_flattening = False
+    dmi_pick_score = 0
     if dmis and len(dmis) >= 3:
         pdi, mdi, adx = dmis[-1]
         # Confirmed +DI/-DI bullish cross within the latest three sessions.
@@ -247,12 +251,22 @@ def calc_score(q, history, sessions, code):
         pdi_rising = dmis[-3][0] < dmis[-2][0] < dmis[-1][0]
         mdi_falling = dmis[-3][1] > dmis[-2][1] > dmis[-1][1]
         gaps = [x[1] - x[0] for x in dmis[-3:]]
+        gap_now = gaps[-1]
+        gap_change_3d = gaps[0] - gaps[-1]
+        pdi_change_3d = dmis[-1][0] - dmis[-3][0]
+        mdi_drop_3d = dmis[-3][1] - dmis[-1][1]
         gap_narrowing = gaps[0] > gaps[1] > gaps[2]
         adx_flattening = (dmis[-2][2] is not None and dmis[-1][2] is not None
                           and dmis[-1][2] <= dmis[-2][2] + 1.5)
         early_warning = (not cross_valid and pdi < mdi and (mdi - pdi) <= 5
                          and pdi_rising and mdi_falling and gap_narrowing
                          and (adx_declining or adx_flattening))
+        # DMI-first ranking score for the daily shortlist; no KD/MACD dependency.
+        dmi_pick_score = (25 if pdi_rising else 0) + (25 if mdi_falling else 0) + (30 if gap_narrowing else 0)
+        dmi_pick_score += 10 if (adx_declining or adx_flattening) else 0
+        dmi_pick_score += 10 if (pdi < mdi and 0 < (mdi - pdi) <= 5) else 0
+        if cross_valid:
+            dmi_pick_score = max(dmi_pick_score, 85)
 
     volume5 = sum(volumes[-5:]) if len(volumes) >= 5 else None
     trust_score, trust_streak, trust5 = score_institutional(sessions, code, "trust", 20, volume5)
@@ -308,6 +322,11 @@ def calc_score(q, history, sessions, code):
         "plus_di": round(pdi, 2) if pdi is not None else None,
         "minus_di": round(mdi, 2) if mdi is not None else None,
         "adx": round(adx, 2) if adx is not None else None,
+        "dmi_gap": round(gap_now, 2) if gap_now is not None else None,
+        "dmi_gap_narrowing_3d": round(gap_change_3d, 2) if gap_change_3d is not None else None,
+        "plus_di_change_3d": round(pdi_change_3d, 2) if pdi_change_3d is not None else None,
+        "minus_di_drop_3d": round(mdi_drop_3d, 2) if mdi_drop_3d is not None else None,
+        "dmi_pick_score": dmi_pick_score,
         "dmi_cross_valid": cross_valid, "dmi_early_warning": early_warning,
         "dmi_signal_label": "起漲預警" if early_warning else "多方交叉已成立" if cross_valid else "等待訊號",
         "minus_di_declining": di_declining, "adx_declining": adx_declining,
@@ -318,6 +337,92 @@ def calc_score(q, history, sessions, code):
         "data_complete": bool(dmi_complete and price_complete and len(sessions) >= 5),
         "signal": "、".join(reasons)
     }
+
+def update_dmi_watch_history(data_date, rows):
+    """Append immutable daily picks and evaluate close-to-close outcomes at 5/10/15 sessions."""
+    if not data_date:
+        return {"daily_picks": [], "stats": {}}
+    try:
+        tracking = json.loads(TRACK_PATH.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        tracking = {"version": 1, "daily": [], "picks": []}
+    tracking.setdefault("daily", [])
+    tracking.setdefault("picks", [])
+    by_code = {r["code"]: r for r in rows}
+
+    # Add one observation per new market date to every open historical signal.
+    for pick in tracking["picks"]:
+        observations = pick.setdefault("observations", [{"date": pick["date"], "close": pick["entry_close"]}])
+        if observations and data_date > observations[-1]["date"]:
+            current = by_code.get(pick["code"])
+            if current and current.get("close") is not None:
+                observations.append({"date": data_date, "close": current["close"]})
+        pick["outcomes"] = {}
+        for horizon in (5, 10, 15):
+            if len(observations) > horizon:
+                sample = observations[1:horizon + 1]
+                entry = pick["entry_close"]
+                values = [x["close"] for x in sample if x.get("close") is not None]
+                if entry and len(values) == horizon:
+                    pick["outcomes"][str(horizon)] = {
+                        "return_pct": round((values[-1] / entry - 1) * 100, 2),
+                        "max_close_gain_pct": round((max(values) / entry - 1) * 100, 2),
+                        "max_close_drawdown_pct": round((min(values) / entry - 1) * 100, 2),
+                        "end_date": sample[-1]["date"]
+                    }
+
+    # Avoid repeatedly counting the same ticker as a fresh independent signal
+    # within the latest 10 recorded market sessions.
+    recent_codes = set()
+    for day in tracking["daily"][-10:]:
+        recent_codes.update(x["code"] for x in day.get("stocks", []))
+    eligible = [r for r in rows if r.get("strategy_qualified") and r.get("data_complete")
+                and r.get("close") is not None and r.get("dmi_pick_score", 0) > 0]
+    eligible.sort(key=lambda r: (r.get("dmi_pick_score", 0), r.get("score", 0),
+                                 r.get("foreign_5d") or 0), reverse=True)
+    selected = [r for r in eligible if r["code"] not in recent_codes][:3]
+
+    # Idempotent for manual reruns on the same data date.
+    day_record = {
+        "date": data_date,
+        "stocks": [{"code": r["code"], "name": r.get("name"), "close": r["close"],
+                    "dmi_pick_score": r.get("dmi_pick_score", 0),
+                    "dmi_signal_label": r.get("dmi_signal_label"),
+                    "plus_di": r.get("plus_di"), "minus_di": r.get("minus_di"),
+                    "adx": r.get("adx"), "score": r.get("score")} for r in selected]
+    }
+    existing_day = next((x for x in tracking["daily"] if x.get("date") == data_date), None)
+    if existing_day:
+        existing_day.update(day_record)
+    else:
+        tracking["daily"].append(day_record)
+    for r in selected:
+        exists = any(p.get("code") == r["code"] and p.get("date") == data_date for p in tracking["picks"])
+        if not exists:
+            tracking["picks"].append({
+                "date": data_date, "code": r["code"], "name": r.get("name"),
+                "entry_close": r["close"], "dmi_pick_score": r.get("dmi_pick_score", 0),
+                "signal": r.get("dmi_signal_label"), "observations": [{"date": data_date, "close": r["close"]}],
+                "outcomes": {}
+            })
+    tracking["daily"] = tracking["daily"][-250:]
+    tracking["picks"] = tracking["picks"][-750:]
+
+    stats = {}
+    for horizon in (5, 10, 15):
+        completed = [p["outcomes"][str(horizon)] for p in tracking["picks"]
+                     if str(horizon) in p.get("outcomes", {})]
+        wins = [x for x in completed if x["return_pct"] > 0]
+        stats[str(horizon)] = {
+            "sample_size": len(completed),
+            "win_rate_pct": round(len(wins) / len(completed) * 100, 1) if completed else None,
+            "average_return_pct": round(sum(x["return_pct"] for x in completed) / len(completed), 2) if completed else None
+        }
+    tracking["stats"] = stats
+    tracking["updated_at"] = now_tw().strftime("%Y-%m-%d %H:%M Taipei")
+    TRACK_PATH.write_text(json.dumps(tracking, ensure_ascii=False, indent=2), encoding="utf-8")
+    return {"daily_picks": day_record["stocks"], "stats": stats}
+
 
 def build():
     quotes = fetch_quotes()
@@ -385,8 +490,12 @@ def build():
             **metrics
         })
     rows.sort(key=lambda x: (x["strategy_qualified"], x["score"], x["foreign"] or 0), reverse=True)
+    final_data_date = price_data_date or (sessions[0][0] if sessions else now.strftime("%Y%m%d"))
+    tracking_summary = update_dmi_watch_history(final_data_date, rows)
     out = {
-        "data_date": price_data_date or (sessions[0][0] if sessions else now.strftime("%Y%m%d")),
+        "data_date": final_data_date,
+        "dmi_daily_picks": tracking_summary["daily_picks"],
+        "dmi_watch_stats": tracking_summary["stats"],
         "institutional_data_date": sessions[0][0] if sessions else None,
         "updated_at": now.strftime("%Y-%m-%d %H:%M Taipei"),
         "price_history_overrides": price_overrides,

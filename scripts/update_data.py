@@ -374,7 +374,7 @@ def update_dmi_watch_history(data_date, rows):
     # Avoid repeatedly counting the same ticker as a fresh independent signal
     # within the latest 10 recorded market sessions.
     recent_codes = set()
-    for day in tracking["daily"][-10:]:
+    for day in [x for x in tracking["daily"] if x.get("date") != data_date][-10:]:
         recent_codes.update(x["code"] for x in day.get("stocks", []))
     eligible = [r for r in rows if r.get("strategy_qualified") and r.get("data_complete")
                 and r.get("close") is not None and r.get("dmi_pick_score", 0) > 0]

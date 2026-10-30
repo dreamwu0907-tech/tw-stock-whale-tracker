@@ -26,5 +26,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/ranking.json
+          git add data/ranking.json data/dmi_watch_history.json
           git diff --cached --quiet || (git commit -m "Update stock ranking data" && git push)

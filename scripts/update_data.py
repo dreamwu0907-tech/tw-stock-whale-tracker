@@ -487,7 +487,8 @@ def build():
             "change_pct": round(change_pct, 2) if change_pct is not None else None,
             "volume_ratio": round(vr, 2) if vr is not None else None,
             "foreign": iv.get("foreign"), "trust": iv.get("trust"), "dealer": iv.get("dealer"),
-            **metrics
+            **metrics,
+            "ohlc_60": history[-60:] if history else []
         })
     rows.sort(key=lambda x: (x["strategy_qualified"], x["score"], x["foreign"] or 0), reverse=True)
     final_data_date = price_data_date or (sessions[0][0] if sessions else now.strftime("%Y%m%d"))

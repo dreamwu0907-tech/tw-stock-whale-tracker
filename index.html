@@ -22,7 +22,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 </head>
 <body><main>
 <div class="top"><div><h1>台股大戶動向觀察站</h1><p class="sub">免費公開資料｜收盤後更新｜以籌碼與量價訊號篩選觀察股</p></div><span class="pill">MVP v0.1 · 上市股票</span></div>
-<nav class="page-nav"><button class="page-tab active" data-page="marketPage">第一頁｜市場排行</button><button class="page-tab" data-page="watchPage">第二頁｜個股評估</button></nav><section id="marketPage" class="page-view"><div class="cards">
+<nav class="page-nav"><button class="page-tab active" data-page="marketPage">第一頁｜市場排行</button><button class="page-tab" data-page="watchPage">第二頁｜自選個股評估</button></nav><section id="marketPage" class="page-view"><div class="cards">
  <div class="card"><div class="k">行情資料日期</div><div class="v" id="date">—</div></div>
  <div class="card"><div class="k">策略合格股票</div><div class="v" id="count">—</div></div>
  <div class="card"><div class="k">優先觀察（80分以上）</div><div class="v" id="bull">—</div></div>
@@ -44,7 +44,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 <div class="rank-table-wrap scroll"><table><thead><tr><th>排名</th><th>代號／名稱</th><th>收盤價</th><th>漲跌%</th><th>近5日漲幅</th><th>外資近5日(張)</th><th>投信近5日(張)</th><th>法人方向</th><th>DMI</th><th>總分</th><th>策略資格</th><th>訊號摘要</th></tr></thead><tbody id="rows"><tr><td colspan="12" class="muted" style="text-align:center">正在載入資料…</td></tr></tbody></table></div><div class="mobile-list" id="mobileRows"><div class="muted">正在載入資料…</div></div>
 <div class="status" id="status">資料讀取中。</div>
 </section>
-</section><section id="watchPage" class="page-view" hidden><section class="panel" id="stockAnalysisPanel"><h2>個股投資評估</h2><p class="note">輸入上市股票代號或名稱，即時產生技術面分析。本頁不儲存自選股；營收與財報資料尚待資料源整合，完成前不會假設數字或納入買進評分。</p><div class="filters"><input id="analysisInput" placeholder="輸入股票代號或名稱，例如 2330"><button id="analyzeStock">開始分析</button></div><div id="analysisResult"><div class="muted">請輸入股票代號或名稱開始分析。</div></div></section></section><section class="panel"><h2>計分規則與資格判斷</h2>
+</section><section id="watchPage" class="page-view" hidden><section class="panel" id="stockAnalysisPanel"><h2>自選個股評估</h2><p class="note">輸入股票代號或名稱，查看技術面與基本面評估。</p><div class="filters"><input id="analysisInput" placeholder="輸入股票代號或名稱，例如 2330"><button id="analyzeStock">開始分析</button></div><div id="analysisResult"><div class="muted">請輸入股票代號或名稱開始分析。</div></div></section></section><section class="panel"><h2>計分規則與資格判斷</h2>
 <p>總分100分：投信20、外資15、DMI 35、價格位置20、交易品質與風險10。分級為80–100「優先觀察」、65–79「持續追蹤」、0–64「一般觀察」。</p>
 <p>「策略合格」包含兩類訊號：①起漲預警：+DI(14)仍低於-DI(14)但差距≤5、+DI連3日上升、-DI連3日下降且兩者差距持續縮小，ADX下降或開始走平；②多方交叉確認：+DI近3個交易日上穿-DI。兩類均要求近5日漲幅≤5%。</p>
 <p class="note">法人近5日累計以張數表示；DMI採14期 Wilder 平滑。歷史技術資料目前只涵蓋成交量前250檔且需有足夠日線，因此其他股票可能顯示資料不足。公開法人資料不能辨識真實大戶，排行也不是買賣建議。</p>

@@ -18,17 +18,17 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 .mobile-list{display:none;gap:10px}.stock-card{background:#0b1424;border:1px solid var(--line);border-radius:12px;padding:13px;min-width:0}.stock-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.stock-identity{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.stock-rank{font-size:12px;color:var(--muted);background:#1b2940;border-radius:6px;padding:2px 6px}.stock-name{min-width:0;overflow-wrap:anywhere}.stock-name strong{font-size:16px}.stock-score{text-align:right;flex-shrink:0}.stock-score .score{font-size:16px;padding:4px 9px}.stock-score .muted{font-size:11px;margin-top:4px}.stock-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:13px 0}.stock-metric{background:#111d30;border-radius:8px;padding:9px;min-width:0}.stock-metric span{display:block;color:var(--muted);font-size:11px}.stock-metric strong{display:block;font-size:15px;margin-top:3px;overflow-wrap:anywhere}.stock-metric small{font-size:11px}.stock-footer{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px}.stock-tag{display:inline-flex;align-items:center;border-radius:6px;padding:4px 7px;font-size:12px;background:#1b2940;color:var(--muted)}.stock-tag.good{background:#12382f;color:var(--green)}.stock-tag.bad{background:#3a202b;color:var(--red)}.stock-signal{font-size:12px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}.load-more{width:100%;margin-top:10px;padding:12px}.dmi-picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.dmi-pick{background:#0b1424;border:1px solid var(--line);border-radius:11px;padding:13px;min-width:0}.dmi-pick h3{font-size:16px;margin:0 0 5px}.dmi-pick .pick-price{font-size:22px;font-weight:700}.dmi-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}.dmi-stat{background:#0b1424;border:1px solid var(--line);border-radius:10px;padding:12px}.dmi-stat strong{display:block;font-size:20px;margin-top:4px}.dmi-log{width:100%;border-collapse:collapse}.dmi-log td,.dmi-log th{text-align:left;white-space:normal}.dmi-log-wrap{overflow:auto}@media(max-width:700px){.dmi-picks{grid-template-columns:1fr}.dmi-stats{grid-template-columns:repeat(3,minmax(0,1fr))}.dmi-stat{padding:9px}.dmi-stat strong{font-size:17px}}
 @media(max-width:800px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){main{padding:15px 10px 30px}.top{align-items:flex-start;gap:8px}.top .pill{margin-top:4px}.cards{gap:8px;margin:14px 0}.card{padding:11px}.v{font-size:20px}.panel{padding:12px;margin-top:10px}.filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.filters input{min-width:0;width:100%;grid-column:1/-1}.filters select,.filters button{width:100%;min-width:0;padding:10px 7px;font-size:13px}.rank-table-wrap{display:none}.mobile-list{display:grid}.panel h2{font-size:16px}.stock-card{padding:12px}.status{overflow-wrap:anywhere}}
-</style>
+.page-nav{display:flex;gap:10px;margin:18px 0 8px}.page-tab{background:#14243a}.page-tab.active{background:#285184;border-color:var(--blue)}.page-view[hidden]{display:none}.watchlist-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.watch-item{background:#0b1424;border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}.watch-head{display:flex;justify-content:space-between;align-items:center;gap:8px}.watch-head strong{overflow-wrap:anywhere}.watch-head button{padding:6px 9px;font-size:12px;background:#3a2630}.watch-advice{font-size:17px;font-weight:700;margin:10px 0}.buy{color:var(--green)}.sell{color:var(--red)}.wait{color:#f0c674}.price-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0}.price-box{background:#111d30;border-radius:8px;padding:9px}.price-box span{display:block;color:var(--muted);font-size:11px}.price-box strong{display:block;font-size:16px;margin-top:3px}.watch-detail{font-size:12px;color:var(--muted);line-height:1.65;overflow-wrap:anywhere}@media(max-width:700px){.page-nav{display:grid;grid-template-columns:1fr 1fr}.page-tab{padding:9px 6px;font-size:13px}.watchlist-grid{grid-template-columns:1fr}}</style>
 </head>
 <body><main>
 <div class="top"><div><h1>台股大戶動向觀察站</h1><p class="sub">免費公開資料｜收盤後更新｜以籌碼與量價訊號篩選觀察股</p></div><span class="pill">MVP v0.1 · 上市股票</span></div>
-<div class="cards">
+<nav class="page-nav"><button class="page-tab active" data-page="marketPage">第一頁｜市場排行</button><button class="page-tab" data-page="watchPage">第二頁｜自選股與每日精選</button></nav><section id="marketPage" class="page-view"><div class="cards">
  <div class="card"><div class="k">行情資料日期</div><div class="v" id="date">—</div></div>
  <div class="card"><div class="k">策略合格股票</div><div class="v" id="count">—</div></div>
  <div class="card"><div class="k">優先觀察（80分以上）</div><div class="v" id="bull">—</div></div>
  <div class="card"><div class="k">資料更新時間</div><div class="v" style="font-size:16px" id="updated">—</div></div>
 </div>
-<section class="panel" id="dmiWatchPanel">
+</section><section id="watchPage" class="page-view" hidden><section class="panel" id="watchlistPanel"><h2>自選股技術分析與買賣價位</h2><p class="note">自選股儲存在目前瀏覽器，不會跨裝置同步。綜合 K 線、型態、DMI、均線與 ATR 提供技術參考。</p><div class="filters"><input id="watchInput" placeholder="輸入上市股票代號或名稱"><button id="addWatch">加入自選</button></div><div id="watchlistItems" class="watchlist-grid"><div class="muted">尚未加入自選股。</div></div></section><section class="panel" id="dmiWatchPanel">
 <h2>每日 DMI 精選（最多 3 檔）</h2>
 <p class="note">只從目前策略合格且資料完整的股票中挑選，依 DMI 力道排序；不足 3 檔時不放寬條件。近 10 個交易日已入選的股票不重複列為新訊號。</p>
 <div id="dmiPicks" class="dmi-picks"><div class="muted">讀取每日精選中…</div></div>
@@ -43,7 +43,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 <div class="rank-table-wrap scroll"><table><thead><tr><th>排名</th><th>代號／名稱</th><th>收盤價</th><th>漲跌%</th><th>近5日漲幅</th><th>外資近5日(張)</th><th>投信近5日(張)</th><th>法人方向</th><th>DMI</th><th>總分</th><th>策略資格</th><th>訊號摘要</th></tr></thead><tbody id="rows"><tr><td colspan="12" class="muted" style="text-align:center">正在載入資料…</td></tr></tbody></table></div><div class="mobile-list" id="mobileRows"><div class="muted">正在載入資料…</div></div>
 <div class="status" id="status">資料讀取中。</div>
 </section>
-<section class="panel"><h2>計分規則與資格判斷</h2>
+</section><section class="panel"><h2>計分規則與資格判斷</h2>
 <p>總分100分：投信20、外資15、DMI 35、價格位置20、交易品質與風險10。分級為80–100「優先觀察」、65–79「持續追蹤」、0–64「一般觀察」。</p>
 <p>「策略合格」包含兩類訊號：①起漲預警：+DI(14)仍低於-DI(14)但差距≤5、+DI連3日上升、-DI連3日下降且兩者差距持續縮小，ADX下降或開始走平；②多方交叉確認：+DI近3個交易日上穿-DI。兩類均要求近5日漲幅≤5%。</p>
 <p class="note">法人近5日累計以張數表示；DMI採14期 Wilder 平滑。歷史技術資料目前只涵蓋成交量前250檔且需有足夠日線，因此其他股票可能顯示資料不足。公開法人資料不能辨識真實大戶，排行也不是買賣建議。</p>
@@ -62,6 +62,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 const DATA_URL = './data/ranking.json';
 const TRACK_URL = './data/dmi_watch_history.json';
 let allRows=[];
+let watchCodes=JSON.parse(localStorage.getItem("twStockWatchCodes")||"[]");
 let mobileLimit=50;
 const fmt=(v,d=2)=>v===null||v===undefined||!Number.isFinite(Number(v))?'—':Number(v).toLocaleString('zh-TW',{maximumFractionDigits:d,minimumFractionDigits:0});
 function render(){
@@ -103,6 +104,58 @@ function render(){
  const more=document.getElementById('showMore');
  if(more) more.addEventListener('click',()=>{mobileLimit+=50;render();});
 }
+function analyzeTechnical(x){
+ const a=x.ohlc_60||[];
+ if(a.length<22)return {ready:false,side:"wait",advice:"技術資料不足",why:"日線資料少於 22 根，暫不提供買賣價位"};
+ const c=a[a.length-1],p=a[a.length-2],cl=a.map(z=>Number(z.close));
+ const avg=(n)=>cl.slice(-n).reduce((s,v)=>s+v,0)/n;
+ const ma5=avg(5),ma10=avg(10),ma20=avg(20);
+ const trs=a.slice(1).map((z,i)=>Math.max(z.high-z.low,Math.abs(z.high-a[i].close),Math.abs(z.low-a[i].close)));
+ const atr=trs.slice(-14).reduce((s,v)=>s+v,0)/Math.min(14,trs.length);
+ const body=Math.abs(c.close-c.open),range=Math.max(c.high-c.low,0.0001),lower=Math.min(c.open,c.close)-c.low,upper=c.high-Math.max(c.open,c.close);
+ const bullEngulf=p.close<p.open&&c.close>c.open&&c.open<=p.close&&c.close>=p.open;
+ const bearEngulf=p.close>p.open&&c.close<c.open&&c.open>=p.close&&c.close<=p.open;
+ const hammer=lower>=Math.max(body*2,range*.45)&&upper<=range*.25&&c.close>=c.open;
+ const star=upper>=Math.max(body*2,range*.45)&&lower<=range*.25&&c.close<=c.open;
+ const candle=bullEngulf?"多頭吞噬":hammer?"錘子線":bearEngulf?"空頭吞噬":star?"射擊之星":"無明確反轉 K 線";
+ const prior=a.slice(-21,-1),priorHigh=Math.max(...prior.map(z=>z.high)),avgVol=prior.reduce((s,z)=>s+Number(z.volume||0),0)/prior.length;
+ const breakout=c.close>priorHigh&&avgVol>0&&Number(c.volume||0)>=avgVol*1.2;
+ let wBottom=false;
+ const base=a.slice(-20,-1);
+ for(let i=0;i<base.length-5&&!wBottom;i++){for(let j=i+4;j<base.length-1&&!wBottom;j++){
+  const l1=base[i].low,l2=base[j].low;
+  if(Math.abs(l1-l2)/Math.max(l1,l2)<.04){const neck=Math.max(...base.slice(i+1,j).map(z=>z.high));if(c.close>neck)wBottom=true;}
+ }}
+ const pattern=breakout?"平台帶量突破":wBottom?"W 底突破頸線":"未確認 W 底／平台突破";
+ const dmiBull=x.plus_di!=null&&x.minus_di!=null&&x.plus_di>x.minus_di;
+ const dmiBear=x.plus_di!=null&&x.minus_di!=null&&x.plus_di<x.minus_di;
+ const bullishCandle=bullEngulf||hammer,bearishCandle=bearEngulf||star;
+ let side="wait",advice="觀察等待",why=[];
+ if((bearishCandle&&dmiBear)||(c.close<ma20&&dmiBear)){side="sell";advice="建議賣出／減碼";why.push("空方 K 線或跌破 MA20");if(dmiBear)why.push("+DI 低於 −DI");}
+ else if(((breakout||wBottom)&&(dmiBull||x.dmi_early_warning))||(bullishCandle&&(dmiBull||x.dmi_cross_valid))){side="buy";advice="偏多，等待買點確認";why.push(pattern!=="未確認 W 底／平台突破"?pattern:candle);if(dmiBull)why.push("+DI 高於 −DI");if(x.dmi_early_warning)why.push("DMI 起漲預警");}
+ else {if(dmiBear)why.push("DMI 空方佔優");if(bearishCandle)why.push("出現空方反轉 K 線");if(!why.length)why.push("等待型態突破與 DMI 確認");}
+ const support=Math.min(...a.slice(-10).map(z=>z.low)),buyBase=Math.max(ma10,support),buyLow=Math.max(0,buyBase-.35*atr),buyHigh=buyBase+.25*atr;
+ const stop=Math.min(support-.25*atr,c.close-1.5*atr),risk=Math.max(c.close-stop,.5*atr);
+ const tp1=c.close+1.5*risk,tp2=c.close+2.5*risk;
+ if(side==="buy"&&c.close>buyHigh){advice="偏多但不追價";why.push("等待回檔至買入區");}
+ return {ready:true,side,advice,why:why.join("；"),candle,pattern,ma5,ma10,ma20,atr,buyLow,buyHigh,stop,tp1,tp2};
+}
+function renderWatchlist(){
+ const el=document.getElementById("watchlistItems");if(!el)return;
+ const items=watchCodes.map(code=>allRows.find(x=>String(x.code)===String(code))).filter(Boolean);
+ el.innerHTML=items.length?items.map(x=>{const t=analyzeTechnical(x),cls=t.side==="buy"?"buy":t.side==="sell"?"sell":"wait";
+ return `<article class="watch-item"><div class="watch-head"><strong>${x.code} ${x.name||""}</strong><button data-remove="${x.code}">移除</button></div><div>收盤價：${fmt(x.close)}｜今日漲跌：${fmt(x.change_pct)}%</div><div class="watch-advice ${cls}">${t.advice}</div><div class="watch-detail">K 線：${t.candle||"資料不足"}｜型態：${t.pattern||"資料不足"}</div>
+ ${t.ready?`<div class="price-grid"><div class="price-box"><span>回檔買入區</span><strong class="buy">${fmt(t.buyLow)}～${fmt(t.buyHigh)}</strong></div><div class="price-box"><span>停損參考</span><strong class="sell">${fmt(t.stop)}</strong></div><div class="price-box"><span>第一停利（1.5R）</span><strong>${fmt(t.tp1)}</strong></div><div class="price-box"><span>第二停利（2.5R）</span><strong>${fmt(t.tp2)}</strong></div></div><div class="watch-detail">MA5 ${fmt(t.ma5)}／MA10 ${fmt(t.ma10)}／MA20 ${fmt(t.ma20)}｜ATR(14) ${fmt(t.atr)}</div>`:""}
+ <div class="watch-detail">判斷依據：${t.why}<br>停損依近期低點與 ATR 估算；停利依風險倍數估算，均為技術參考價。</div></article>`;}).join(""):"<div class=\"muted\">尚未加入自選股，請輸入上市股票代號或名稱。</div>";
+ el.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{watchCodes=watchCodes.filter(c=>c!==b.dataset.remove);localStorage.setItem("twStockWatchCodes",JSON.stringify(watchCodes));renderWatchlist();}));
+}
+function addWatch(){
+ const q=document.getElementById("watchInput").value.trim().toLowerCase();if(!q)return;
+ const x=allRows.find(r=>String(r.code)===q||String(r.name||"").toLowerCase().includes(q));
+ if(!x){alert("找不到股票，請確認代號或名稱；目前僅能加入資料清單中的上市股票。");return;}
+ if(!watchCodes.includes(String(x.code)))watchCodes.push(String(x.code));
+ localStorage.setItem("twStockWatchCodes",JSON.stringify(watchCodes));document.getElementById("watchInput").value="";renderWatchlist();
+}
 function renderDmiTracking(d, tracking){
  const picks=(d.dmi_daily_picks||[]);
  const picksEl=document.getElementById('dmiPicks');
@@ -130,6 +183,7 @@ async function load(){
   const d=await r.json();allRows=d.rows||[];
   let tracking=null;try{const tr=await fetch(TRACK_URL+'?t='+Date.now(),{cache:'no-store'});if(tr.ok)tracking=await tr.json();}catch(_){}
   renderDmiTracking(d,tracking);
+  renderWatchlist();
   document.getElementById('date').textContent=d.data_date||'—';
   document.getElementById('count').textContent=allRows.filter(x=>x.strategy_qualified).length;
   document.getElementById('bull').textContent=allRows.filter(x=>x.score>=80).length;
@@ -142,6 +196,9 @@ async function load(){
  }
 }
 document.getElementById('refresh').addEventListener('click',load);
+document.getElementById('addWatch').addEventListener('click',addWatch);
+document.getElementById('watchInput').addEventListener('keydown',e=>{if(e.key==='Enter')addWatch();});
+document.querySelectorAll('.page-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.page-tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page-view').forEach(x=>x.hidden=x.id!==b.dataset.page);}));
 document.getElementById('search').addEventListener('input',()=>{mobileLimit=50;render()});
 document.getElementById('filter').addEventListener('change',()=>{mobileLimit=50;render()});
 document.getElementById('sort').addEventListener('change',()=>{mobileLimit=50;render()});

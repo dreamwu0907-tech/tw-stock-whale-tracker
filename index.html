@@ -28,6 +28,19 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
  <div class="card"><div class="k">優先觀察（80分以上）</div><div class="v" id="bull">—</div></div>
  <div class="card"><div class="k">資料更新時間</div><div class="v" style="font-size:16px" id="updated">—</div></div>
 </div>
+<section class="panel"><h2>計分規則與資格判斷</h2>
+<p>總分100分：投信20、外資15、DMI 35、價格位置20、交易品質與風險10。分級為80–100「優先觀察」、65–79「持續追蹤」、0–64「一般觀察」。</p>
+<p>「策略合格」包含兩類訊號：①起漲預警：+DI(14)仍低於-DI(14)但差距≤5、+DI連3日上升、-DI連3日下降且兩者差距持續縮小，ADX下降或開始走平；②多方交叉確認：+DI近3個交易日上穿-DI。兩類均要求近5日漲幅≤5%。</p>
+<p class="note">法人近5日累計以張數表示；DMI採14期 Wilder 平滑。歷史技術資料目前只涵蓋成交量前250檔且需有足夠日線，因此其他股票可能顯示資料不足。公開法人資料不能辨識真實大戶，排行也不是買賣建議。</p>
+</section>
+<section class="panel"><h2>資料來源與更新頻率</h2>
+<table><thead><tr><th>資料</th><th>來源</th><th>頻率</th><th>用途</th></tr></thead><tbody>
+<tr><td>上市股票日行情</td><td><a href="https://openapi.twse.com.tw/" target="_blank" rel="noreferrer">證交所 OpenAPI</a></td><td>每日盤後</td><td>價格、成交量、量價變化</td></tr>
+<tr><td>三大法人買賣超</td><td><a href="https://www.twse.com.tw/" target="_blank" rel="noreferrer">證交所盤後資料</a></td><td>每日盤後</td><td>外資、投信、自營商方向</td></tr>
+<tr><td>集保股權分散表</td><td><a href="https://www.tdcc.com.tw/portal/zh/smWeb/qryStock" target="_blank" rel="noreferrer">集保結算所</a></td><td>每週</td><td>大額持股級距變化（未接入本版）</td></tr>
+<tr><td>券商分點進出</td><td>各市場公開資料／資料供應商</td><td>視來源而定</td><td>本版未接入；不可把法人資料等同分點主力</td></tr>
+</tbody></table>
+</section>
 </section>
 <section class="panel" id="dmiWatchPanel">
 <h2>每日 DMI 精選（最多 3 檔）</h2>
@@ -44,20 +57,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 <div class="rank-table-wrap scroll"><table><thead><tr><th>排名</th><th>代號／名稱</th><th>收盤價</th><th>漲跌%</th><th>近5日漲幅</th><th>外資近5日(張)</th><th>投信近5日(張)</th><th>法人方向</th><th>DMI</th><th>總分</th><th>策略資格</th><th>訊號摘要</th></tr></thead><tbody id="rows"><tr><td colspan="12" class="muted" style="text-align:center">正在載入資料…</td></tr></tbody></table></div><div class="mobile-list" id="mobileRows"><div class="muted">正在載入資料…</div></div>
 <div class="status" id="status">資料讀取中。</div>
 </section>
-</section><section id="watchPage" class="page-view" hidden><section class="panel" id="stockAnalysisPanel"><h2>自選個股評估</h2><p class="note">輸入股票代號或名稱，查看技術面與基本面評估。</p><div class="filters"><input id="analysisInput" placeholder="輸入股票代號或名稱，例如 2330"><button id="analyzeStock">開始分析</button></div><div id="analysisResult"><div class="muted">請輸入股票代號或名稱開始分析。</div></div></section></section><section class="panel"><h2>計分規則與資格判斷</h2>
-<p>總分100分：投信20、外資15、DMI 35、價格位置20、交易品質與風險10。分級為80–100「優先觀察」、65–79「持續追蹤」、0–64「一般觀察」。</p>
-<p>「策略合格」包含兩類訊號：①起漲預警：+DI(14)仍低於-DI(14)但差距≤5、+DI連3日上升、-DI連3日下降且兩者差距持續縮小，ADX下降或開始走平；②多方交叉確認：+DI近3個交易日上穿-DI。兩類均要求近5日漲幅≤5%。</p>
-<p class="note">法人近5日累計以張數表示；DMI採14期 Wilder 平滑。歷史技術資料目前只涵蓋成交量前250檔且需有足夠日線，因此其他股票可能顯示資料不足。公開法人資料不能辨識真實大戶，排行也不是買賣建議。</p>
-</section>
-<section class="panel"><h2>資料來源與更新頻率</h2>
-<table><thead><tr><th>資料</th><th>來源</th><th>頻率</th><th>用途</th></tr></thead><tbody>
-<tr><td>上市股票日行情</td><td><a href="https://openapi.twse.com.tw/" target="_blank" rel="noreferrer">證交所 OpenAPI</a></td><td>每日盤後</td><td>價格、成交量、量價變化</td></tr>
-<tr><td>三大法人買賣超</td><td><a href="https://www.twse.com.tw/" target="_blank" rel="noreferrer">證交所盤後資料</a></td><td>每日盤後</td><td>外資、投信、自營商方向</td></tr>
-<tr><td>集保股權分散表</td><td><a href="https://www.tdcc.com.tw/portal/zh/smWeb/qryStock" target="_blank" rel="noreferrer">集保結算所</a></td><td>每週</td><td>大額持股級距變化（未接入本版）</td></tr>
-<tr><td>券商分點進出</td><td>各市場公開資料／資料供應商</td><td>視來源而定</td><td>本版未接入；不可把法人資料等同分點主力</td></tr>
-</tbody></table>
-</section>
-<p class="note" style="margin-top:18px">這是個人研究工具。資料來源或 API 可能調整，請勿單憑單一訊號交易。</p>
+</section><section id="watchPage" class="page-view" hidden><section class="panel" id="stockAnalysisPanel"><h2>自選個股評估</h2><p class="note">輸入股票代號或名稱，查看技術面與基本面評估。</p><div class="filters"><input id="analysisInput" placeholder="輸入股票代號或名稱，例如 2330"><button id="analyzeStock">開始分析</button></div><div id="analysisResult"><div class="muted">請輸入股票代號或名稱開始分析。</div></div></section></section><p class="note" style="margin-top:18px">這是個人研究工具。資料來源或 API 可能調整，請勿單憑單一訊號交易。</p>
 </main>
 <script>
 const DATA_URL = './data/ranking.json';
@@ -146,11 +146,17 @@ function renderStockAnalysis(){
  const x=allRows.find(r=>String(r.code)===q||String(r.name||"").toLowerCase()===q||String(r.name||"").toLowerCase().includes(q));
  if(!x){el.innerHTML='<div class="muted">找不到這檔股票。請確認代號或名稱；目前資料範圍為上市股票。</div>';return;}
  const t=analyzeTechnical(x),cls=t.side==="buy"?"buy":t.side==="sell"?"sell":"wait";
+ const company=encodeURIComponent(x.code+" "+(x.name||""));
+ const mops="https://mops.twse.com.tw/";
+ const twse="https://www.twse.com.tw/";
+ const news="https://www.google.com/search?q="+company+"+(重大訊息+OR+擴廠+OR+資本支出+OR+投資+OR+併購)";
  el.innerHTML=`<article class="watch-item"><div class="watch-head"><strong>${x.code} ${x.name||""}</strong><span class="muted">收盤價：${fmt(x.close)}｜今日漲跌：${fmt(x.change_pct)}%</span></div>
  <div class="watch-advice ${cls}">${t.advice}</div><div class="watch-detail">K 線：${t.candle||"資料不足"}｜型態：${t.pattern||"資料不足"}｜DMI：+DI ${fmt(x.plus_di)}／−DI ${fmt(x.minus_di)}／ADX ${fmt(x.adx)}</div>
  ${t.ready?`<div class="price-grid"><div class="price-box"><span>回檔買入區</span><strong class="buy">${fmt(t.buyLow)}～${fmt(t.buyHigh)}</strong></div><div class="price-box"><span>停損參考</span><strong class="sell">${fmt(t.stop)}</strong></div><div class="price-box"><span>第一目標價（1.5R）</span><strong>${fmt(t.tp1)}</strong></div><div class="price-box"><span>第二目標價（2.5R）</span><strong>${fmt(t.tp2)}</strong></div></div><div class="watch-detail">MA5 ${fmt(t.ma5)}／MA10 ${fmt(t.ma10)}／MA20 ${fmt(t.ma20)}｜ATR(14) ${fmt(t.atr)}</div>`:""}
  <div class="watch-detail">技術判斷依據：${t.why}。停損依近期低點與 ATR 估算；目標價依風險倍數估算。</div>
- <div class="panel" style="margin-top:12px"><h3 style="margin:0 0 6px;font-size:15px">營收與基本面</h3><div class="muted">目前尚未整合月營收、毛利率及 EPS 歷史資料，因此暫不提供基本面評分，也不會單憑技術訊號給出無條件買進結論。</div></div></article>`;
+ <div class="panel" style="margin-top:12px"><h3 style="margin:0 0 6px;font-size:15px">基本面與財務風險</h3><div class="muted">本階段尚未取得可驗證的月營收、毛利率、EPS、負債與現金流歷史資料，因此不計基本面分數，也不以缺漏資料當成零風險。資料接入後將評估營收趨勢、獲利能力、負債與現金流。</div></div>
+ <div class="panel" style="margin-top:12px"><h3 style="margin:0 0 6px;font-size:15px">重大投資與事件風險</h3><p class="note">此區先提供官方公告查核入口。公告或新聞中的投資計畫會區分「已公告／執行中／已投產」，並檢查投資金額、資金來源、預計投產時間、折舊負擔及訂單支撐；未確認的媒體消息不視為公司事實。</p><div class="stock-footer"><a href="${mops}" target="_blank" rel="noreferrer">公開資訊觀測站：重大訊息與財報</a><a href="${twse}" target="_blank" rel="noreferrer">證交所：公告與市場資訊</a><a href="${news}" target="_blank" rel="noreferrer">搜尋 ${x.code} 重大投資與擴廠消息</a></div><div class="watch-detail">事件風險檢查：資本支出過高、舉債增加、投產延遲、產能利用率不足、投資效益未達預期、重大訴訟或客戶集中。尚未自動擷取並驗證個別公司公告，本階段不會虛構事件或直接扣分。</div></div>
+ <div class="panel" style="margin-top:12px"><h3 style="margin:0 0 6px;font-size:15px">綜合風險評估</h3><div class="watch-detail">預定評分權重：技術面 25%、基本面 25%、營運與重大投資 20%、產業趨勢 15%、財務與事件風險 15%。重大風險另設警示／扣分機制，不讓技術或題材高分抵銷重大財務風險。</div><div class="status">目前僅技術面資料可計算；基本面、重大投資與事件風險尚待官方資料自動化接入，因此暫不產生整體 100 分總評。資料日期：${x.ohlc_60?.at(-1)?.date||"未知"}。</div></div></article>`;
 }
 function renderDmiTracking(d, tracking){
  const picks=(d.dmi_daily_picks||[]);

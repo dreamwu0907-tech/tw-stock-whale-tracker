@@ -14,17 +14,6 @@
           "minus_di": 41.55,
           "adx": 50.77,
           "score": 54
-        },
-        {
-          "code": "6719",
-          "name": "力智",
-          "close": 184.0,
-          "dmi_pick_score": 85,
-          "dmi_signal_label": "多方交叉已成立",
-          "plus_di": 30.29,
-          "minus_di": 20.89,
-          "adx": 18.46,
-          "score": 60
         }
       ]
     }
@@ -78,5 +67,5 @@
       "average_return_pct": null
     }
   },
-  "updated_at": "2026-10-30 18:51 Taipei"
+  "updated_at": "2026-10-31 17:18 Taipei"
 }

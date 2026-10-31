@@ -22,13 +22,14 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 </head>
 <body><main>
 <div class="top"><div><h1>台股大戶動向觀察站</h1><p class="sub">免費公開資料｜收盤後更新｜以籌碼與量價訊號篩選觀察股</p></div><span class="pill">MVP v0.1 · 上市股票</span></div>
-<nav class="page-nav"><button class="page-tab active" data-page="marketPage">第一頁｜市場排行</button><button class="page-tab" data-page="watchPage">第二頁｜自選股與每日精選</button></nav><section id="marketPage" class="page-view"><div class="cards">
+<nav class="page-nav"><button class="page-tab active" data-page="marketPage">第一頁｜市場排行</button><button class="page-tab" data-page="watchPage">第二頁｜個股評估</button></nav><section id="marketPage" class="page-view"><div class="cards">
  <div class="card"><div class="k">行情資料日期</div><div class="v" id="date">—</div></div>
  <div class="card"><div class="k">策略合格股票</div><div class="v" id="count">—</div></div>
  <div class="card"><div class="k">優先觀察（80分以上）</div><div class="v" id="bull">—</div></div>
  <div class="card"><div class="k">資料更新時間</div><div class="v" style="font-size:16px" id="updated">—</div></div>
 </div>
-</section><section id="watchPage" class="page-view" hidden><section class="panel" id="watchlistPanel"><h2>自選股技術分析與買賣價位</h2><p class="note">自選股儲存在目前瀏覽器，不會跨裝置同步。綜合 K 線、型態、DMI、均線與 ATR 提供技術參考。</p><div class="filters"><input id="watchInput" placeholder="輸入上市股票代號或名稱"><button id="addWatch">加入自選</button></div><div id="watchlistItems" class="watchlist-grid"><div class="muted">尚未加入自選股。</div></div></section><section class="panel" id="dmiWatchPanel">
+</section>
+<section class="panel" id="dmiWatchPanel">
 <h2>每日 DMI 精選（最多 3 檔）</h2>
 <p class="note">只從目前策略合格且資料完整的股票中挑選，依 DMI 力道排序；不足 3 檔時不放寬條件。近 10 個交易日已入選的股票不重複列為新訊號。</p>
 <div id="dmiPicks" class="dmi-picks"><div class="muted">讀取每日精選中…</div></div>
@@ -37,13 +38,13 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 <p class="note">勝率以訊號後第 5／10／15 個交易日收盤價高於入選日收盤價計算；同一檔股票 10 個交易日內不重複建立新訊號。樣本尚未成熟時會顯示待累積，不以未完成樣本計算。</p>
 <div class="dmi-log-wrap"><table class="dmi-log"><thead><tr><th>選股日期</th><th>每日精選</th></tr></thead><tbody id="dmiLog"><tr><td colspan="2" class="muted">等待資料</td></tr></tbody></table></div>
 </section>
-<section class="panel">
+<section class="panel" id="rankingPanel">
 <h2>每日籌碼觀察排行</h2>
 <div class="filters"><input id="search" placeholder="輸入代號或名稱搜尋"><select id="filter"><option value="all">全部股票</option><option value="qualified">只看策略合格</option><option value="complete">只看資料完整</option></select><select id="sort"><option value="score">依總分排序</option><option value="foreign_5d">外資近5日買超排序</option><option value="trust_5d">投信近5日買超排序</option><option value="return_5d_pct">近5日漲幅排序</option><option value="volume_ratio">成交量比排序</option></select><button id="refresh">重新載入</button></div>
 <div class="rank-table-wrap scroll"><table><thead><tr><th>排名</th><th>代號／名稱</th><th>收盤價</th><th>漲跌%</th><th>近5日漲幅</th><th>外資近5日(張)</th><th>投信近5日(張)</th><th>法人方向</th><th>DMI</th><th>總分</th><th>策略資格</th><th>訊號摘要</th></tr></thead><tbody id="rows"><tr><td colspan="12" class="muted" style="text-align:center">正在載入資料…</td></tr></tbody></table></div><div class="mobile-list" id="mobileRows"><div class="muted">正在載入資料…</div></div>
 <div class="status" id="status">資料讀取中。</div>
 </section>
-</section><section class="panel"><h2>計分規則與資格判斷</h2>
+</section><section id="watchPage" class="page-view" hidden><section class="panel" id="stockAnalysisPanel"><h2>個股投資評估</h2><p class="note">輸入上市股票代號或名稱，即時產生技術面分析。本頁不儲存自選股；營收與財報資料尚待資料源整合，完成前不會假設數字或納入買進評分。</p><div class="filters"><input id="analysisInput" placeholder="輸入股票代號或名稱，例如 2330"><button id="analyzeStock">開始分析</button></div><div id="analysisResult"><div class="muted">請輸入股票代號或名稱開始分析。</div></div></section></section><section class="panel"><h2>計分規則與資格判斷</h2>
 <p>總分100分：投信20、外資15、DMI 35、價格位置20、交易品質與風險10。分級為80–100「優先觀察」、65–79「持續追蹤」、0–64「一般觀察」。</p>
 <p>「策略合格」包含兩類訊號：①起漲預警：+DI(14)仍低於-DI(14)但差距≤5、+DI連3日上升、-DI連3日下降且兩者差距持續縮小，ADX下降或開始走平；②多方交叉確認：+DI近3個交易日上穿-DI。兩類均要求近5日漲幅≤5%。</p>
 <p class="note">法人近5日累計以張數表示；DMI採14期 Wilder 平滑。歷史技術資料目前只涵蓋成交量前250檔且需有足夠日線，因此其他股票可能顯示資料不足。公開法人資料不能辨識真實大戶，排行也不是買賣建議。</p>
@@ -62,7 +63,6 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 const DATA_URL = './data/ranking.json';
 const TRACK_URL = './data/dmi_watch_history.json';
 let allRows=[];
-let watchCodes=JSON.parse(localStorage.getItem("twStockWatchCodes")||"[]");
 let mobileLimit=50;
 const fmt=(v,d=2)=>v===null||v===undefined||!Number.isFinite(Number(v))?'—':Number(v).toLocaleString('zh-TW',{maximumFractionDigits:d,minimumFractionDigits:0});
 function render(){
@@ -140,21 +140,17 @@ function analyzeTechnical(x){
  if(side==="buy"&&c.close>buyHigh){advice="偏多但不追價";why.push("等待回檔至買入區");}
  return {ready:true,side,advice,why:why.join("；"),candle,pattern,ma5,ma10,ma20,atr,buyLow,buyHigh,stop,tp1,tp2};
 }
-function renderWatchlist(){
- const el=document.getElementById("watchlistItems");if(!el)return;
- const items=watchCodes.map(code=>allRows.find(x=>String(x.code)===String(code))).filter(Boolean);
- el.innerHTML=items.length?items.map(x=>{const t=analyzeTechnical(x),cls=t.side==="buy"?"buy":t.side==="sell"?"sell":"wait";
- return `<article class="watch-item"><div class="watch-head"><strong>${x.code} ${x.name||""}</strong><button data-remove="${x.code}">移除</button></div><div>收盤價：${fmt(x.close)}｜今日漲跌：${fmt(x.change_pct)}%</div><div class="watch-advice ${cls}">${t.advice}</div><div class="watch-detail">K 線：${t.candle||"資料不足"}｜型態：${t.pattern||"資料不足"}</div>
- ${t.ready?`<div class="price-grid"><div class="price-box"><span>回檔買入區</span><strong class="buy">${fmt(t.buyLow)}～${fmt(t.buyHigh)}</strong></div><div class="price-box"><span>停損參考</span><strong class="sell">${fmt(t.stop)}</strong></div><div class="price-box"><span>第一停利（1.5R）</span><strong>${fmt(t.tp1)}</strong></div><div class="price-box"><span>第二停利（2.5R）</span><strong>${fmt(t.tp2)}</strong></div></div><div class="watch-detail">MA5 ${fmt(t.ma5)}／MA10 ${fmt(t.ma10)}／MA20 ${fmt(t.ma20)}｜ATR(14) ${fmt(t.atr)}</div>`:""}
- <div class="watch-detail">判斷依據：${t.why}<br>停損依近期低點與 ATR 估算；停利依風險倍數估算，均為技術參考價。</div></article>`;}).join(""):"<div class=\"muted\">尚未加入自選股，請輸入上市股票代號或名稱。</div>";
- el.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{watchCodes=watchCodes.filter(c=>c!==b.dataset.remove);localStorage.setItem("twStockWatchCodes",JSON.stringify(watchCodes));renderWatchlist();}));
-}
-function addWatch(){
- const q=document.getElementById("watchInput").value.trim().toLowerCase();if(!q)return;
- const x=allRows.find(r=>String(r.code)===q||String(r.name||"").toLowerCase().includes(q));
- if(!x){alert("找不到股票，請確認代號或名稱；目前僅能加入資料清單中的上市股票。");return;}
- if(!watchCodes.includes(String(x.code)))watchCodes.push(String(x.code));
- localStorage.setItem("twStockWatchCodes",JSON.stringify(watchCodes));document.getElementById("watchInput").value="";renderWatchlist();
+function renderStockAnalysis(){
+ const q=document.getElementById("analysisInput").value.trim().toLowerCase(),el=document.getElementById("analysisResult");
+ if(!q){el.innerHTML='<div class="muted">請輸入股票代號或名稱。</div>';return;}
+ const x=allRows.find(r=>String(r.code)===q||String(r.name||"").toLowerCase()===q||String(r.name||"").toLowerCase().includes(q));
+ if(!x){el.innerHTML='<div class="muted">找不到這檔股票。請確認代號或名稱；目前資料範圍為上市股票。</div>';return;}
+ const t=analyzeTechnical(x),cls=t.side==="buy"?"buy":t.side==="sell"?"sell":"wait";
+ el.innerHTML=`<article class="watch-item"><div class="watch-head"><strong>${x.code} ${x.name||""}</strong><span class="muted">收盤價：${fmt(x.close)}｜今日漲跌：${fmt(x.change_pct)}%</span></div>
+ <div class="watch-advice ${cls}">${t.advice}</div><div class="watch-detail">K 線：${t.candle||"資料不足"}｜型態：${t.pattern||"資料不足"}｜DMI：+DI ${fmt(x.plus_di)}／−DI ${fmt(x.minus_di)}／ADX ${fmt(x.adx)}</div>
+ ${t.ready?`<div class="price-grid"><div class="price-box"><span>回檔買入區</span><strong class="buy">${fmt(t.buyLow)}～${fmt(t.buyHigh)}</strong></div><div class="price-box"><span>停損參考</span><strong class="sell">${fmt(t.stop)}</strong></div><div class="price-box"><span>第一目標價（1.5R）</span><strong>${fmt(t.tp1)}</strong></div><div class="price-box"><span>第二目標價（2.5R）</span><strong>${fmt(t.tp2)}</strong></div></div><div class="watch-detail">MA5 ${fmt(t.ma5)}／MA10 ${fmt(t.ma10)}／MA20 ${fmt(t.ma20)}｜ATR(14) ${fmt(t.atr)}</div>`:""}
+ <div class="watch-detail">技術判斷依據：${t.why}。停損依近期低點與 ATR 估算；目標價依風險倍數估算。</div>
+ <div class="panel" style="margin-top:12px"><h3 style="margin:0 0 6px;font-size:15px">營收與基本面</h3><div class="muted">目前尚未整合月營收、毛利率及 EPS 歷史資料，因此暫不提供基本面評分，也不會單憑技術訊號給出無條件買進結論。</div></div></article>`;
 }
 function renderDmiTracking(d, tracking){
  const picks=(d.dmi_daily_picks||[]);
@@ -183,8 +179,7 @@ async function load(){
   const d=await r.json();allRows=d.rows||[];
   let tracking=null;try{const tr=await fetch(TRACK_URL+'?t='+Date.now(),{cache:'no-store'});if(tr.ok)tracking=await tr.json();}catch(_){}
   renderDmiTracking(d,tracking);
-  renderWatchlist();
-  document.getElementById('date').textContent=d.data_date||'—';
+document.getElementById('date').textContent=d.data_date||'—';
   document.getElementById('count').textContent=allRows.filter(x=>x.strategy_qualified).length;
   document.getElementById('bull').textContent=allRows.filter(x=>x.score>=80).length;
   document.getElementById('updated').textContent=d.updated_at||'—';
@@ -196,8 +191,8 @@ async function load(){
  }
 }
 document.getElementById('refresh').addEventListener('click',load);
-document.getElementById('addWatch').addEventListener('click',addWatch);
-document.getElementById('watchInput').addEventListener('keydown',e=>{if(e.key==='Enter')addWatch();});
+document.getElementById('analyzeStock').addEventListener('click',renderStockAnalysis);
+document.getElementById('analysisInput').addEventListener('keydown',e=>{if(e.key==='Enter')renderStockAnalysis();});
 document.querySelectorAll('.page-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.page-tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page-view').forEach(x=>x.hidden=x.id!==b.dataset.page);}));
 document.getElementById('search').addEventListener('input',()=>{mobileLimit=50;render()});
 document.getElementById('filter').addEventListener('change',()=>{mobileLimit=50;render()});

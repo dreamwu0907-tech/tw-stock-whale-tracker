@@ -22,7 +22,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 </head>
 <body><main>
 <div class="top"><div><h1>台股大戶動向觀察站</h1><p class="sub">免費公開資料｜收盤後更新｜以籌碼與量價訊號篩選觀察股</p></div><span class="pill">MVP v0.1 · 上市股票</span></div>
-<nav class="page-nav"><button class="page-tab active" data-page="marketPage">第一頁｜市場排行</button><button class="page-tab" data-page="watchPage">第二頁｜自選個股評估</button></nav><section id="marketPage" class="page-view"><div class="cards">
+<nav class="page-nav"><button class="page-tab active" data-page="marketPage">第一頁｜市場排行</button><button class="page-tab" data-page="watchPage">第二頁｜自選個股評估</button><button class="page-tab" data-page="globalPage">第三頁｜全球產業週報</button></nav><section id="marketPage" class="page-view"><div class="cards">
  <div class="card"><div class="k">行情資料日期</div><div class="v" id="date">—</div></div>
  <div class="card"><div class="k">策略合格股票</div><div class="v" id="count">—</div></div>
  <div class="card"><div class="k">優先觀察（80分以上）</div><div class="v" id="bull">—</div></div>
@@ -57,7 +57,12 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 <div class="rank-table-wrap scroll"><table><thead><tr><th>排名</th><th>代號／名稱</th><th>收盤價</th><th>漲跌%</th><th>近5日漲幅</th><th>外資近5日(張)</th><th>投信近5日(張)</th><th>法人方向</th><th>DMI</th><th>歷史 K 線相似度</th><th>總分</th><th>策略資格</th><th>訊號摘要</th></tr></thead><tbody id="rows"><tr><td colspan="13" class="muted" style="text-align:center">正在載入資料…</td></tr></tbody></table></div><div class="mobile-list" id="mobileRows"><div class="muted">正在載入資料…</div></div>
 <div class="status" id="status">資料讀取中。</div>
 </section>
-</section><section id="watchPage" class="page-view" hidden><section class="panel" id="stockAnalysisPanel"><h2>自選個股評估</h2><p class="note">輸入股票代號或名稱，查看技術面與基本面評估。</p><div class="filters"><input id="analysisInput" placeholder="輸入股票代號或名稱，例如 2330"><button id="analyzeStock">開始分析</button></div><div id="analysisResult"><div class="muted">請輸入股票代號或名稱開始分析。</div></div></section></section><p class="note" style="margin-top:18px">這是個人研究工具。資料來源或 API 可能調整，請勿單憑單一訊號交易。</p>
+</section><section id="watchPage" class="page-view" hidden><section class="panel" id="stockAnalysisPanel"><h2>自選個股評估</h2><p class="note">輸入股票代號或名稱，查看技術面與基本面評估。</p><div class="filters"><input id="analysisInput" placeholder="輸入股票代號或名稱，例如 2330"><button id="analyzeStock">開始分析</button></div><div id="analysisResult"><div class="muted">請輸入股票代號或名稱開始分析。</div></div></section></section><section id="globalPage" class="page-view" hidden>
+<section class="panel"><h2>全球產業趨勢週報</h2><p class="note">預定每週日 12:00 前更新；蒐集前一週全球公開資訊，分析產業趨勢、資金方向及台灣供應鏈。</p><div class="status">目前為功能架構預覽：全球資訊爬蟲、GPT API 分析及自動週報排程尚未串接，因此不顯示未經驗證的即時結論。</div></section>
+<section class="panel"><h2>本週全球趨勢觀察</h2><div class="watchlist-grid"><article class="watch-item"><strong>AI 與半導體</strong><p class="note">資料待接入：全球資本支出、晶片需求、先進封裝、資料中心。</p></article><article class="watch-item"><strong>金融與資本市場</strong><p class="note">資料待接入：利率、匯率、央行政策、全球資金流向。</p></article><article class="watch-item"><strong>機器人與自動化</strong><p class="note">資料待接入：技術商用化、工業投資、訂單與供應鏈。</p></article><article class="watch-item"><strong>軍工與航太</strong><p class="note">資料待接入：國防預算、採購合約、航太供應鏈。</p></article><article class="watch-item"><strong>能源與電力</strong><p class="note">資料待接入：電網升級、HVDC、儲能、核能與電力設備。</p></article><article class="watch-item"><strong>其他新興產業</strong><p class="note">依每週公開資訊辨識新興趨勢，不預先限制產業範圍。</p></article></div></section>
+<section class="panel"><h2>台股潛在受惠名單</h2><p class="note">正式版本預計每週挑選 5～10 檔，需確認產品／客戶／訂單／營收連結，並評估股價是否已提前反映利多。</p><div class="status">尚未產生推薦名單。資料接入後將保留每週推薦紀錄、訊號日期、觀察價位及後續 5／10／20 個交易日績效。</div></section>
+<section class="panel"><h2>歷史週報與模型驗證</h2><p class="note">每週保留產業判斷與個股推薦，追蹤後續營收、法人動向、股價報酬及最大回檔，檢查過去判斷是否有效。</p><div class="status">歷史週報資料庫尚未建立。</div></section>
+</section><p class="note" style="margin-top:18px">這是個人研究工具。資料來源或 API 可能調整，請勿單憑單一訊號交易。</p>
 </main>
 <script>
 const DATA_URL = './data/ranking.json';

@@ -36,7 +36,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/weekly_raw.json
+          git add data/weekly_raw.json data/weekly_raw/
           git diff --cached --quiet || (git commit -m "Collect weekly global industry news" && git push)
   analyze:
     if: github.event.schedule == '0 3 * * 0' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'analyze')
@@ -57,5 +57,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/weekly_report.json
+          git add data/weekly_report.json data/weekly_reports/
           git diff --cached --quiet || (git commit -m "Publish weekly global industry report" && git push)

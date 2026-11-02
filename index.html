@@ -59,12 +59,12 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 </section>
 </section><section id="watchPage" class="page-view" hidden><section class="panel" id="stockAnalysisPanel"><h2>自選個股評估</h2><p class="note">輸入股票代號或名稱，查看技術面與基本面評估。</p><div class="filters"><input id="analysisInput" placeholder="輸入股票代號或名稱，例如 2330"><button id="analyzeStock">開始分析</button></div><div id="analysisResult"><div class="muted">請輸入股票代號或名稱開始分析。</div></div></section></section><section id="globalPage" class="page-view" hidden>
 <section class="panel"><h2>全球產業趨勢週報</h2><p class="note">每週六 18:00（台灣時間）蒐集前 7 天全球公開資訊；每週日 11:00 啟動 GPT 分析，預定 12:00 前發布。</p><div id="weeklyStatus" class="status">正在讀取最新週報…</div><div class="note" id="weeklyMeta"></div></section>
-<section class="panel"><h2>本週全球趨勢與產業方向</h2><div id="weeklySummary" class="watch-detail">尚未有已發布週報。</div><div id="weeklyIndustries" class="watchlist-grid" style="margin-top:12px"></div></section>
+<section class="panel"><h2>首次啟用設定</h2><p class="watch-detail">目前資料蒐集使用 Google News RSS 搜尋公開新聞標題與摘要，並非完整抓取全球所有網站全文。GPT 週報需要 OpenAI API Key，且 API 用量會另外計費。</p><ol class="watch-detail"><li>建立 OpenAI API Key：<a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer">OpenAI API Keys</a>。</li><li>開啟本專案 <a href="https://github.com/dreamwu0907-tech/tw-stock-whale-tracker/settings/secrets/actions" target="_blank" rel="noopener noreferrer">GitHub Actions Secrets</a>。</li><li>新增 Repository secret，名稱必須是 <code>OPENAI_API_KEY</code>，值貼上 API Key。不要把 Key 寫進網頁或程式碼。</li><li>到 <a href="https://github.com/dreamwu0907-tech/tw-stock-whale-tracker/actions/workflows/weekly_research.yml" target="_blank" rel="noopener noreferrer">Weekly global industry research</a>，先手動執行 collect，再手動執行 analyze。</li></ol><p class="note">正式排程：週六 18:00（台灣時間）蒐集；週日 11:00 執行分析。若未設定 Key，系統仍會保留蒐集資料並顯示待設定狀態。</p></section><section class="panel"><h2>本週全球趨勢與產業方向</h2><div id="weeklySummary" class="watch-detail">尚未有已發布週報。</div><div id="weeklyIndustries" class="watchlist-grid" style="margin-top:12px"></div></section>
 <section class="panel"><h2>全球資金與總體觀察</h2><div id="weeklyCapital" class="watchlist-grid"></div></section>
 <section class="panel"><h2>台股潛在受惠名單</h2><p class="note">僅列出有來源證據支持的供應鏈關聯；若證據不足，寧可不推薦，不以概念股標籤湊數。</p><div id="weeklyStocks" class="watchlist-grid"></div></section>
 <section class="panel"><h2>下週重要事件與觀察</h2><div id="weeklyEvents" class="watchlist-grid"></div></section>
 <section class="panel"><h2>資料來源與研究限制</h2><div id="weeklyMethod" class="watch-detail">資料來源、涵蓋範圍與限制將隨週報顯示。</div></section>
-<section class="panel"><h2>歷史週報</h2><p class="note">每週報告以日期保留在 GitHub 資料版本紀錄；後續將再擴充成可查詢的歷史週報與 5／10／20 日績效追蹤。</p><div class="status">目前先保存每週最新報告及原始蒐集資料。</div></section>
+<section class="panel"><h2>歷史週報</h2><p class="note">每週報告與原始蒐集資料均依日期歸檔。</p><div id="weeklyArchive" class="watchlist-grid"><div class="muted">讀取歷史週報清單…</div></div></section>
 </section></section><p class="note" style="margin-top:18px">這是個人研究工具。資料來源或 API 可能調整，請勿單憑單一訊號交易。</p>
 </main>
 <script>
@@ -115,6 +115,15 @@ function render(){
 
 function safeText(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function sourceLinks(urls){return (urls||[]).filter(u=>/^https?:\\/\\//i.test(u)).slice(0,5).map(u=>'<a href="'+safeText(u)+'" target="_blank" rel="noopener noreferrer">來源</a>').join(" · ");}
+async function loadWeeklyArchive(){
+ const el=document.getElementById("weeklyArchive");
+ try{
+  const r=await fetch("./data/weekly_reports/index.json?t="+Date.now(),{cache:"no-store"});
+  if(!r.ok)throw new Error("尚無歷史週報");
+  const rows=await r.json();
+  el.innerHTML=rows.map(x=>'<article class="watch-item"><strong>'+safeText(x.date)+'</strong><p class="watch-detail">資料期間：'+safeText(x.period_start||"—")+' ～ '+safeText(x.period_end||"—")+'</p><a href="./data/weekly_reports/'+encodeURIComponent(x.file)+'" target="_blank" rel="noopener noreferrer">查看該週報 JSON</a></article>').join("")||'<div class="muted">尚無歷史週報。</div>';
+ }catch(e){el.innerHTML='<div class="muted">尚無歷史週報；完成第一次週報後會自動建立。</div>';}
+}
 async function loadWeeklyReport(){
  const status=document.getElementById("weeklyStatus");
  try{
@@ -236,10 +245,11 @@ document.getElementById('date').textContent=d.data_date||'—';
 document.getElementById('refresh').addEventListener('click',load);
 document.getElementById('analyzeStock').addEventListener('click',renderStockAnalysis);
 document.getElementById('analysisInput').addEventListener('keydown',e=>{if(e.key==='Enter')renderStockAnalysis();});
-document.querySelectorAll('.page-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.page-tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page-view').forEach(x=>x.hidden=x.id!==b.dataset.page);if(b.dataset.page==="globalPage")loadWeeklyReport();}));
+document.querySelectorAll('.page-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.page-tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page-view').forEach(x=>x.hidden=x.id!==b.dataset.page);if(b.dataset.page==="globalPage"){loadWeeklyReport();loadWeeklyArchive();}}));
 document.getElementById('search').addEventListener('input',()=>{mobileLimit=50;render()});
 document.getElementById('filter').addEventListener('change',()=>{mobileLimit=50;render()});
 document.getElementById('sort').addEventListener('change',()=>{mobileLimit=50;render()});
 load();
 loadWeeklyReport();
+loadWeeklyArchive();
 </script></body></html>

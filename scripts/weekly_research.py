@@ -103,7 +103,16 @@ def analyze():
         }, ensure_ascii=False, indent=2), encoding="utf-8")
         archive_dir = DATA / "weekly_reports"
         archive_dir.mkdir(exist_ok=True)
-        (archive_dir / (now_tw().strftime("%Y-%m-%d") + ".json")).write_text(REPORT.read_text(encoding="utf-8"), encoding="utf-8")
+        archive_file = archive_dir / (now_tw().strftime("%Y-%m-%d") + ".json")
+        archive_file.write_text(REPORT.read_text(encoding="utf-8"), encoding="utf-8")
+        index_path = archive_dir / "index.json"
+        try: index = json.loads(index_path.read_text(encoding="utf-8"))
+        except Exception: index = []
+        index = [x for x in index if x.get("file") != archive_file.name]
+        index.insert(0, {"date": now_tw().strftime("%Y-%m-%d"), "file": archive_file.name,
+                         "period_start": raw.get("period_start"), "period_end": raw.get("period_end"),
+                         "status": "needs_api_key"})
+        index_path.write_text(json.dumps(index[:104], ensure_ascii=False, indent=2), encoding="utf-8")
         print("OPENAI_API_KEY missing; saved a clear setup status.")
         return
     articles = raw.get("articles", [])[:120]

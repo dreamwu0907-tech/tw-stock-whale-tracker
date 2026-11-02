@@ -1,0 +1,61 @@
+name: Weekly global industry research
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Run collection or analysis"
+        required: true
+        type: choice
+        options:
+          - collect
+          - analyze
+  schedule:
+    # Saturday 18:00 Taiwan time: collect global news for the past 7 days.
+    - cron: "0 10 * * 6"
+    # Sunday 11:00 Taiwan time: generate the report before 12:00.
+    - cron: "0 3 * * 0"
+permissions:
+  contents: write
+concurrency:
+  group: weekly-global-research
+  cancel-in-progress: false
+jobs:
+  collect:
+    if: github.event.schedule == '0 10 * * 6' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'collect')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Collect global public information
+        run: python scripts/weekly_research.py collect
+      - name: Save raw weekly research data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/weekly_raw.json
+          git diff --cached --quiet || (git commit -m "Collect weekly global industry news" && git push)
+  analyze:
+    if: github.event.schedule == '0 3 * * 0' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'analyze')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate weekly report with OpenAI Responses API
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-6-luna
+        run: python scripts/weekly_research.py analyze
+      - name: Publish weekly report JSON
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/weekly_report.json
+          git diff --cached --quiet || (git commit -m "Publish weekly global industry report" && git push)

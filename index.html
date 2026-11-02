@@ -114,7 +114,7 @@ function render(){
 }
 
 function safeText(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function sourceLinks(urls){return (urls||[]).filter(u=>/^https?:\\/\\//i.test(u)).slice(0,5).map(u=>'<a href="'+safeText(u)+'" target="_blank" rel="noopener noreferrer">來源</a>').join(" · ");}
+function sourceLinks(urls){return (urls||[]).filter(u=>typeof u==="string"&&(u.startsWith("https://")||u.startsWith("http://"))).slice(0,5).map(u=>'<a href="'+safeText(u)+'" target="_blank" rel="noopener noreferrer">來源</a>').join(" · ");}
 async function loadWeeklyArchive(){
  const el=document.getElementById("weeklyArchive");
  try{

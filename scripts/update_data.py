@@ -314,6 +314,20 @@ def calc_score(q, history, sessions, code):
     five_ret = (closes[-1] / closes[-6] - 1) * 100 if len(closes) >= 6 and closes[-6] else None
     twenty_ret = (closes[-1] / closes[-21] - 1) * 100 if len(closes) >= 21 and closes[-21] else None
     ma20 = sum(closes[-20:]) / 20 if len(closes) >= 20 else None
+    ma5 = sum(closes[-5:]) / 5 if len(closes) >= 5 else None
+    ma10 = sum(closes[-10:]) / 10 if len(closes) >= 10 else None
+    ma_spread_pct = ((max(ma5, ma10, ma20) - min(ma5, ma10, ma20)) / ma20 * 100
+                     if ma5 is not None and ma10 is not None and ma20 else None)
+    ma_bull_alignment = bool(ma5 is not None and ma10 is not None and ma20 is not None
+                             and ma5 > ma10 > ma20)
+    true_ranges = [max(history[i]["high"] - history[i]["low"],
+                       abs(history[i]["high"] - history[i-1]["close"]),
+                       abs(history[i]["low"] - history[i-1]["close"]))
+                   for i in range(1, len(history))]
+    atr14_now = sum(true_ranges[-14:]) / 14 if len(true_ranges) >= 14 else None
+    atr14_prev = sum(true_ranges[-28:-14]) / 14 if len(true_ranges) >= 28 else None
+    atr_compression_pct = ((atr14_now / atr14_prev - 1) * 100
+                           if atr14_now is not None and atr14_prev else None)
     ma_dev = (closes[-1] / ma20 - 1) * 100 if ma20 else None
     dmis = dmi_series(history)
     pdi = mdi = adx = None
@@ -418,6 +432,13 @@ def calc_score(q, history, sessions, code):
         "minus_di_declining": di_declining, "adx_declining": adx_declining,
         "return_5d_pct": round(five_ret, 2) if five_ret is not None else None,
         "return_20d_pct": round(twenty_ret, 2) if twenty_ret is not None else None,
+        "ma5": round(ma5, 2) if ma5 is not None else None,
+        "ma10": round(ma10, 2) if ma10 is not None else None,
+        "ma20": round(ma20, 2) if ma20 is not None else None,
+        "ma_spread_pct": round(ma_spread_pct, 2) if ma_spread_pct is not None else None,
+        "ma_bull_alignment": ma_bull_alignment,
+        "atr14": round(atr14_now, 2) if atr14_now is not None else None,
+        "atr_compression_pct": round(atr_compression_pct, 2) if atr_compression_pct is not None else None,
         "ma20_deviation_pct": round(ma_dev, 2) if ma_dev is not None else None,
         "strategy_qualified": strategy_qualified, "tier": tier, "institutional_label": inst_label,
         "data_complete": bool(dmi_complete and price_complete and len(sessions) >= 5),

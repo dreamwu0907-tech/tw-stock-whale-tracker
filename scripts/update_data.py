@@ -223,6 +223,90 @@ def score_institutional(sessions, code, key, max_points, volume5):
     continuity = 3 if buy_days == 5 else 2 if buy_days >= 3 else 0
     return min(max_points, streak_score + ratio_score + continuity), streak, total
 
+def historical_pattern_similarity(history, window=15, horizon=20):
+    """
+    Compare the latest 15-session price/volume shape with prior 15-session windows.
+    Only use historical windows with a fully observed 20-session forward outcome.
+    Similarity is based on normalized cumulative returns, candle body/range and
+    relative volume; it is a research signal, not a predictive guarantee.
+    """
+    if len(history) < window + horizon + 25:
+        return {"history_pattern_similarity": None, "history_pattern_samples": 0,
+                "history_pattern_win_rate_5d": None, "history_pattern_win_rate_10d": None,
+                "history_pattern_win_rate_20d": None, "history_pattern_avg_return_5d": None,
+                "history_pattern_avg_return_10d": None, "history_pattern_avg_return_20d": None,
+                "history_pattern_label": "歷史樣本不足"}
+    def features(rows):
+        first = rows[0]["close"]
+        if not first:
+            return None
+        closes = [x["close"] for x in rows]
+        rets = [(closes[i] / closes[i-1] - 1) for i in range(1, len(closes))]
+        base_vol = sum(x["volume"] for x in rows) / len(rows)
+        shape = []
+        for i, x in enumerate(rows):
+            span = max(x["high"] - x["low"], 0.0001)
+            body = (x["close"] - x["open"]) / span
+            rel_close = x["close"] / first - 1
+            rel_vol = min(3.0, x["volume"] / base_vol) if base_vol else 1.0
+            shape.extend([rel_close * 8, body, rel_vol * 0.25])
+        # Add return volatility and net return so similar paths are not matched
+        # solely because their candle colors happen to align.
+        mean = sum(rets) / len(rets) if rets else 0
+        vol = (sum((v-mean)**2 for v in rets) / len(rets))**0.5 if rets else 0
+        shape.extend([vol * 100, (closes[-1] / first - 1) * 5])
+        return shape
+    current = features(history[-window:])
+    if current is None:
+        return {"history_pattern_similarity": None, "history_pattern_samples": 0,
+                "history_pattern_win_rate_5d": None, "history_pattern_win_rate_10d": None,
+                "history_pattern_win_rate_20d": None, "history_pattern_avg_return_5d": None,
+                "history_pattern_avg_return_10d": None, "history_pattern_avg_return_20d": None,
+                "history_pattern_label": "歷史樣本不足"}
+    matches = []
+    # Exclude overlapping windows and require all forward outcomes to be known.
+    latest_start = len(history) - window - horizon
+    for start in range(0, latest_start + 1):
+        end = start + window
+        if end > len(history) - horizon:
+            continue
+        candidate = features(history[start:end])
+        if candidate is None or len(candidate) != len(current):
+            continue
+        distance = (sum((a-b)**2 for a,b in zip(current,candidate)) / len(current))**0.5
+        similarity = max(0.0, 100.0 - distance * 18.0)
+        if similarity < 65:
+            continue
+        entry = history[end-1]["close"]
+        future = history[end:end+horizon]
+        if not entry or len(future) < horizon:
+            continue
+        returns = {}
+        for n in (5,10,20):
+            if len(future) >= n:
+                returns[n] = (future[n-1]["close"] / entry - 1) * 100
+        matches.append({"similarity": similarity, "returns": returns})
+    matches.sort(key=lambda x:x["similarity"], reverse=True)
+    top = matches[:5]
+    if not top:
+        return {"history_pattern_similarity": 0, "history_pattern_samples": 0,
+                "history_pattern_win_rate_5d": None, "history_pattern_win_rate_10d": None,
+                "history_pattern_win_rate_20d": None, "history_pattern_avg_return_5d": None,
+                "history_pattern_avg_return_10d": None, "history_pattern_avg_return_20d": None,
+                "history_pattern_label": "未找到足夠相似的歷史型態"}
+    out = {"history_pattern_similarity": round(sum(x["similarity"] for x in top)/len(top),1),
+           "history_pattern_samples": len(top)}
+    for n in (5,10,20):
+        vals = [x["returns"][n] for x in top if n in x["returns"]]
+        out[f"history_pattern_win_rate_{n}d"] = round(sum(v>0 for v in vals)/len(vals)*100,1) if vals else None
+        out[f"history_pattern_avg_return_{n}d"] = round(sum(vals)/len(vals),2) if vals else None
+    wr = out["history_pattern_win_rate_20d"]
+    avg = out["history_pattern_avg_return_20d"]
+    out["history_pattern_label"] = ("歷史相似走勢偏多" if wr is not None and wr >= 60 and avg is not None and avg > 0
+                                    else "歷史相似走勢偏弱" if wr is not None and wr <= 40 and avg is not None and avg < 0
+                                    else "歷史結果分歧")
+    return out
+
 def calc_score(q, history, sessions, code):
     # Historical rows are chronological. Return metrics are only computed with enough sessions.
     closes = [x["close"] for x in history]
@@ -313,7 +397,9 @@ def calc_score(q, history, sessions, code):
     price_complete = five_ret is not None and twenty_ret is not None and ma_dev is not None
     strategy_qualified = bool(dmi_complete and (early_warning or (cross_valid and di_declining and adx_declining)) and five_ret is not None and five_ret <= 5)
     tier = "優先觀察" if score >= 80 else "持續追蹤" if score >= 65 else "一般觀察"
+    historical_pattern = historical_pattern_similarity(history) if history else historical_pattern_similarity([])
     return {
+        **historical_pattern,
         "score": int(round(score)), "trust_score": trust_score, "foreign_score": foreign_score,
         "dmi_score": dmi_score, "price_score": price_score, "risk_score": risk_score,
         "trust_streak": trust_streak, "foreign_streak": foreign_streak,
@@ -427,19 +513,26 @@ def update_dmi_watch_history(data_date, rows):
 def build():
     quotes = fetch_quotes()
     sessions = fetch_institutional_history()
-    # Keep API usage bounded: fetch two months of OHLC for the 250 most liquid stocks.
-    liquid_codes = {q["code"] for q in sorted(quotes.values(), key=lambda x: x["volume_shares"], reverse=True)[:250]}
+    # Fetch broader history for the 100 most liquid names to compare historical pre-rally patterns.
+    ranked_codes = [q["code"] for q in sorted(quotes.values(), key=lambda x: x["volume_shares"], reverse=True)[:250]]
+    deep_history_codes = set(ranked_codes[:100])
     now = now_tw()
-    current_month = now.strftime("%Y%m")
-    previous_month = (now.replace(day=1) - timedelta(days=1)).strftime("%Y%m")
+    month_list = []
+    for offset in range(6):
+        month_start = now.replace(day=1) - timedelta(days=offset * 28)
+        month_key = month_start.strftime("%Y%m")
+        if month_key not in month_list:
+            month_list.append(month_key)
     histories = {}
-    for i, code in enumerate(liquid_codes):
-        old = fetch_history(code, previous_month)
-        current = fetch_history(code, current_month)
-        history = old + current
-        # Deduplicate adjacent months and require enough bars for DMI/20-day calculations.
+    for i, code in enumerate(ranked_codes):
+        months = month_list if code in deep_history_codes else month_list[:2]
+        parts = [fetch_history(code, month) for month in reversed(months)]
+        history = [bar for part in parts for bar in part]
+        # Deduplicate dates and retain up to ~6 months for deeper-history names.
+        by_date = {bar["date"]: bar for bar in history}
+        history = [by_date[k] for k in sorted(by_date)]
         if len(history) >= 21:
-            histories[code] = history[-60:]
+            histories[code] = history[-130:] if code in deep_history_codes else history[-60:]
         if i and i % 20 == 0:
             time.sleep(0.2)
 
@@ -488,7 +581,7 @@ def build():
             "volume_ratio": round(vr, 2) if vr is not None else None,
             "foreign": iv.get("foreign"), "trust": iv.get("trust"), "dealer": iv.get("dealer"),
             **metrics,
-            "ohlc_60": history[-60:] if history else []
+            "ohlc_history": history[-130:] if history else []
         })
     rows.sort(key=lambda x: (x["strategy_qualified"], x["score"], x["foreign"] or 0), reverse=True)
     final_data_date = price_data_date or (sessions[0][0] if sessions else now.strftime("%Y%m%d"))
@@ -502,9 +595,9 @@ def build():
         "price_history_overrides": price_overrides,
         "price_history_mismatches": price_history_mismatches,
         "market_scope": "TWSE listed stocks only",
-        "score_version": "DMI+institutional v1.0",
+        "score_version": "DMI+institutional+historical-pattern v1.1",
         "score_weights": {"trust":20,"foreign":15,"dmi":35,"price":20,"risk":10},
-        "history_coverage": f"{len(histories)} liquid stocks with sufficient OHLC history",
+        "history_coverage": f"{len(histories)} liquid stocks with OHLC history; historical-pattern depth: 100 most liquid stocks up to ~6 months",
         "note": "80–100優先觀察、65–79持續追蹤、0–64一般觀察；策略合格另需DMI三條件成立且近5日漲幅≤5%。歷史技術資料目前限成交量前250檔；缺資料不視為零分以外的有效訊號，請查看 data_complete。",
         "rows": rows
     }

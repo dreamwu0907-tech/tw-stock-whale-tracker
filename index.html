@@ -53,8 +53,8 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 </section>
 <section class="panel" id="rankingPanel">
 <h2>每日籌碼觀察排行</h2>
-<div class="filters"><input id="search" placeholder="輸入代號或名稱搜尋"><select id="filter"><option value="all">全部股票</option><option value="qualified">只看策略合格</option><option value="complete">只看資料完整</option></select><select id="sort"><option value="score">依總分排序</option><option value="foreign_5d">外資近5日買超排序</option><option value="trust_5d">投信近5日買超排序</option><option value="return_5d_pct">近5日漲幅排序</option><option value="volume_ratio">成交量比排序</option></select><button id="refresh">重新載入</button></div>
-<div class="rank-table-wrap scroll"><table><thead><tr><th>排名</th><th>代號／名稱</th><th>收盤價</th><th>漲跌%</th><th>近5日漲幅</th><th>外資近5日(張)</th><th>投信近5日(張)</th><th>法人方向</th><th>DMI</th><th>總分</th><th>策略資格</th><th>訊號摘要</th></tr></thead><tbody id="rows"><tr><td colspan="12" class="muted" style="text-align:center">正在載入資料…</td></tr></tbody></table></div><div class="mobile-list" id="mobileRows"><div class="muted">正在載入資料…</div></div>
+<div class="filters"><input id="search" placeholder="輸入代號或名稱搜尋"><select id="filter"><option value="all">全部股票</option><option value="qualified">只看策略合格</option><option value="complete">只看資料完整</option></select><select id="sort"><option value="score">依總分排序</option><option value="foreign_5d">外資近5日買超排序</option><option value="trust_5d">投信近5日買超排序</option><option value="return_5d_pct">近5日漲幅排序</option><option value="volume_ratio">成交量比排序</option><option value="history_pattern_similarity">歷史 K 線相似度排序</option></select><button id="refresh">重新載入</button></div>
+<div class="rank-table-wrap scroll"><table><thead><tr><th>排名</th><th>代號／名稱</th><th>收盤價</th><th>漲跌%</th><th>近5日漲幅</th><th>外資近5日(張)</th><th>投信近5日(張)</th><th>法人方向</th><th>DMI</th><th>歷史 K 線相似度</th><th>總分</th><th>策略資格</th><th>訊號摘要</th></tr></thead><tbody id="rows"><tr><td colspan="13" class="muted" style="text-align:center">正在載入資料…</td></tr></tbody></table></div><div class="mobile-list" id="mobileRows"><div class="muted">正在載入資料…</div></div>
 <div class="status" id="status">資料讀取中。</div>
 </section>
 </section><section id="watchPage" class="page-view" hidden><section class="panel" id="stockAnalysisPanel"><h2>自選個股評估</h2><p class="note">輸入股票代號或名稱，查看技術面與基本面評估。</p><div class="filters"><input id="analysisInput" placeholder="輸入股票代號或名稱，例如 2330"><button id="analyzeStock">開始分析</button></div><div id="analysisResult"><div class="muted">請輸入股票代號或名稱開始分析。</div></div></section></section><p class="note" style="margin-top:18px">這是個人研究工具。資料來源或 API 可能調整，請勿單憑單一訊號交易。</p>
@@ -80,7 +80,7 @@ function render(){
  <td>${fmt(x.close)}</td><td class="${Number(x.change_pct)>=0?'pos':'neg'}">${fmt(x.change_pct)}%</td>
  <td class="${Number(x.return_5d_pct)>5?'neg':''}">${fmt(x.return_5d_pct)}%</td>
  <td class="${Number(x.foreign_5d)>=0?'pos':'neg'}">${fmt(x.foreign_5d,0)}</td><td class="${Number(x.trust_5d)>=0?'pos':'neg'}">${fmt(x.trust_5d,0)}</td>
- <td>${x.institutional_label||'—'}</td><td>${dmi}</td><td><span class="score">${fmt(x.score,0)}</span><br><span class="muted">${x.tier||''}</span></td>
+ <td>${x.institutional_label||'—'}</td><td>${dmi}</td><td>${x.history_pattern_similarity==null?"—":fmt(x.history_pattern_similarity,0)+"%"}<br><span class="muted">${x.history_pattern_label||"樣本不足"}</span></td><td><span class="score">${fmt(x.score,0)}</span><br><span class="muted">${x.tier||''}</span></td>
  <td class="${x.strategy_qualified?'pos':'muted'}">${qualified}${x.data_complete?'':'*'}</td><td class="muted">${x.signal||'—'}</td></tr>`}).join('');
  const mobile=document.getElementById('mobileRows');
  mobile.innerHTML=rows.slice(0,mobileLimit).map((x,i)=>{
@@ -105,7 +105,7 @@ function render(){
  if(more) more.addEventListener('click',()=>{mobileLimit+=50;render();});
 }
 function analyzeTechnical(x){
- const a=x.ohlc_60||[];
+ const a=x.ohlc_history||x.ohlc_60||[];
  if(a.length<22)return {ready:false,side:"wait",advice:"技術資料不足",why:"日線資料少於 22 根，暫不提供買賣價位"};
  const c=a[a.length-1],p=a[a.length-2],cl=a.map(z=>Number(z.close));
  const avg=(n)=>cl.slice(-n).reduce((s,v)=>s+v,0)/n;
@@ -154,9 +154,10 @@ function renderStockAnalysis(){
  <div class="watch-advice ${cls}">${t.advice}</div><div class="watch-detail">K 線：${t.candle||"資料不足"}｜型態：${t.pattern||"資料不足"}｜DMI：+DI ${fmt(x.plus_di)}／−DI ${fmt(x.minus_di)}／ADX ${fmt(x.adx)}</div>
  ${t.ready?`<div class="price-grid"><div class="price-box"><span>回檔買入區</span><strong class="buy">${fmt(t.buyLow)}～${fmt(t.buyHigh)}</strong></div><div class="price-box"><span>停損參考</span><strong class="sell">${fmt(t.stop)}</strong></div><div class="price-box"><span>第一目標價（1.5R）</span><strong>${fmt(t.tp1)}</strong></div><div class="price-box"><span>第二目標價（2.5R）</span><strong>${fmt(t.tp2)}</strong></div></div><div class="watch-detail">MA5 ${fmt(t.ma5)}／MA10 ${fmt(t.ma10)}／MA20 ${fmt(t.ma20)}｜ATR(14) ${fmt(t.atr)}</div>`:""}
  <div class="watch-detail">技術判斷依據：${t.why}。停損依近期低點與 ATR 估算；目標價依風險倍數估算。</div>
+ <div class="panel" style="margin-top:12px"><h3 style="margin:0 0 6px;font-size:15px">歷史 K 線起漲相似度</h3><div class="watch-detail">目前型態與過去相似走勢的平均相似度：<strong>${x.history_pattern_similarity==null?"資料不足":fmt(x.history_pattern_similarity,1)+"%"}</strong>｜有效歷史樣本：${x.history_pattern_samples||0} 組｜模型判斷：${x.history_pattern_label||"尚無結論"}</div><div class="price-grid"><div class="price-box"><span>相似型態後 5 日勝率／平均報酬</span><strong>${x.history_pattern_win_rate_5d==null?"—":fmt(x.history_pattern_win_rate_5d,1)+"%"} ／ ${x.history_pattern_avg_return_5d==null?"—":fmt(x.history_pattern_avg_return_5d)+"%"}</strong></div><div class="price-box"><span>相似型態後 10 日勝率／平均報酬</span><strong>${x.history_pattern_win_rate_10d==null?"—":fmt(x.history_pattern_win_rate_10d,1)+"%"} ／ ${x.history_pattern_avg_return_10d==null?"—":fmt(x.history_pattern_avg_return_10d)+"%"}</strong></div><div class="price-box"><span>相似型態後 20 日勝率／平均報酬</span><strong>${x.history_pattern_win_rate_20d==null?"—":fmt(x.history_pattern_win_rate_20d,1)+"%"} ／ ${x.history_pattern_avg_return_20d==null?"—":fmt(x.history_pattern_avg_return_20d)+"%"}</strong></div></div><div class="watch-detail">此功能以近 15 個交易日的累積價格路徑、K 線實體比例及相對成交量，與該股過去走勢比對；僅納入後續 20 個交易日資料完整的歷史樣本。樣本數偏少時不視為可靠統計，歷史相似不代表未來必然重演。</div></div>
  <div class="panel" style="margin-top:12px"><h3 style="margin:0 0 6px;font-size:15px">基本面與財務風險</h3><div class="muted">本階段尚未取得可驗證的月營收、毛利率、EPS、負債與現金流歷史資料，因此不計基本面分數，也不以缺漏資料當成零風險。資料接入後將評估營收趨勢、獲利能力、負債與現金流。</div></div>
  <div class="panel" style="margin-top:12px"><h3 style="margin:0 0 6px;font-size:15px">重大投資與事件風險</h3><p class="note">此區先提供官方公告查核入口。公告或新聞中的投資計畫會區分「已公告／執行中／已投產」，並檢查投資金額、資金來源、預計投產時間、折舊負擔及訂單支撐；未確認的媒體消息不視為公司事實。</p><div class="stock-footer"><a href="${mops}" target="_blank" rel="noreferrer">公開資訊觀測站：重大訊息與財報</a><a href="${twse}" target="_blank" rel="noreferrer">證交所：公告與市場資訊</a><a href="${news}" target="_blank" rel="noreferrer">搜尋 ${x.code} 重大投資與擴廠消息</a></div><div class="watch-detail">事件風險檢查：資本支出過高、舉債增加、投產延遲、產能利用率不足、投資效益未達預期、重大訴訟或客戶集中。尚未自動擷取並驗證個別公司公告，本階段不會虛構事件或直接扣分。</div></div>
- <div class="panel" style="margin-top:12px"><h3 style="margin:0 0 6px;font-size:15px">綜合風險評估</h3><div class="watch-detail">預定評分權重：技術面 25%、基本面 25%、營運與重大投資 20%、產業趨勢 15%、財務與事件風險 15%。重大風險另設警示／扣分機制，不讓技術或題材高分抵銷重大財務風險。</div><div class="status">目前僅技術面資料可計算；基本面、重大投資與事件風險尚待官方資料自動化接入，因此暫不產生整體 100 分總評。資料日期：${x.ohlc_60?.at(-1)?.date||"未知"}。</div></div></article>`;
+ <div class="panel" style="margin-top:12px"><h3 style="margin:0 0 6px;font-size:15px">綜合風險評估</h3><div class="watch-detail">預定評分權重：技術面 25%、基本面 25%、營運與重大投資 20%、產業趨勢 15%、財務與事件風險 15%。重大風險另設警示／扣分機制，不讓技術或題材高分抵銷重大財務風險。</div><div class="status">目前僅技術面資料可計算；基本面、重大投資與事件風險尚待官方資料自動化接入，因此暫不產生整體 100 分總評。資料日期：${(x.ohlc_history||x.ohlc_60)?.at(-1)?.date||"未知"}。</div></div></article>`;
 }
 function renderDmiTracking(d, tracking){
  const picks=(d.dmi_daily_picks||[]);

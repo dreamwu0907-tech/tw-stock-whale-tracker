@@ -47,7 +47,7 @@ def collect():
     start = end - timedelta(days=7)
     all_items, errors = [], []
     for q in QUERIES:
-        params = urllib.parse.urlencode({"q": q, "hl": "en-US", "gl": "US", "ceid": "US:en"})
+        params = urllib.parse.urlencode({"q": q + " when:7d", "hl": "en-US", "gl": "US", "ceid": "US:en"})
         url = "https://news.google.com/rss/search?" + params
         try:
             all_items.extend(rss_items(fetch(url), q))
@@ -77,6 +77,9 @@ def collect():
                         "Market-flow claims require independent market-data sources."]
     }
     RAW.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    archive_dir = DATA / "weekly_raw"
+    archive_dir.mkdir(exist_ok=True)
+    (archive_dir / (end.strftime("%Y-%m-%d") + ".json")).write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Collected {len(unique)} unique RSS items; {len(errors)} feed errors.")
 def response_text(obj):
     chunks = []
@@ -98,6 +101,9 @@ def analyze():
             "message": "請在 GitHub Repository Secrets 設定 OPENAI_API_KEY，才能執行 GPT 週報分析。",
             "articles": raw.get("articles", [])[:60]
         }, ensure_ascii=False, indent=2), encoding="utf-8")
+        archive_dir = DATA / "weekly_reports"
+        archive_dir.mkdir(exist_ok=True)
+        (archive_dir / (now_tw().strftime("%Y-%m-%d") + ".json")).write_text(REPORT.read_text(encoding="utf-8"), encoding="utf-8")
         print("OPENAI_API_KEY missing; saved a clear setup status.")
         return
     articles = raw.get("articles", [])[:120]
@@ -140,6 +146,16 @@ def analyze():
         "source_articles": articles
     }
     REPORT.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
+    archive_dir = DATA / "weekly_reports"
+    archive_dir.mkdir(exist_ok=True)
+    archive_file = archive_dir / (now_tw().strftime("%Y-%m-%d") + ".json")
+    archive_file.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
+    index_path = archive_dir / "index.json"
+    try: index = json.loads(index_path.read_text(encoding="utf-8"))
+    except Exception: index = []
+    index = [x for x in index if x.get("file") != archive_file.name]
+    index.insert(0, {"date": now_tw().strftime("%Y-%m-%d"), "file": archive_file.name, "period_start": output["period_start"], "period_end": output["period_end"], "status": output["status"]})
+    index_path.write_text(json.dumps(index[:104], ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Weekly report generated with {len(articles)} source items.")
 if __name__ == "__main__":
     if len(sys.argv) != 2 or sys.argv[1] not in ("collect", "analyze"):

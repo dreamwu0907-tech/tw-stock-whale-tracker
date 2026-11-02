@@ -1,0 +1,183 @@
+{
+  "status": "published",
+  "generated_at": "2026-11-02T12:00:00+08:00",
+  "period_start": "2026-10-26T12:00:00+08:00",
+  "period_end": "2026-11-02T12:00:00+08:00",
+  "article_count": 180,
+  "model": "ChatGPT manual analysis",
+  "source_method": "User-provided Google News RSS collection; manually analyzed in ChatGPT",
+  "report": {
+    "executive_summary": "本週 180 筆 RSS 標題與摘要中，AI／半導體／HBM 與 AI 資料中心是最集中的產業主軸；國防航太有採購及衛星／無人機訊號；機器人出現工廠與倉庫試點部署消息。電網、金融及生技新聞較分散。新聞能見度不等同於企業訂單、資金流入或股價尚未反映。",
+    "global_macro": "本週資料顯示 AI 基礎建設投資仍受關注，但同時有大型科技公司現金流疑慮與半導體股波動報導。利率與匯率仍可能影響科技股評價。RSS 資料沒有市場資金流量、外資買賣超或完整價格序列，不能據此判定全球資金方向。",
+    "industries": [
+      {
+        "name": "AI 半導體、HBM 與先進封裝",
+        "trend_stage": "擴張期；估值與資本支出風險同步升高",
+        "direction": "偏多觀察",
+        "short_term": "新聞集中於 AI 晶片需求、HBM、先進封裝產能與半導體投資。追蹤晶圓代工、封測、記憶體與設備供應鏈的法說及月營收。",
+        "long_term": "若 AI 推論與資料中心投資持續擴大，晶片製造、先進封裝、HBM、測試與設備仍可能受惠；需留意供給擴張與客戶資本支出放緩。",
+        "evidence": [
+          {
+            "claim": "本週 RSS 搜尋結果包含 HBM、先進封裝與半導體投資相關報導；需回到原始公告驗證細節。",
+            "url": "https://news.google.com/search?q=HBM+advanced+packaging+semiconductor+investment"
+          }
+        ],
+        "risks": [
+          "部分資訊可能為投資評論或二手轉載。",
+          "AI 資本支出若放緩，高估值供應鏈可能修正。"
+        ],
+        "taiwan_candidates": [
+          {
+            "ticker": "2330",
+            "company": "台積電",
+            "role": "晶圓代工、先進製程及先進封裝",
+            "why_benefit": "本週資料涉及台積電與 AI 晶片、先進封裝趨勢，可作為產業核心觀察標的；本週資料不足以判斷買點。",
+            "evidence_urls": [
+              "https://news.google.com/search?q=TSMC+AI+advanced+packaging"
+            ],
+            "risks": [
+              "估值可能已反映部分 AI 成長預期。",
+              "需追蹤先進封裝產能、資本支出與地緣政治風險。"
+            ],
+            "price_reflection": "未知；本週報告未附台股價格與籌碼數據。"
+          }
+        ]
+      },
+      {
+        "name": "AI 資料中心、伺服器與電源散熱",
+        "trend_stage": "需求擴張期；供應鏈受惠需逐家公司驗證",
+        "direction": "偏多觀察",
+        "short_term": "追蹤雲端業者資本支出、伺服器出貨、高功率電源及液冷滲透率。",
+        "long_term": "AI 機櫃功耗與散熱密度提高，可能推升電源、液冷、配電及機房基礎設施需求。",
+        "evidence": [
+          {
+            "claim": "RSS 結果涉及 AI 資料中心融資、建置與供應鏈擴張。",
+            "url": "https://news.google.com/search?q=AI+data+center+investment+financing"
+          }
+        ],
+        "risks": [
+          "本批資料沒有台灣個別供應商的具體訂單與營收貢獻。",
+          "專案可能受電力取得、融資成本與建置延遲影響。"
+        ],
+        "taiwan_candidates": []
+      },
+      {
+        "name": "機器人與工業自動化",
+        "trend_stage": "商業化驗證期",
+        "direction": "中期偏多，短線觀察",
+        "short_term": "留意人形機器人進入工廠與倉庫的試點消息，重點從展示轉向實際部署、續約及單機經濟效益。",
+        "long_term": "若物流與重複性工序逐步導入，伺服、控制器、機器視覺及系統整合可能受惠。",
+        "evidence": [
+          {
+            "claim": "RSS 結果提及人形機器人進入工廠與倉庫的試點部署。",
+            "url": "https://news.google.com/search?q=humanoid+robots+factories+warehouses"
+          }
+        ],
+        "risks": [
+          "試點不代表大量商業訂單。",
+          "成本、可靠度、安全與投資回收期仍是瓶頸。"
+        ],
+        "taiwan_candidates": []
+      },
+      {
+        "name": "國防、航太、無人機與衛星",
+        "trend_stage": "政策與採購需求推動期",
+        "direction": "中期偏多觀察",
+        "short_term": "追蹤正式預算、標案公告、得標公司與交貨時程。",
+        "long_term": "國防自主可能推升無人機、雷達、通訊、衛星及航太零組件需求。",
+        "evidence": [
+          {
+            "claim": "RSS 結果涉及印度軍事採購及軍用衛星相關消息。",
+            "url": "https://news.google.com/search?q=India+military+procurement+military+satellite"
+          }
+        ],
+        "risks": [
+          "海外採購不必然轉化為台灣廠商訂單。",
+          "國防專案認列時間長，需留意預算與交付進度。"
+        ],
+        "taiwan_candidates": []
+      },
+      {
+        "name": "電網、電力設備與儲能",
+        "trend_stage": "長期結構性需求；本週直接催化有限",
+        "direction": "中長期觀察",
+        "short_term": "本週資料缺少具體新標案、金額及台灣供應商資訊。",
+        "long_term": "AI 資料中心用電增加與電網更新可能帶動變壓器、開關設備、輸配電及儲能需求。",
+        "evidence": [
+          {
+            "claim": "本週 RSS 搜尋涵蓋電網現代化與智慧電網主題。",
+            "url": "https://news.google.com/search?q=grid+modernization+smart+grid+investment"
+          }
+        ],
+        "risks": [
+          "不足以證明台灣廠商新增訂單。",
+          "需留意原物料成本、交期及專案驗收。"
+        ],
+        "taiwan_candidates": []
+      },
+      {
+        "name": "金融、利率與全球資本市場",
+        "trend_stage": "政策觀望與波動期",
+        "direction": "中性；提高風險監控",
+        "short_term": "利率與匯率變化可能影響科技股估值；新聞標題不能替代資金流量統計。",
+        "long_term": "利率、美元及日圓走勢將影響科技股評價與跨市場資金配置。",
+        "evidence": [
+          {
+            "claim": "本週 RSS 收錄聯準會與日本央行利率相關報導。",
+            "url": "https://news.google.com/search?q=Federal+Reserve+Bank+of+Japan+interest+rates"
+          }
+        ],
+        "risks": [
+          "不能以新聞推定外資買賣方向。",
+          "高本益比股票對利率變化較敏感。"
+        ],
+        "taiwan_candidates": []
+      },
+      {
+        "name": "生技醫療與製藥",
+        "trend_stage": "個別事件驅動，缺乏共同主軸",
+        "direction": "中性觀察",
+        "short_term": "本週新聞分散，缺乏集中且可驗證的產業催化。",
+        "long_term": "需回到臨床進度、藥證、授權金及現金流判斷。",
+        "evidence": [],
+        "risks": [
+          "臨床試驗、藥證時程與資金需求風險。"
+        ],
+        "taiwan_candidates": []
+      }
+    ],
+    "capital_flow": [
+      {
+        "market_or_asset": "全球科技與半導體產業",
+        "observation": "新聞同時反映 AI 投資擴張與科技股現金流／估值疑慮；這是市場敘事，不是可量化的資金流入證據。",
+        "evidence_urls": [
+          "https://news.google.com/search?q=AI+semiconductor+investment+cash+flow+technology+stocks"
+        ],
+        "confidence": "低；需另查基金流量、交易所數據及法人買賣超"
+      }
+    ],
+    "watchlist": [
+      {
+        "ticker": "2330",
+        "company": "台積電",
+        "industry": "AI 半導體、先進製程與封裝",
+        "thesis": "本週新聞提及台積電與 AI 晶片及先進封裝趨勢，可作為產業核心觀察標的；買點需另外檢查股價、成交量及法人籌碼。",
+        "evidence_urls": [
+          "https://news.google.com/search?q=TSMC+AI+advanced+packaging"
+        ],
+        "risk": "估值、資本支出循環、地緣政治及客戶需求變化。"
+      }
+    ],
+    "next_week_events": [],
+    "methodology_notes": [
+      "資料期間為 2026-10-26 至 2026-11-02；原始 RSS 共 180 筆紀錄。",
+      "本報告依 RSS 標題與摘要整理，並未逐篇讀取原文全文。",
+      "RSS 新聞出現頻率不等於事件重要性、企業訂單或投資價值。",
+      "本週資料沒有台股每日價格、成交量、法人買賣超、估值與財報數據，因此不能判定個股是否尚未起漲，也不提供目標價或進場價。",
+      "台股候選僅列出本批資料可直接連結的台積電；其他產業先保留為產業觀察，不以概念股標籤湊名單。",
+      "下一階段應將產業趨勢與月營收、毛利率、EPS、法人籌碼、MA5/10/20、ATR 及歷史 K 線相似度交叉篩選。",
+      "資金流向須以交易所、基金流量、法人買賣超或官方統計驗證，不能用新聞標題推斷。"
+    ]
+  },
+  "source_articles": []
+}

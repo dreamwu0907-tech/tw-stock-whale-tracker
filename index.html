@@ -77,7 +77,7 @@ function render(){
  let rows=allRows.filter(x=>(String(x.code).toLowerCase().includes(q)||String(x.name).toLowerCase().includes(q))&&(filter==='all'||(filter==='qualified'&&x.strategy_qualified)||(filter==='complete'&&x.data_complete)));
  rows.sort((a,b)=>(Number(b[key]??-Infinity)-Number(a[key]??-Infinity)));
  const tbody=document.getElementById('rows');
- if(!rows.length){tbody.innerHTML='<tr><td colspan="12" class="muted" style="text-align:center">沒有符合的資料，或尚未成功更新資料。</td></tr>';document.getElementById('mobileRows').innerHTML='<div class="muted">沒有符合的資料，請調整搜尋或篩選條件。</div>';return}
+ if(!rows.length){tbody.innerHTML='<tr><td colspan="13" class="muted" style="text-align:center">沒有符合的資料，或尚未成功更新資料。</td></tr>';document.getElementById('mobileRows').innerHTML='<div class="muted">沒有符合的資料，請調整搜尋或篩選條件。</div>';return}
  tbody.innerHTML=rows.slice(0,300).map((x,i)=>{
  const dmi=x.dmi_early_warning?'起漲預警':x.dmi_cross_valid?'多方交叉已成立':'等待訊號';
  const qualified=x.strategy_qualified?'合格':(x.return_5d_pct!=null&&x.return_5d_pct>5?'漲幅超標':'未合格');

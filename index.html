@@ -62,6 +62,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 <section class="panel"><h2>首次啟用設定</h2><p class="watch-detail">目前資料蒐集使用 Google News RSS 搜尋公開新聞標題與摘要，並非完整抓取全球所有網站全文。GPT 週報需要 OpenAI API Key，且 API 用量會另外計費。</p><ol class="watch-detail"><li>建立 OpenAI API Key：<a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer">OpenAI API Keys</a>。</li><li>開啟本專案 <a href="https://github.com/dreamwu0907-tech/tw-stock-whale-tracker/settings/secrets/actions" target="_blank" rel="noopener noreferrer">GitHub Actions Secrets</a>。</li><li>新增 Repository secret，名稱必須是 <code>OPENAI_API_KEY</code>，值貼上 API Key。不要把 Key 寫進網頁或程式碼。</li><li>到 <a href="https://github.com/dreamwu0907-tech/tw-stock-whale-tracker/actions/workflows/weekly_research.yml" target="_blank" rel="noopener noreferrer">Weekly global industry research</a>，先手動執行 collect，再手動執行 analyze。</li></ol><p class="note">正式排程：週六 18:00（台灣時間）蒐集；週日 11:00 執行分析。若未設定 Key，系統仍會保留蒐集資料並顯示待設定狀態。</p></section><section class="panel"><h2>本週全球趨勢與產業方向</h2><div id="weeklySummary" class="watch-detail">尚未有已發布週報。</div><div id="weeklyIndustries" class="watchlist-grid" style="margin-top:12px"></div></section>
 <section class="panel"><h2>全球資金與總體觀察</h2><div id="weeklyCapital" class="watchlist-grid"></div></section>
 <section class="panel"><h2>台股潛在受惠名單</h2><p class="note">僅列出有來源證據支持的供應鏈關聯；若證據不足，寧可不推薦，不以概念股標籤湊數。</p><div id="weeklyStocks" class="watchlist-grid"></div></section>
+<section class="panel"><h2>產業趨勢 × 台股起漲交叉觀察</h2><p class="note">將週報中有證據支持的台股候選，對照目前市場排行資料。產業題材不等於買進訊號；只有同時具備可用行情與技術／籌碼資料時才顯示個股訊號。</p><div id="trendStockMatch" class="watchlist-grid"><div class="muted">等待週報與行情資料…</div></div></section>
 <section class="panel"><h2>下週重要事件與觀察</h2><div id="weeklyEvents" class="watchlist-grid"></div></section>
 <section class="panel"><h2>資料來源與研究限制</h2><div id="weeklyMethod" class="watch-detail">資料來源、涵蓋範圍與限制將隨週報顯示。</div></section>
 <section class="panel"><h2>歷史週報</h2><p class="note">每週報告與原始蒐集資料均依日期歸檔。</p><div id="weeklyArchive" class="watchlist-grid"><div class="muted">讀取歷史週報清單…</div></div></section>
@@ -124,6 +125,31 @@ async function loadWeeklyArchive(){
   el.innerHTML=rows.map(x=>'<article class="watch-item"><strong>'+safeText(x.date)+'</strong><p class="watch-detail">資料期間：'+safeText(x.period_start||"—")+' ～ '+safeText(x.period_end||"—")+'</p><a href="./data/weekly_reports/'+encodeURIComponent(x.file)+'" target="_blank" rel="noopener noreferrer">查看該週報 JSON</a></article>').join("")||'<div class="muted">尚無歷史週報。</div>';
  }catch(e){el.innerHTML='<div class="muted">尚無歷史週報；完成第一次週報後會自動建立。</div>';}
 }
+function renderTrendStockMatch(p){
+ const el=document.getElementById("trendStockMatch");
+ const industries=p.industries||[];
+ const candidates=(p.watchlist||[]).map(x=>Object.assign({industry:x.industry||"週報觀察名單"},x));
+ industries.forEach(ind=>(ind.taiwan_candidates||[]).forEach(x=>candidates.push(Object.assign({industry:ind.name,direction:ind.direction,trend_stage:ind.trend_stage},x))));
+ const seen=new Set(), unique=candidates.filter(x=>{const k=String(x.ticker||x.code||"").trim();if(!k||seen.has(k))return false;seen.add(k);return true;});
+ if(!unique.length){el.innerHTML='<div class="muted">本週週報沒有具備明確供應鏈證據的台股候選。這是資料品質控管，不代表沒有產業機會；請先補足公司與供應鏈證據。</div>';return;}
+ el.innerHTML=unique.slice(0,20).map(c=>{
+  const code=String(c.ticker||c.code||"").trim();
+  const row=allRows.find(x=>String(x.code)===code);
+  const thesis=c.thesis||c.why_benefit||"週報列為觀察標的";
+  let signal="尚無技術結論",detail="目前行情排行資料未找到此股，或技術資料不足。";
+  if(row){
+   const tags=[];
+   if(row.dmi_early_warning)tags.push("DMI 起漲預警");
+   if(row.dmi_cross_valid)tags.push("DMI 多方交叉");
+   if(row.strategy_qualified)tags.push("符合市場策略條件");
+   if(row.history_pattern_label)tags.push("歷史型態："+row.history_pattern_label);
+   signal=row.dmi_early_warning?"起漲預警":row.dmi_cross_valid?"多方交叉確認":row.strategy_qualified?"策略合格": "尚未符合起漲條件";
+   detail="收盤 "+fmt(row.close)+"｜漲跌 "+fmt(row.change_pct)+"%｜外資近5日 "+fmt(row.foreign_5d,0)+" 張｜投信近5日 "+fmt(row.trust_5d,0)+" 張｜歷史 K 線相似度 "+(row.history_pattern_similarity==null?"—":fmt(row.history_pattern_similarity,1)+"%")+"｜"+(tags.join("；")||"尚無明確多方訊號");
+  }
+  const cls=row&&(row.dmi_early_warning||row.dmi_cross_valid||row.strategy_qualified)?"buy":"wait";
+  return '<article class="watch-item"><div class="watch-head"><strong>'+safeText(code+' '+(c.company||c.name||""))+'</strong><span class="watch-advice '+cls+'">'+safeText(signal)+'</span></div><p class="watch-detail">產業：'+safeText(c.industry||"—")+'｜趨勢：'+safeText(c.direction||c.trend_stage||"待確認")+'</p><p class="watch-detail">'+safeText(thesis)+'</p><p class="watch-detail">'+safeText(detail)+'</p><p class="watch-detail">風險：'+safeText(c.risk||((c.risks||[]).join("；"))||"仍需檢查財報、估值及重大訊息")+'</p><p class="watch-detail">'+sourceLinks(c.evidence_urls)+'</p></article>';
+ }).join("");
+}
 async function loadWeeklyReport(){
  const status=document.getElementById("weeklyStatus");
  try{
@@ -144,6 +170,7 @@ async function loadWeeklyReport(){
   document.getElementById("weeklyCapital").innerHTML=(p.capital_flow||[]).map(x=>'<article class="watch-item"><strong>'+safeText(x.market_or_asset)+'</strong><p class="watch-detail">'+safeText(x.observation)+'</p><p class="watch-detail">可信度：'+safeText(x.confidence||"未評估")+'</p><p class="watch-detail">'+sourceLinks(x.evidence_urls)+'</p></article>').join("")||'<div class="muted">本週資料不足以確認資金流向。</div>';
   const stocks=(p.watchlist||[]).concat((p.industries||[]).flatMap(i=>(i.taiwan_candidates||[]).map(x=>Object.assign({industry:i.name},x))));
   document.getElementById("weeklyStocks").innerHTML=stocks.slice(0,15).map(x=>'<article class="watch-item"><strong>'+safeText(x.ticker)+' '+safeText(x.company)+'</strong><p class="watch-detail">產業：'+safeText(x.industry||"—")+'｜角色：'+safeText(x.role||"—")+'</p><p class="watch-detail">'+safeText(x.thesis||x.why_benefit||"")+'</p><p class="watch-detail">利多反映程度：'+safeText(x.price_reflection||"尚無可靠股價資料")+'</p><p class="watch-detail">風險：'+safeText(x.risk||((x.risks||[]).join("；")))+'</p><p class="watch-detail">'+sourceLinks(x.evidence_urls)+'</p></article>').join("")||'<div class="muted">本週沒有足夠來源證據支持具體台股推薦；不以題材硬湊名單。</div>';
+  renderTrendStockMatch(p);
   document.getElementById("weeklyEvents").innerHTML=(p.next_week_events||[]).map(x=>'<article class="watch-item"><strong>'+safeText(x.event)+'</strong><p class="watch-detail">'+safeText(x.when)+"｜"+safeText(x.why_it_matters)+'</p><p class="watch-detail">'+sourceLinks([x.source_url])+'</p></article>').join("")||'<div class="muted">尚無已確認的下週事件。</div>';
   document.getElementById("weeklyMethod").innerHTML=(p.methodology_notes||[]).map(x=>"• "+safeText(x)).join("<br>")+"<p>本週來源文章："+(d.source_articles||[]).slice(0,30).map(x=>'<a href="'+safeText(x.url)+'" target="_blank" rel="noopener noreferrer">'+safeText(x.title)+'</a>').join(" · ")+"</p>";
  }catch(e){status.textContent="尚無可讀取的週報。請先執行每週蒐集與分析工作流程；"+e.message;}

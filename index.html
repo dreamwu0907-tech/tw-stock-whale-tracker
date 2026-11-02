@@ -58,11 +58,14 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 <div class="status" id="status">資料讀取中。</div>
 </section>
 </section><section id="watchPage" class="page-view" hidden><section class="panel" id="stockAnalysisPanel"><h2>自選個股評估</h2><p class="note">輸入股票代號或名稱，查看技術面與基本面評估。</p><div class="filters"><input id="analysisInput" placeholder="輸入股票代號或名稱，例如 2330"><button id="analyzeStock">開始分析</button></div><div id="analysisResult"><div class="muted">請輸入股票代號或名稱開始分析。</div></div></section></section><section id="globalPage" class="page-view" hidden>
-<section class="panel"><h2>全球產業趨勢週報</h2><p class="note">預定每週日 12:00 前更新；蒐集前一週全球公開資訊，分析產業趨勢、資金方向及台灣供應鏈。</p><div class="status">目前為功能架構預覽：全球資訊爬蟲、GPT API 分析及自動週報排程尚未串接，因此不顯示未經驗證的即時結論。</div></section>
-<section class="panel"><h2>本週全球趨勢觀察</h2><div class="watchlist-grid"><article class="watch-item"><strong>AI 與半導體</strong><p class="note">資料待接入：全球資本支出、晶片需求、先進封裝、資料中心。</p></article><article class="watch-item"><strong>金融與資本市場</strong><p class="note">資料待接入：利率、匯率、央行政策、全球資金流向。</p></article><article class="watch-item"><strong>機器人與自動化</strong><p class="note">資料待接入：技術商用化、工業投資、訂單與供應鏈。</p></article><article class="watch-item"><strong>軍工與航太</strong><p class="note">資料待接入：國防預算、採購合約、航太供應鏈。</p></article><article class="watch-item"><strong>能源與電力</strong><p class="note">資料待接入：電網升級、HVDC、儲能、核能與電力設備。</p></article><article class="watch-item"><strong>其他新興產業</strong><p class="note">依每週公開資訊辨識新興趨勢，不預先限制產業範圍。</p></article></div></section>
-<section class="panel"><h2>台股潛在受惠名單</h2><p class="note">正式版本預計每週挑選 5～10 檔，需確認產品／客戶／訂單／營收連結，並評估股價是否已提前反映利多。</p><div class="status">尚未產生推薦名單。資料接入後將保留每週推薦紀錄、訊號日期、觀察價位及後續 5／10／20 個交易日績效。</div></section>
-<section class="panel"><h2>歷史週報與模型驗證</h2><p class="note">每週保留產業判斷與個股推薦，追蹤後續營收、法人動向、股價報酬及最大回檔，檢查過去判斷是否有效。</p><div class="status">歷史週報資料庫尚未建立。</div></section>
-</section><p class="note" style="margin-top:18px">這是個人研究工具。資料來源或 API 可能調整，請勿單憑單一訊號交易。</p>
+<section class="panel"><h2>全球產業趨勢週報</h2><p class="note">每週六 18:00（台灣時間）蒐集前 7 天全球公開資訊；每週日 11:00 啟動 GPT 分析，預定 12:00 前發布。</p><div id="weeklyStatus" class="status">正在讀取最新週報…</div><div class="note" id="weeklyMeta"></div></section>
+<section class="panel"><h2>本週全球趨勢與產業方向</h2><div id="weeklySummary" class="watch-detail">尚未有已發布週報。</div><div id="weeklyIndustries" class="watchlist-grid" style="margin-top:12px"></div></section>
+<section class="panel"><h2>全球資金與總體觀察</h2><div id="weeklyCapital" class="watchlist-grid"></div></section>
+<section class="panel"><h2>台股潛在受惠名單</h2><p class="note">僅列出有來源證據支持的供應鏈關聯；若證據不足，寧可不推薦，不以概念股標籤湊數。</p><div id="weeklyStocks" class="watchlist-grid"></div></section>
+<section class="panel"><h2>下週重要事件與觀察</h2><div id="weeklyEvents" class="watchlist-grid"></div></section>
+<section class="panel"><h2>資料來源與研究限制</h2><div id="weeklyMethod" class="watch-detail">資料來源、涵蓋範圍與限制將隨週報顯示。</div></section>
+<section class="panel"><h2>歷史週報</h2><p class="note">每週報告以日期保留在 GitHub 資料版本紀錄；後續將再擴充成可查詢的歷史週報與 5／10／20 日績效追蹤。</p><div class="status">目前先保存每週最新報告及原始蒐集資料。</div></section>
+</section></section><p class="note" style="margin-top:18px">這是個人研究工具。資料來源或 API 可能調整，請勿單憑單一訊號交易。</p>
 </main>
 <script>
 const DATA_URL = './data/ranking.json';
@@ -109,6 +112,34 @@ function render(){
  const more=document.getElementById('showMore');
  if(more) more.addEventListener('click',()=>{mobileLimit+=50;render();});
 }
+
+function safeText(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function sourceLinks(urls){return (urls||[]).filter(u=>/^https?:\\/\\//i.test(u)).slice(0,5).map(u=>'<a href="'+safeText(u)+'" target="_blank" rel="noopener noreferrer">來源</a>').join(" · ");}
+async function loadWeeklyReport(){
+ const status=document.getElementById("weeklyStatus");
+ try{
+  const r=await fetch("./data/weekly_report.json?t="+Date.now(),{cache:"no-store"});
+  if(!r.ok)throw new Error("週報尚未產生（HTTP "+r.status+"）");
+  const d=await r.json();
+  if(d.status==="needs_api_key"){
+   status.textContent="已完成全球新聞蒐集（"+(d.article_count||0)+" 則），但尚未設定 OpenAI API Key，因此 GPT 分析尚未執行。請完成 GitHub Secret 設定。";
+   document.getElementById("weeklyMeta").textContent="資料期間："+(d.period_start||"—")+" ～ "+(d.period_end||"—");
+   return;
+  }
+  if(d.status!=="published"||!d.report)throw new Error(d.message||"週報尚未發布");
+  const p=d.report;
+  status.textContent="週報已發布｜蒐集 "+(d.article_count||0)+" 則 RSS 資訊｜模型："+(d.model||"—");
+  document.getElementById("weeklyMeta").textContent="資料期間："+(d.period_start||"—")+" ～ "+(d.period_end||"—")+"｜產生時間："+(d.generated_at||"—")+"｜RSS 標題與摘要整理，非完整新聞全文";
+  document.getElementById("weeklySummary").innerHTML="<p>"+safeText(p.executive_summary||"")+"</p><p>"+safeText(p.global_macro||"")+"</p>";
+  document.getElementById("weeklyIndustries").innerHTML=(p.industries||[]).map(x=>'<article class="watch-item"><strong>'+safeText(x.name)+'</strong><div class="watch-advice wait">'+safeText(x.direction||x.trend_stage||"觀察")+'</div><p class="watch-detail">趨勢階段：'+safeText(x.trend_stage||"未判定")+'</p><p class="watch-detail">短期：'+safeText(x.short_term||"—")+'</p><p class="watch-detail">中長期：'+safeText(x.long_term||"—")+'</p><p class="watch-detail">風險：'+safeText((x.risks||[]).join("；"))+'</p><p class="watch-detail">'+(x.evidence||[]).map(e=>safeText(e.claim)+" "+sourceLinks([e.url])).join("<br>")+'</p></article>').join("")||'<div class="muted">本週沒有足夠證據可形成產業結論。</div>';
+  document.getElementById("weeklyCapital").innerHTML=(p.capital_flow||[]).map(x=>'<article class="watch-item"><strong>'+safeText(x.market_or_asset)+'</strong><p class="watch-detail">'+safeText(x.observation)+'</p><p class="watch-detail">可信度：'+safeText(x.confidence||"未評估")+'</p><p class="watch-detail">'+sourceLinks(x.evidence_urls)+'</p></article>').join("")||'<div class="muted">本週資料不足以確認資金流向。</div>';
+  const stocks=(p.watchlist||[]).concat((p.industries||[]).flatMap(i=>(i.taiwan_candidates||[]).map(x=>Object.assign({industry:i.name},x))));
+  document.getElementById("weeklyStocks").innerHTML=stocks.slice(0,15).map(x=>'<article class="watch-item"><strong>'+safeText(x.ticker)+' '+safeText(x.company)+'</strong><p class="watch-detail">產業：'+safeText(x.industry||"—")+'｜角色：'+safeText(x.role||"—")+'</p><p class="watch-detail">'+safeText(x.thesis||x.why_benefit||"")+'</p><p class="watch-detail">利多反映程度：'+safeText(x.price_reflection||"尚無可靠股價資料")+'</p><p class="watch-detail">風險：'+safeText(x.risk||((x.risks||[]).join("；")))+'</p><p class="watch-detail">'+sourceLinks(x.evidence_urls)+'</p></article>').join("")||'<div class="muted">本週沒有足夠來源證據支持具體台股推薦；不以題材硬湊名單。</div>';
+  document.getElementById("weeklyEvents").innerHTML=(p.next_week_events||[]).map(x=>'<article class="watch-item"><strong>'+safeText(x.event)+'</strong><p class="watch-detail">'+safeText(x.when)+"｜"+safeText(x.why_it_matters)+'</p><p class="watch-detail">'+sourceLinks([x.source_url])+'</p></article>').join("")||'<div class="muted">尚無已確認的下週事件。</div>';
+  document.getElementById("weeklyMethod").innerHTML=(p.methodology_notes||[]).map(x=>"• "+safeText(x)).join("<br>")+"<p>本週來源文章："+(d.source_articles||[]).slice(0,30).map(x=>'<a href="'+safeText(x.url)+'" target="_blank" rel="noopener noreferrer">'+safeText(x.title)+'</a>').join(" · ")+"</p>";
+ }catch(e){status.textContent="尚無可讀取的週報。請先執行每週蒐集與分析工作流程；"+e.message;}
+}
+
 function analyzeTechnical(x){
  const a=x.ohlc_history||x.ohlc_60||[];
  if(a.length<22)return {ready:false,side:"wait",advice:"技術資料不足",why:"日線資料少於 22 根，暫不提供買賣價位"};
@@ -205,9 +236,10 @@ document.getElementById('date').textContent=d.data_date||'—';
 document.getElementById('refresh').addEventListener('click',load);
 document.getElementById('analyzeStock').addEventListener('click',renderStockAnalysis);
 document.getElementById('analysisInput').addEventListener('keydown',e=>{if(e.key==='Enter')renderStockAnalysis();});
-document.querySelectorAll('.page-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.page-tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page-view').forEach(x=>x.hidden=x.id!==b.dataset.page);}));
+document.querySelectorAll('.page-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.page-tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page-view').forEach(x=>x.hidden=x.id!==b.dataset.page);if(b.dataset.page==="globalPage")loadWeeklyReport();}));
 document.getElementById('search').addEventListener('input',()=>{mobileLimit=50;render()});
 document.getElementById('filter').addEventListener('change',()=>{mobileLimit=50;render()});
 document.getElementById('sort').addEventListener('change',()=>{mobileLimit=50;render()});
 load();
+loadWeeklyReport();
 </script></body></html>

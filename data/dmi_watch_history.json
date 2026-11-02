@@ -16,6 +16,22 @@
           "score": 54
         }
       ]
+    },
+    {
+      "date": "20261102",
+      "stocks": [
+        {
+          "code": "9904",
+          "name": "寶成",
+          "close": 25.85,
+          "dmi_pick_score": 85,
+          "dmi_signal_label": "多方交叉已成立",
+          "plus_di": 22.77,
+          "minus_di": 21.77,
+          "adx": 22.04,
+          "score": 80
+        }
+      ]
     }
   ],
   "picks": [
@@ -30,6 +46,10 @@
         {
           "date": "20261030",
           "close": 7.26
+        },
+        {
+          "date": "20261102",
+          "close": 7.14
         }
       ],
       "outcomes": {}
@@ -45,6 +65,25 @@
         {
           "date": "20261030",
           "close": 184.0
+        },
+        {
+          "date": "20261102",
+          "close": 184.0
+        }
+      ],
+      "outcomes": {}
+    },
+    {
+      "date": "20261102",
+      "code": "9904",
+      "name": "寶成",
+      "entry_close": 25.85,
+      "dmi_pick_score": 85,
+      "signal": "多方交叉已成立",
+      "observations": [
+        {
+          "date": "20261102",
+          "close": 25.85
         }
       ],
       "outcomes": {}
@@ -67,5 +106,5 @@
       "average_return_pct": null
     }
   },
-  "updated_at": "2026-10-31 17:18 Taipei"
+  "updated_at": "2026-11-02 19:07 Taipei"
 }

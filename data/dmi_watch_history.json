@@ -32,6 +32,22 @@
           "score": 80
         }
       ]
+    },
+    {
+      "date": "20261103",
+      "stocks": [
+        {
+          "code": "1605",
+          "name": "華新",
+          "close": 35.0,
+          "dmi_pick_score": 85,
+          "dmi_signal_label": "多方交叉已成立",
+          "plus_di": 18.69,
+          "minus_di": 19.45,
+          "adx": 16.82,
+          "score": 80
+        }
+      ]
     }
   ],
   "picks": [
@@ -50,6 +66,10 @@
         {
           "date": "20261102",
           "close": 7.14
+        },
+        {
+          "date": "20261103",
+          "close": 7.1
         }
       ],
       "outcomes": {}
@@ -69,6 +89,10 @@
         {
           "date": "20261102",
           "close": 184.0
+        },
+        {
+          "date": "20261103",
+          "close": 185.0
         }
       ],
       "outcomes": {}
@@ -84,6 +108,25 @@
         {
           "date": "20261102",
           "close": 25.85
+        },
+        {
+          "date": "20261103",
+          "close": 25.9
+        }
+      ],
+      "outcomes": {}
+    },
+    {
+      "date": "20261103",
+      "code": "1605",
+      "name": "華新",
+      "entry_close": 35.0,
+      "dmi_pick_score": 85,
+      "signal": "多方交叉已成立",
+      "observations": [
+        {
+          "date": "20261103",
+          "close": 35.0
         }
       ],
       "outcomes": {}
@@ -106,5 +149,5 @@
       "average_return_pct": null
     }
   },
-  "updated_at": "2026-11-02 19:07 Taipei"
+  "updated_at": "2026-11-03 19:09 Taipei"
 }

@@ -35,19 +35,7 @@
     },
     {
       "date": "20261103",
-      "stocks": [
-        {
-          "code": "1605",
-          "name": "華新",
-          "close": 35.0,
-          "dmi_pick_score": 85,
-          "dmi_signal_label": "多方交叉已成立",
-          "plus_di": 18.69,
-          "minus_di": 19.45,
-          "adx": 16.82,
-          "score": 80
-        }
-      ]
+      "stocks": []
     }
   ],
   "picks": [
@@ -149,5 +137,5 @@
       "average_return_pct": null
     }
   },
-  "updated_at": "2026-11-03 19:09 Taipei"
+  "updated_at": "2026-11-03 20:01 Taipei"
 }

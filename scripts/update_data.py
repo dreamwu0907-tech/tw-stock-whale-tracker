@@ -335,36 +335,45 @@ def calc_score(q, history, sessions, code):
     gap_now = gap_change_3d = pdi_change_3d = mdi_drop_3d = None
     raw_bullish_cross = False
     cross_valid = di_declining = adx_declining = early_warning = False
+    near_cross = False
     adx_flattening = False
     dmi_pick_score = 0
-    if dmis and len(dmis) >= 3:
+    if dmis and len(dmis) >= 4:
         pdi, mdi, adx = dmis[-1]
         # Detect an actual upward +DI crossover within the latest three sessions.
         for j in range(max(1, len(dmis)-3), len(dmis)):
             if dmis[j-1][0] <= dmis[j-1][1] and dmis[j][0] > dmis[j][1]:
                 raw_bullish_cross = True
-        # All three line directions must be strict over the latest three sessions.
+        # Strict confirmation remains unchanged: three consecutive observations
+        # show +DI rising, -DI falling and ADX falling, plus an upward crossover.
         pdi_rising = dmis[-3][0] < dmis[-2][0] < dmis[-1][0]
         di_declining = dmis[-3][1] > dmis[-2][1] > dmis[-1][1]
         adx_declining = all(v is not None for v in (dmis[-3][2], dmis[-2][2], dmis[-1][2])) and dmis[-3][2] > dmis[-2][2] > dmis[-1][2]
         mdi_falling = di_declining
-        # A valid DMI signal requires the upward crossover AND all three slopes.
         cross_valid = bool(raw_bullish_cross and pdi_rising and mdi_falling and adx_declining)
-        gaps = [x[1] - x[0] for x in dmis[-3:]]
+        gaps = [x[1] - x[0] for x in dmis[-4:]]
         gap_now = gaps[-1]
         gap_change_3d = gaps[0] - gaps[-1]
-        pdi_change_3d = dmis[-1][0] - dmis[-3][0]
-        mdi_drop_3d = dmis[-3][1] - dmis[-1][1]
-        gap_narrowing = gaps[0] > gaps[1] > gaps[2]
+        pdi_change_3d = dmis[-1][0] - dmis[-4][0]
+        mdi_drop_3d = dmis[-4][1] - dmis[-1][1]
+        # Relaxed observation: at least 2 of the last 3 daily moves point
+        # in the desired direction, rather than requiring every move to agree.
+        pdi_up_days = sum(1 for a,b in zip(dmis[-4:-1], dmis[-3:]) if b[0] > a[0])
+        mdi_down_days = sum(1 for a,b in zip(dmis[-4:-1], dmis[-3:]) if b[1] < a[1])
+        gap_narrow_days = sum(1 for a,b in zip(gaps[:-1],gaps[1:]) if b < a)
+        pdi_relaxed = pdi_up_days >= 2
+        mdi_relaxed = mdi_down_days >= 2
+        gap_narrowing = gap_narrow_days >= 2
         adx_flattening = (dmis[-2][2] is not None and dmis[-1][2] is not None
                           and dmis[-1][2] <= dmis[-2][2] + 1.5)
-        # Pre-cross setup is shown as observation only; it is NOT strategy-qualified.
-        early_warning = (not raw_bullish_cross and pdi < mdi and (mdi - pdi) <= 5
-                         and pdi_rising and mdi_falling and gap_narrowing
-                         and (adx_declining or adx_flattening))
-        # DMI-first ranking score; a crossover bonus is awarded only when all
-        # three line directions and the upward crossover are simultaneously valid.
-        dmi_pick_score = (25 if pdi_rising else 0) + (25 if mdi_falling else 0) + (20 if gap_narrowing else 0)
+        # Near-cross: still below -DI, within 8 points, converging, and ADX
+        # declining or flattening. Earlier watch has no fixed gap limit.
+        near_cross = (not raw_bullish_cross and pdi < mdi and (mdi-pdi) <= 8
+                      and pdi_relaxed and mdi_relaxed and gap_narrowing
+                      and (adx_declining or adx_flattening))
+        early_warning = (not raw_bullish_cross and pdi < mdi
+                         and pdi_relaxed and mdi_relaxed and gap_narrowing)
+        dmi_pick_score = (25 if pdi_relaxed else 0) + (25 if mdi_relaxed else 0) + (20 if gap_narrowing else 0)
         dmi_pick_score += 15 if adx_declining else 0
         dmi_pick_score += 15 if cross_valid else 0
 
@@ -405,7 +414,8 @@ def calc_score(q, history, sessions, code):
     if foreign_streak: reasons.append(f"外資連買{foreign_streak}日")
     if cross_valid: reasons.append("DMI合格：+DI上升、-DI下降、ADX下降，且+DI向上穿越-DI")
     elif raw_bullish_cross: reasons.append("雖已交叉，但三條線方向未同時符合")
-    elif early_warning: reasons.append("DMI交叉前觀察：+DI上升、-DI下降且差距≤5")
+    elif near_cross: reasons.append("DMI接近交叉：+DI與-DI近3日多數方向收斂，差距≤8")
+    elif early_warning: reasons.append("DMI提前觀察：+DI上升、-DI下降且差距收斂")
     if di_declining: reasons.append("-DI連3日下降")
     if adx_declining: reasons.append("ADX連3日下降")
     if five_ret is not None and five_ret <= 5: reasons.append("5日漲幅未超5%")
@@ -430,8 +440,8 @@ def calc_score(q, history, sessions, code):
         "plus_di_change_3d": round(pdi_change_3d, 2) if pdi_change_3d is not None else None,
         "minus_di_drop_3d": round(mdi_drop_3d, 2) if mdi_drop_3d is not None else None,
         "dmi_pick_score": dmi_pick_score,
-        "dmi_cross_valid": cross_valid, "dmi_bullish_cross": raw_bullish_cross, "dmi_early_warning": early_warning,
-        "dmi_signal_label": "三條件交叉合格" if cross_valid else "交叉前觀察" if early_warning else "交叉方向未合格" if raw_bullish_cross else "等待訊號",
+        "dmi_cross_valid": cross_valid, "dmi_bullish_cross": raw_bullish_cross, "dmi_early_warning": early_warning, "dmi_near_cross": near_cross,
+        "dmi_signal_label": "三條件交叉合格" if cross_valid else "接近交叉" if near_cross else "提前觀察" if early_warning else "交叉方向未合格" if raw_bullish_cross else "等待訊號",
         "minus_di_declining": di_declining, "adx_declining": adx_declining,
         "return_5d_pct": round(five_ret, 2) if five_ret is not None else None,
         "return_20d_pct": round(twenty_ret, 2) if twenty_ret is not None else None,

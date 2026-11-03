@@ -30,7 +30,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 </div>
 <section class="panel"><h2>計分規則與資格判斷</h2>
 <p>總分100分：投信20、外資15、DMI 35、價格位置20、交易品質與風險10。分級為80–100「優先觀察」、65–79「持續追蹤」、0–64「一般觀察」。</p>
-<p>「策略合格」必須同時符合：①+DI(14)連3個交易日上升；②-DI(14)連3個交易日下降；③ADX(14)連3個交易日下降；④+DI由下向上穿越-DI。單純交叉或交叉前預警都不算合格，另要求近5日漲幅≤5%。</p>
+<p>DMI分三級：①「提前觀察」：近3個交易日中，+DI上升、-DI下降各至少2次，且兩線差距呈收斂；②「接近交叉」：符合提前觀察，+DI仍低於-DI、差距≤8，且ADX下降或趨平；③「交叉確認」：+DI向上穿越-DI，並且+DI連3日上升、-DI連3日下降、ADX連3日下降。只有第③級再加上近5日漲幅≤5%，才列為「策略合格」。前兩級僅供提早觀察，不代表買進訊號。</p>
 <p class="note">法人近5日累計以張數表示；DMI採14期 Wilder 平滑。歷史技術資料目前只涵蓋成交量前250檔且需有足夠日線，因此其他股票可能顯示資料不足。公開法人資料不能辨識真實大戶，排行也不是買賣建議。</p>
 </section>
 <section class="panel"><h2>資料來源與更新頻率</h2>
@@ -83,7 +83,7 @@ function render(){
  const tbody=document.getElementById('rows');
  if(!rows.length){tbody.innerHTML='<tr><td colspan="13" class="muted" style="text-align:center">沒有符合的資料，或尚未成功更新資料。</td></tr>';document.getElementById('mobileRows').innerHTML='<div class="muted">沒有符合的資料，請調整搜尋或篩選條件。</div>';return}
  tbody.innerHTML=rows.slice(0,300).map((x,i)=>{
- const dmi=x.dmi_early_warning?'起漲預警':x.dmi_cross_valid?'多方交叉已成立':'等待訊號';
+ const dmi=x.dmi_near_cross?'接近交叉':x.dmi_early_warning?'提前觀察':x.dmi_cross_valid?'多方交叉已確認':'等待訊號';
  const qualified=x.strategy_qualified?'合格':(x.return_5d_pct!=null&&x.return_5d_pct>5?'漲幅超標':'未合格');
  return `<tr><td>${i+1}</td><td><strong>${x.code}</strong><br><span class="muted">${x.name||''}</span></td>
  <td>${fmt(x.close)}</td><td class="${Number(x.change_pct)>=0?'pos':'neg'}">${fmt(x.change_pct)}%</td>
@@ -139,14 +139,15 @@ function renderTrendStockMatch(p){
   let signal="尚無技術結論",detail="目前行情排行資料未找到此股，或技術資料不足。";
   if(row){
    const tags=[];
-   if(row.dmi_early_warning)tags.push("DMI 起漲預警");
+   if(row.dmi_early_warning)tags.push("DMI 提前觀察");
+   if(row.dmi_near_cross)tags.push("DMI 接近交叉");
    if(row.dmi_cross_valid)tags.push("DMI 多方交叉");
    if(row.strategy_qualified)tags.push("符合市場策略條件");
    if(row.history_pattern_label)tags.push("歷史型態："+row.history_pattern_label);
-   signal=row.dmi_early_warning?"起漲預警":row.dmi_cross_valid?"多方交叉確認":row.strategy_qualified?"策略合格": "尚未符合起漲條件";
+   signal=row.dmi_near_cross?"接近交叉":row.dmi_early_warning?"提前觀察":row.dmi_cross_valid?"多方交叉確認":row.strategy_qualified?"策略合格":"尚未符合起漲條件";
    detail="收盤 "+fmt(row.close)+"｜漲跌 "+fmt(row.change_pct)+"%｜外資近5日 "+fmt(row.foreign_5d,0)+" 張｜投信近5日 "+fmt(row.trust_5d,0)+" 張｜歷史 K 線相似度 "+(row.history_pattern_similarity==null?"—":fmt(row.history_pattern_similarity,1)+"%")+"｜"+(tags.join("；")||"尚無明確多方訊號");
   }
-  const cls=row&&(row.dmi_early_warning||row.dmi_cross_valid||row.strategy_qualified)?"buy":"wait";
+  const cls=row&&(row.dmi_early_warning||row.dmi_near_cross||row.dmi_cross_valid||row.strategy_qualified)?"buy":"wait";
   return '<article class="watch-item"><div class="watch-head"><strong>'+safeText(code+' '+(c.company||c.name||""))+'</strong><span class="watch-advice '+cls+'">'+safeText(signal)+'</span></div><p class="watch-detail">產業：'+safeText(c.industry||"—")+'｜趨勢：'+safeText(c.direction||c.trend_stage||"待確認")+'</p><p class="watch-detail">'+safeText(thesis)+'</p><p class="watch-detail">'+safeText(detail)+'</p><p class="watch-detail">風險：'+safeText(c.risk||((c.risks||[]).join("；"))||"仍需檢查財報、估值及重大訊息")+'</p><p class="watch-detail">'+sourceLinks(c.evidence_urls)+'</p></article>';
  }).join("");
 }

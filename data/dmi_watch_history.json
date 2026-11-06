@@ -44,6 +44,10 @@
     {
       "date": "20261105",
       "stocks": []
+    },
+    {
+      "date": "20261106",
+      "stocks": []
     }
   ],
   "picks": [
@@ -74,9 +78,20 @@
         {
           "date": "20261105",
           "close": 7.37
+        },
+        {
+          "date": "20261106",
+          "close": 7.22
         }
       ],
-      "outcomes": {}
+      "outcomes": {
+        "5": {
+          "return_pct": -0.55,
+          "max_close_gain_pct": 1.52,
+          "max_close_drawdown_pct": -3.17,
+          "end_date": "20261106"
+        }
+      }
     },
     {
       "date": "20261030",
@@ -105,9 +120,20 @@
         {
           "date": "20261105",
           "close": 180.0
+        },
+        {
+          "date": "20261106",
+          "close": 174.5
         }
       ],
-      "outcomes": {}
+      "outcomes": {
+        "5": {
+          "return_pct": -5.16,
+          "max_close_gain_pct": 0.54,
+          "max_close_drawdown_pct": -5.16,
+          "end_date": "20261106"
+        }
+      }
     },
     {
       "date": "20261102",
@@ -132,6 +158,10 @@
         {
           "date": "20261105",
           "close": 26.0
+        },
+        {
+          "date": "20261106",
+          "close": 25.7
         }
       ],
       "outcomes": {}
@@ -155,6 +185,10 @@
         {
           "date": "20261105",
           "close": 32.6
+        },
+        {
+          "date": "20261106",
+          "close": 31.45
         }
       ],
       "outcomes": {}
@@ -162,9 +196,9 @@
   ],
   "stats": {
     "5": {
-      "sample_size": 0,
-      "win_rate_pct": null,
-      "average_return_pct": null
+      "sample_size": 2,
+      "win_rate_pct": 0.0,
+      "average_return_pct": -2.85
     },
     "10": {
       "sample_size": 0,
@@ -177,5 +211,5 @@
       "average_return_pct": null
     }
   },
-  "updated_at": "2026-11-05 19:13 Taipei"
+  "updated_at": "2026-11-06 19:13 Taipei"
 }

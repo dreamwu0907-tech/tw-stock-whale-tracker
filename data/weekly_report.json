@@ -1,183 +1,430 @@
 {
-  "status": "published",
-  "generated_at": "2026-11-02T12:00:00+08:00",
-  "period_start": "2026-10-26T12:00:00+08:00",
-  "period_end": "2026-11-02T12:00:00+08:00",
-  "article_count": 180,
-  "model": "ChatGPT manual analysis",
-  "source_method": "User-provided Google News RSS collection; manually analyzed in ChatGPT",
-  "report": {
-    "executive_summary": "本週 180 筆 RSS 標題與摘要中，AI／半導體／HBM 與 AI 資料中心是最集中的產業主軸；國防航太有採購及衛星／無人機訊號；機器人出現工廠與倉庫試點部署消息。電網、金融及生技新聞較分散。新聞能見度不等同於企業訂單、資金流入或股價尚未反映。",
-    "global_macro": "本週資料顯示 AI 基礎建設投資仍受關注，但同時有大型科技公司現金流疑慮與半導體股波動報導。利率與匯率仍可能影響科技股評價。RSS 資料沒有市場資金流量、外資買賣超或完整價格序列，不能據此判定全球資金方向。",
-    "industries": [
-      {
-        "name": "AI 半導體、HBM 與先進封裝",
-        "trend_stage": "擴張期；估值與資本支出風險同步升高",
-        "direction": "偏多觀察",
-        "short_term": "新聞集中於 AI 晶片需求、HBM、先進封裝產能與半導體投資。追蹤晶圓代工、封測、記憶體與設備供應鏈的法說及月營收。",
-        "long_term": "若 AI 推論與資料中心投資持續擴大，晶片製造、先進封裝、HBM、測試與設備仍可能受惠；需留意供給擴張與客戶資本支出放緩。",
-        "evidence": [
-          {
-            "claim": "本週 RSS 搜尋結果包含 HBM、先進封裝與半導體投資相關報導；需回到原始公告驗證細節。",
-            "url": "https://news.google.com/search?q=HBM+advanced+packaging+semiconductor+investment"
-          }
-        ],
-        "risks": [
-          "部分資訊可能為投資評論或二手轉載。",
-          "AI 資本支出若放緩，高估值供應鏈可能修正。"
-        ],
-        "taiwan_candidates": [
-          {
-            "ticker": "2330",
-            "company": "台積電",
-            "role": "晶圓代工、先進製程及先進封裝",
-            "why_benefit": "本週資料涉及台積電與 AI 晶片、先進封裝趨勢，可作為產業核心觀察標的；本週資料不足以判斷買點。",
-            "evidence_urls": [
-              "https://news.google.com/search?q=TSMC+AI+advanced+packaging"
-            ],
-            "risks": [
-              "估值可能已反映部分 AI 成長預期。",
-              "需追蹤先進封裝產能、資本支出與地緣政治風險。"
-            ],
-            "price_reflection": "未知；本週報告未附台股價格與籌碼數據。"
-          }
-        ]
-      },
-      {
-        "name": "AI 資料中心、伺服器與電源散熱",
-        "trend_stage": "需求擴張期；供應鏈受惠需逐家公司驗證",
-        "direction": "偏多觀察",
-        "short_term": "追蹤雲端業者資本支出、伺服器出貨、高功率電源及液冷滲透率。",
-        "long_term": "AI 機櫃功耗與散熱密度提高，可能推升電源、液冷、配電及機房基礎設施需求。",
-        "evidence": [
-          {
-            "claim": "RSS 結果涉及 AI 資料中心融資、建置與供應鏈擴張。",
-            "url": "https://news.google.com/search?q=AI+data+center+investment+financing"
-          }
-        ],
-        "risks": [
-          "本批資料沒有台灣個別供應商的具體訂單與營收貢獻。",
-          "專案可能受電力取得、融資成本與建置延遲影響。"
-        ],
-        "taiwan_candidates": []
-      },
-      {
-        "name": "機器人與工業自動化",
-        "trend_stage": "商業化驗證期",
-        "direction": "中期偏多，短線觀察",
-        "short_term": "留意人形機器人進入工廠與倉庫的試點消息，重點從展示轉向實際部署、續約及單機經濟效益。",
-        "long_term": "若物流與重複性工序逐步導入，伺服、控制器、機器視覺及系統整合可能受惠。",
-        "evidence": [
-          {
-            "claim": "RSS 結果提及人形機器人進入工廠與倉庫的試點部署。",
-            "url": "https://news.google.com/search?q=humanoid+robots+factories+warehouses"
-          }
-        ],
-        "risks": [
-          "試點不代表大量商業訂單。",
-          "成本、可靠度、安全與投資回收期仍是瓶頸。"
-        ],
-        "taiwan_candidates": []
-      },
-      {
-        "name": "國防、航太、無人機與衛星",
-        "trend_stage": "政策與採購需求推動期",
-        "direction": "中期偏多觀察",
-        "short_term": "追蹤正式預算、標案公告、得標公司與交貨時程。",
-        "long_term": "國防自主可能推升無人機、雷達、通訊、衛星及航太零組件需求。",
-        "evidence": [
-          {
-            "claim": "RSS 結果涉及印度軍事採購及軍用衛星相關消息。",
-            "url": "https://news.google.com/search?q=India+military+procurement+military+satellite"
-          }
-        ],
-        "risks": [
-          "海外採購不必然轉化為台灣廠商訂單。",
-          "國防專案認列時間長，需留意預算與交付進度。"
-        ],
-        "taiwan_candidates": []
-      },
-      {
-        "name": "電網、電力設備與儲能",
-        "trend_stage": "長期結構性需求；本週直接催化有限",
-        "direction": "中長期觀察",
-        "short_term": "本週資料缺少具體新標案、金額及台灣供應商資訊。",
-        "long_term": "AI 資料中心用電增加與電網更新可能帶動變壓器、開關設備、輸配電及儲能需求。",
-        "evidence": [
-          {
-            "claim": "本週 RSS 搜尋涵蓋電網現代化與智慧電網主題。",
-            "url": "https://news.google.com/search?q=grid+modernization+smart+grid+investment"
-          }
-        ],
-        "risks": [
-          "不足以證明台灣廠商新增訂單。",
-          "需留意原物料成本、交期及專案驗收。"
-        ],
-        "taiwan_candidates": []
-      },
-      {
-        "name": "金融、利率與全球資本市場",
-        "trend_stage": "政策觀望與波動期",
-        "direction": "中性；提高風險監控",
-        "short_term": "利率與匯率變化可能影響科技股估值；新聞標題不能替代資金流量統計。",
-        "long_term": "利率、美元及日圓走勢將影響科技股評價與跨市場資金配置。",
-        "evidence": [
-          {
-            "claim": "本週 RSS 收錄聯準會與日本央行利率相關報導。",
-            "url": "https://news.google.com/search?q=Federal+Reserve+Bank+of+Japan+interest+rates"
-          }
-        ],
-        "risks": [
-          "不能以新聞推定外資買賣方向。",
-          "高本益比股票對利率變化較敏感。"
-        ],
-        "taiwan_candidates": []
-      },
-      {
-        "name": "生技醫療與製藥",
-        "trend_stage": "個別事件驅動，缺乏共同主軸",
-        "direction": "中性觀察",
-        "short_term": "本週新聞分散，缺乏集中且可驗證的產業催化。",
-        "long_term": "需回到臨床進度、藥證、授權金及現金流判斷。",
-        "evidence": [],
-        "risks": [
-          "臨床試驗、藥證時程與資金需求風險。"
-        ],
-        "taiwan_candidates": []
-      }
-    ],
-    "capital_flow": [
-      {
-        "market_or_asset": "全球科技與半導體產業",
-        "observation": "新聞同時反映 AI 投資擴張與科技股現金流／估值疑慮；這是市場敘事，不是可量化的資金流入證據。",
-        "evidence_urls": [
-          "https://news.google.com/search?q=AI+semiconductor+investment+cash+flow+technology+stocks"
-        ],
-        "confidence": "低；需另查基金流量、交易所數據及法人買賣超"
-      }
-    ],
-    "watchlist": [
-      {
-        "ticker": "2330",
-        "company": "台積電",
-        "industry": "AI 半導體、先進製程與封裝",
-        "thesis": "本週新聞提及台積電與 AI 晶片及先進封裝趨勢，可作為產業核心觀察標的；買點需另外檢查股價、成交量及法人籌碼。",
-        "evidence_urls": [
-          "https://news.google.com/search?q=TSMC+AI+advanced+packaging"
-        ],
-        "risk": "估值、資本支出循環、地緣政治及客戶需求變化。"
-      }
-    ],
-    "next_week_events": [],
-    "methodology_notes": [
-      "資料期間為 2026-10-26 至 2026-11-02；原始 RSS 共 180 筆紀錄。",
-      "本報告依 RSS 標題與摘要整理，並未逐篇讀取原文全文。",
-      "RSS 新聞出現頻率不等於事件重要性、企業訂單或投資價值。",
-      "本週資料沒有台股每日價格、成交量、法人買賣超、估值與財報數據，因此不能判定個股是否尚未起漲，也不提供目標價或進場價。",
-      "台股候選僅列出本批資料可直接連結的台積電；其他產業先保留為產業觀察，不以概念股標籤湊名單。",
-      "下一階段應將產業趨勢與月營收、毛利率、EPS、法人籌碼、MA5/10/20、ATR 及歷史 K 線相似度交叉篩選。",
-      "資金流向須以交易所、基金流量、法人買賣超或官方統計驗證，不能用新聞標題推斷。"
-    ]
-  },
-  "source_articles": []
+  "status": "needs_api_key",
+  "generated_at": "2026-11-08T11:42:36.023199+08:00",
+  "period_start": "2026-10-31T18:28:31.033084+08:00",
+  "period_end": "2026-11-07T18:28:31.033084+08:00",
+  "article_count": 155,
+  "message": "請在 GitHub Repository Secrets 設定 OPENAI_API_KEY，才能執行 GPT 週報分析。",
+  "articles": [
+    {
+      "title": "How One Country Became the Unlikely Crossroads of the Global A.I. Boom - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPbFo1T3JiWVZZTzRUQ2NlWlBld2lpTEgyTzF4R2lLdjE0ZGlCdmRTeERDVXVLVWU0T0NXS3EyblU1c0Njb1FXanJZTjV5aEhnRFhoZEgzNmt2MmJiM0dKV1FMT18zNTJVSzRhOUFQOXNqMFh2X3VqT0VhSzlVc2dYSQ?oc=5",
+      "published": "Tue, 03 Nov 2026 08:00:00 GMT",
+      "summary": "How One Country Became the Unlikely Crossroads of the Global A.I. Boom &nbsp;&nbsp; The New York Times",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "Investors wipe $2.5 trillion off Nasdaq as blue tsunami prompts AI fears - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPVVFVWVUwWmVwQXRLMTV2ZFBIV3dpR1VBUTU4dnhfUW5SN3BwcGZraXF1YTFDMmx2TjZFOTVBTWNqc09zTV9VbE1faDJ5Y294THA0YlFkTlZmX3AzWDJacm96Um1YQ0htd2FLRmJFTlpvLWVhQ0pXdUtyLVh0ZTRESzBJNW1fZ2lrTVBkUEIzejF2VUVLeGdyQWxDazczTmNWQWdOMXIybTR2T0x5OWFGNWMyU256bUhRME54eXBlTQ?oc=5",
+      "published": "Thu, 05 Nov 2026 11:23:00 GMT",
+      "summary": "Investors wipe $2.5 trillion off Nasdaq as blue tsunami prompts AI fears &nbsp;&nbsp; Reuters",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "The Best AI Stocks to Buy Now - Morningstar",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5MSWticmVUcmhzVVpBMWg0bFpvRGpXR1FIdzhKMmVOdVVETlV0MzVfemFuMzBwX3Q2Ykh4TFRjakstUDZVX2N6NEpsSWxZZU54bTZnQmNMal9Fdkw3ei04N2htZldJYkhl?oc=5",
+      "published": "Wed, 04 Nov 2026 08:00:00 GMT",
+      "summary": "The Best AI Stocks to Buy Now &nbsp;&nbsp; Morningstar",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "7 Best Semiconductor Stocks for 2026 | Investing - U.S. News - Money",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPdVlocTJ6U2RLbGpQUnpwLWxwSjQ4ZlI3cjR5U204TDlkakhISEo5d3ItaGFVQ1VSdk1UdXBFc1JGYnVqT1ZoN2RKQUREM3dxeDRYbzF5Rl9XeHl6WXZzWWNkY1NRS0pvd0RDYVVLbFRTNHdzR2xyZXpaam1naEc3Y3dR?oc=5",
+      "published": "Tue, 03 Nov 2026 21:42:00 GMT",
+      "summary": "7 Best Semiconductor Stocks for 2026 | Investing &nbsp;&nbsp; U.S. News - Money",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "MSCI Chairman Warns Halting AI Data Centers Risk Global Recession - 조선일보",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPTHdhbGlNdVdaeUpOdlJTeEJiWEZzRmRlTlFlMFVyRmZaRnE2c2tqeDN4Mk9HRlNxelNQZ3dBRkVxTmlkWUg1azlrTFVrQ2k4UlR5Nm0xRS0wbEliQlo3SlNqdVB2Z2p0c2E3X0l2UUdVdW1YSGhvU3d1N0JSWmFzYlRfeXlNRzY3R0Nra3ZR?oc=5",
+      "published": "Fri, 06 Nov 2026 12:27:49 GMT",
+      "summary": "MSCI Chairman Warns Halting AI Data Centers Risk Global Recession &nbsp;&nbsp; 조선일보",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "South Korea Doubles AI Chip Budget: 4 ETFs to Ride the Wave - TradingView",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNcERxbE4xeFBqTkVGUlVYeWFqYjdxR2tGYU1hR3V4Zlp6VTMzSnVWS3dLWFVBbkRkbkFGYVFxOHcyMWlhLVgxdk1CWGZBczZOcHRUS3pfYXNuUTNTMlp3R2wwSjVfUlcwQkJMN1pBZGRhY2cxUFBta3RDSnFZU3dTY0tiVE9RVWlWWWVHYTF5cXNJVFU0SFpuQnFwQlpwa21wbUF2WkROZGM4SEZZa1Y4UHJ3Yi0?oc=5",
+      "published": "Tue, 03 Nov 2026 13:18:00 GMT",
+      "summary": "South Korea Doubles AI Chip Budget: 4 ETFs to Ride the Wave &nbsp;&nbsp; TradingView",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "South Korea Plans $16 Billion for AI and Chips - igor´sLAB",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNUUlKMGZIUE5UNjBIZEpUNkRqNGEwSE1ZbllvTDA2bVZXVmlnZmNueU42bHY2LWFhbFFtYnc2YnNGckJSZmowYjQ3ektrSDZtZE1CZWVqcl9MVUxhdXFHeDZIS21OTmVKWEV6WUpjZ2N3OFg2WnBydVZsa0w1c1FWand4RkRldWx3TWpDeTZFbWxCZ3pWMGZzWm14cFNsVkNQRVE?oc=5",
+      "published": "Tue, 03 Nov 2026 05:00:00 GMT",
+      "summary": "South Korea Plans $16 Billion for AI and Chips &nbsp;&nbsp; igor´sLAB",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "South Korea targets 'world's highest performance' sovereign AI model in record new budget - CNBC",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE13dTdFdkR6VjhfZURCWjJyZXdDU1k0dVFGeG56V0Z6UmQyaVhFenE5b25lck9CUUFOcW1OS0NPU2E2Y1lBck8xU1NKamVmVmlQWTN6Y09LOFYwcDVLd2FzeDNXbm1ET19QR2xUOE9VLXJKLUd2Z3fSAXtBVV95cUxQUHhib3ZEcVdNc0lDSFE3WWRqU3AxNHJZVzE3NmpWaEwxSVBHcjN4VVR0Y2Y1Mm1lMUJra1BEQ3FGN1BFNGdiUklhcWJSakJEQVhPWG9oZ3ByaThQNUJTaVZNRVZBSmhFZmhDN3VqRW9WYnBaYWstTTRFVjA?oc=5",
+      "published": "Mon, 02 Nov 2026 06:02:03 GMT",
+      "summary": "South Korea targets 'world's highest performance' sovereign AI model in record new budget &nbsp;&nbsp; CNBC",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "Investors try to regain their footing after tech stocks tank - NBC News",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOLWlzcGJ5b2FoTDRoekZ5blNRdTExdkc3NURPalBjNElDM1NzamNoS1IzS1B4cXlzX3dGMlJXcG9RdWMweW5CM1NCQ0MwdGYwc2h4dGZQaFZSZVBBZUpIZGw0ci01bE1aamxNRktLdGw3MkFKQ05peWZQVjdkdEk4d1U2M2NQNDVqUy1aZFJWUEdvN1RWSFNaNXFzSnJ2aEZmbmxTVW11aUFQS0lhbFlaWDd3?oc=5",
+      "published": "Fri, 06 Nov 2026 21:53:03 GMT",
+      "summary": "Investors try to regain their footing after tech stocks tank &nbsp;&nbsp; NBC News",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "Global markets plummet amid fears of future AI regulation - Inspenet",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1MTGxFTUVSdWZORmNyZUZUQnBIRm85cU5NWTJQZmg4MlNmQ0ZSV3RvT1czRDZJd3dob25zWGlXRVhldkUtb2V3Zi1OeFVJbTlLS2M3WDVnODdPWDhBN2hfdlVuUDJYcmZzVGw2NzVSRUxsM0VL?oc=5",
+      "published": "Fri, 06 Nov 2026 18:31:27 GMT",
+      "summary": "Global markets plummet amid fears of future AI regulation &nbsp;&nbsp; Inspenet",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "South Korea will double spending on AI and semiconductors in 2027 to a record high, the president said, pledging to use the technology to turn the military into a \"smart, elite force.\" | via ANC 24/7 Link to full story in the comments section. - Facebook",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTVdLRFlWSDJzV3RrdzJ0Qk5aeGhVQ0t4cjdSdllFV2Q3NTlTYXBqUjZRTFRJTThpX2QtcDlLVXE4ZExxMzktVHlKUlZoSVBuQnhNcGZidXJoSjdsZU82WXNpY1JTWDhhTGNtMzM2dUZKcWNDUXJnQWdCS3dXcXA2NXEwR2FqUHc2UFF0NTlyNVJGeDZ4cmRmaS1GVGI4SUxfQU9US1pjU0t1dEd2Ny04TjZTbDVSSGF1WG5rOS1seUxYYkhEQUFDV25selY4WTZxVjRrRTlTaw?oc=5",
+      "published": "Mon, 02 Nov 2026 18:00:49 GMT",
+      "summary": "South Korea will double spending on AI and semiconductors in 2027 to a record high, the president said, pledging to use the technology to turn the military into a \"smart, elite force.\" | via ANC 24/7 Link to full story in the comments section. &nbsp;&nbsp; Facebook",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "Global AI stock selloff wipes trillions off Wall Street as Nasdaq plunges 5.5% - Gulf Business",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNeURWeFBoaHJ1T21BWEFBQk5LdjVjbVc5blJFMy1jNUljbWJIelRZbDFUbkdNQ2VOUFQ5S1prX3Z0WkdMQnp1VjVlY2ZOWDJzbDU0N0lnSGpmdjRZbkJEVzFNbk5hY1VBTHNHZzZ2a2NJQ0pTTzBscGZFRTlzbVJfMnRhajRIM184Ymg2LTRVMHR5TkJERlB6NzJtMkZybEd3WjgtQXZGQkQ1SDZqZUpWT0ppb293ZG8?oc=5",
+      "published": "Fri, 06 Nov 2026 06:05:45 GMT",
+      "summary": "Global AI stock selloff wipes trillions off Wall Street as Nasdaq plunges 5.5% &nbsp;&nbsp; Gulf Business",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "Global firms pledge record $2 billion in 2027 for Korea's chip, AI sectors - Korea JoongAng Daily",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQRmpDb0tQb0g0SVphNmh0a0R4YVdpVlNRd080R3RnaWFndXBiTVZZZG04U3hsVG9FMk56dTlhbHQ5WWNCSElobElGZ2dld2V0MlpJeXFDbWJUclcwMzREWFBLTGluRGd3U19Da3VEYnFVdkoxcmxNWUZVNy1PQ1pUNGZWd3l2S1JhdmdOWkZHZ1cxQVF5bldJUml0V1VtM1Y0MnV2UUY4TmNBY3FJTGFkSTdnSktPSDFNc19ucEpMWnBEQQ?oc=5",
+      "published": "Wed, 04 Nov 2026 05:52:34 GMT",
+      "summary": "Global firms pledge record $2 billion in 2027 for Korea's chip, AI sectors &nbsp;&nbsp; Korea JoongAng Daily",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "Shares plunge 3.2%, extending losses - Taipei Times",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1rMXk2bGUzNWZQZEJYblFnOEgxSy03eENBN2JCNjhXbE5FOTc2bXR4QTdqYVRlc3RVU3R3bTB1c0h3WDA2akNsQVdCVHNnQm1zSjlKWWZtTldsQzBUeHdRdnBhTTZaZHhMbzRaSE5iQjJJT2tDb3c?oc=5",
+      "published": "Thu, 05 Nov 2026 16:00:00 GMT",
+      "summary": "Shares plunge 3.2%, extending losses &nbsp;&nbsp; Taipei Times",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "Korea draws record $2 bil. foreign investment pledges in AI, semiconductors - The Korea Times",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQZ0tXeE14WXZQZ0pqMzRMWmhPM2drYU0tQ1BnblZIWnFvS01VWTdvZVJWWnFZN3A1VlVUNjZCejF1Vk1HdFV2R0ZCcVBUN3pCQzNEeF8wYjQ2M0JkU1Y2MzlMQ0JiLXFIQl9rdEZtNmFfSzlMY1pZU3VabWw2TF85SFlyMG4yMGo5U29DemdFemgyTmw5M3JycWFNeldyTThKa25GTm5tRG5KUnFRNEVXaW1uYmdjYTNESHFockluSjNIcklINUZHdtIBzgFBVV95cUxPZTZVZFQ3T0F6UlJzaWRPRlJTR2RhREZRWDVpY1ZNbUR3b3dON1Q2VUY5bDA5OUJxeEkxY3FBcWV6TzIzR3pFcWNnM2NEVGNER0Q5NG90bURPRklNejJRZ0JYdFN0N3k2dkVUVGNoTFlZeHRSdE5ia09uajAwOXhxZm9uM2oxc1p4RlVkTFIyUGFScXQ2aEZPQUZNUjVGOGgtZno0b2kxSTRMZmllR3VFZTE3bEx5M2JQbmFsRG1TN3RpYnBXNF9XUzBlc29NZw?oc=5",
+      "published": "Wed, 04 Nov 2026 07:49:04 GMT",
+      "summary": "Korea draws record $2 bil. foreign investment pledges in AI, semiconductors &nbsp;&nbsp; The Korea Times",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "AI Fears Send Asia’s Semiconductor Belt Into a Selloff - Businesskorea",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE92c1NJLVFKdkVuN05nVWxqTkRHYUJScGpadlVhMXpTUThhcVMzM3lkeUxzMmNRbGdvQUdZc3JuU0J6ak1Sc0NKWVBwbXoxbDVKc3NBS1ktRDN2UUM4enpWYW9xblMzSHpJS2xEcUxDMlVJTk1s?oc=5",
+      "published": "Fri, 06 Nov 2026 02:34:35 GMT",
+      "summary": "AI Fears Send Asia’s Semiconductor Belt Into a Selloff &nbsp;&nbsp; Businesskorea",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "Chip stocks under pressure: Twelve semiconductor names with oversold signals (SMH:NASDAQ) - Seeking Alpha",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPYmxsd05CVjNxNnhwV28yUmZ4QVJMVUJxcHkySGdSTFNrSHE5WllWbTFHNHotQ1VxXzlYQS1JLUU4WHhxVVVGbEFPNWRHNzg4cTZNZm9SaUhrMWk2cERPR2g4MVVYQTlqRjU3TkstWU5PbnBQT1JTZlpyQ0NXMUdVS0ZLa0dVQW8xVlR6eUNPLTNQV2NScDRidTduQlNIQTJzRXhkUWJ3UnFsNVYyWldtbUJwRQ?oc=5",
+      "published": "Thu, 05 Nov 2026 17:30:19 GMT",
+      "summary": "Chip stocks under pressure: Twelve semiconductor names with oversold signals (SMH:NASDAQ) &nbsp;&nbsp; Seeking Alpha",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "AI Growth Lifts Gold Electronics Demand 5%, Supporting Future Mine Supply - Crux Investor",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQQlFIVnNBa3VYVl9CVGZzSXRpZng5UU00Z2FVeHYtZmI4N2JqRXBmN2ZzNWg3b1hocWJNOHl3VDRuX0d3VEdlZ1V5N3BPYzVDcEVJeGYwTXpWeGFGUHF1SzVxV25aeG1Wci1rUlc4Vl8wTlB5Vm5ldHhXamtWLWNuM3hRaVNBSm5Fa0thcl8zR2xhZmVRR05KNldEV05XWlQ0QVZ0LXQzUDR0dw?oc=5",
+      "published": "Fri, 06 Nov 2026 09:05:38 GMT",
+      "summary": "AI Growth Lifts Gold Electronics Demand 5%, Supporting Future Mine Supply &nbsp;&nbsp; Crux Investor",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "AI Data Center Selloff Shows Investors’ Election Fears - JournalArta",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPTF9CMjBaNmpxbHgzcXZwTTJoajRZQ0VWbnQ3a2FHeXhRSUkwUmtib0xtelozY0txZXBnbzItd2tyUFJIal9KYm5RaGFQNkhYejhoTUdfQmpHUzBjZmVKLUs4ZWx1ajZmXzZla2E3dGxsS0cyN21YQTZCQzhqUnBJaHBLSEdRMmJCUGNoemV3?oc=5",
+      "published": "Sat, 07 Nov 2026 08:01:58 GMT",
+      "summary": "AI Data Center Selloff Shows Investors’ Election Fears &nbsp;&nbsp; JournalArta",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "1,600 Trillion Won Mega Projects Must Go Beyond Semiconductor Plants - 조선일보",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxONEltZXBMM20tOGVFeDNHd2xQMkZOWDZIdU56Q2dFTldaQUkwY2h3TFM4NUtXNzdfcmJXV0M1TnlNUTJyV3ljWW1rU1o5Zm9zQnJPU1pMWXdSc0JZWjM3U1lDSWJNN0cxVThWbTVpcTJNTTFwSGNwc2h3ZmhtRFdoY1RuZjhzemJEUDd3TGpR?oc=5",
+      "published": "Mon, 02 Nov 2026 06:17:45 GMT",
+      "summary": "1,600 Trillion Won Mega Projects Must Go Beyond Semiconductor Plants &nbsp;&nbsp; 조선일보",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "SHOC: Shock To The Investment Case (NYSE:SHOC) - Seeking Alpha",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1WYmJTUlVldmozSTlkZEZ5TVJaSjVheFBVMGQ3UjNrRTJaRmtiUUhHQURzUE9GMjJhY3ViY1BnbmhUV09HcTVPckZkQmg3WkgyaHBfRE9IZ242VnVnaEJTNVpkbzJYNUlGR0w4eFFKVXpqeGk3cS1PeGdPVFVxRUk?oc=5",
+      "published": "Fri, 06 Nov 2026 19:37:14 GMT",
+      "summary": "SHOC: Shock To The Investment Case (NYSE:SHOC) &nbsp;&nbsp; Seeking Alpha",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "Marvell to buy Lumentum for $115 bn to boost AI data center bet - electronics.economictimes.indiatimes.com",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQVzU5YVRwM3VhT0l3MnBGdng5VlFweHJPZEcydzJKUHZGWmFmUTRqdjdqcU5nMjZGaUFlVlc4X1B6WjZoVUJDbXBXcTlhSHVBU1RETWVYdDFlbmY0dUdUZW14c0FpQjZNWkFyRHZrNkt3SElwMUNmUldpTGx3Tk80YlJmWFlnU0JvSkRwUDRuRG85ZkhrRDlIZXZoRWdGT1cweHNBUlFIdEFKYllqZHMxdVJFc2dSLTRFWWRSQlhIZzdNTnhlbU9OT0s0Ti1Fdmlhall3cWNaONIB3AFBVV95cUxNekxjNnRYM2dLZmNTZUFwWUtiQWtRTVNYd01rNndCbENKSlkxQ3o5bTl4WG1JemJtcExNNjl6YUZLYVhjaWl1NW9ZRXJKc0h3bFhqUHRkX2xudEVBTUJYNGU5MzhTelhIRmY5UXhMVUVtMWItZlU0NTdGVFhlRDNHdThkVTBRSzNFTFRDb01fWnlEY2h0M1ZHdHI3eEEzeERzeDFOa09zZ2pUZm43OC11NjJnX2NWWDJlS3BlVVdyalM2eTNrbmxlbG5kYTFRME9sQ1lOZFNNNzNkbXpo?oc=5",
+      "published": "Tue, 03 Nov 2026 02:31:44 GMT",
+      "summary": "Marvell to buy Lumentum for $115 bn to boost AI data center bet &nbsp;&nbsp; electronics.economictimes.indiatimes.com",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "The Philadelphia Semiconductor Index dropped 12% in a single day! Morgan Stanley seeks AI investment opportunities in the East, with six major beneficiaries emerging in the Asian power theme. - 富途牛牛",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOR2Rkb1h0Z1VGeF9DdXpIVnFyVzBzN05LbHFJM3FwTnZ0bHNuWnE5WHYyemNEX19pd1RLWnQ1VVZ1eFpwcW4tck5sN3l0NmlmT2hUb3BObTAxZDNsbzZWd0lac29zMzVjcV81R0dNNEpBS05HdU51clR3X0lEYzRURlhGa3JEU2JkTjJzMTVYNDEwemUtSi1ldnVYS1g0UmhZb1R6bzcxNWpsZw?oc=5",
+      "published": "Fri, 06 Nov 2026 08:09:00 GMT",
+      "summary": "The Philadelphia Semiconductor Index dropped 12% in a single day! Morgan Stanley seeks AI investment opportunities in the East, with six major beneficiaries emerging in the Asian power theme. &nbsp;&nbsp; 富途牛牛",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "A Visit to the Center of the U.S. AIDC, a 'Hot Topic'... What Is Different From South Korea - 머니투데이",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9SbEZlbGNOUnVfcHZLNkpLa3FGNHMyMVVVLTJHOGhQNDRRQmVKSHMwcmp6M2dkQVpVV2JNTUtWclpBUFlkb09KVlg5aVk2YVVaY3ViOG1UekVmM3FyWTJnT29FNWJtYzlWM21R?oc=5",
+      "published": "Fri, 06 Nov 2026 01:46:40 GMT",
+      "summary": "A Visit to the Center of the U.S. AIDC, a 'Hot Topic'... What Is Different From South Korea &nbsp;&nbsp; 머니투데이",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "MENA’s mobile economy set for major growth as 5G, AI and investment reshape the region - Gulf Business",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNY0Fkc2hURWJRNEhrbmJ5Vm5WOUJIVHRwQUd1S0dkZFl5OFVESFBVeDBMS2VZTjdfRzUwLUtLQXZIaHhzSW1vR19rS0ktM0tvYy12V2pQM3AwSUY2ZHd2X01nTFJpd0RETkNFSzliYzhubHFIMkdfa0ltT0dmVEtqWi1Vdm1VRU9HMldzdTNFSEtMTFVNTHl2MmpkMlZ4QkNZUVU2UXF0QjdQaWtwbjJVaENyVjRDeWRjeldSa2pJbllPNm5Id0FV?oc=5",
+      "published": "Fri, 06 Nov 2026 12:11:11 GMT",
+      "summary": "MENA’s mobile economy set for major growth as 5G, AI and investment reshape the region &nbsp;&nbsp; Gulf Business",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "Nuclear power plants back in motion… powering six semiconductor fabs and 19 AI data centers - 머니투데이",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1wdlltN28xMEpYX2NOVEdvVXU0SVJsZUh5S0JuUU5FRGhUbWQ5Y0didk1BR3kwbFdxU2ZQY2dIcTM4d2JOanFLcWZ0YXhNTnZ0LXBoU1lldFNPWEI0YVlNYVpKVmNiR3U4ZWZr?oc=5",
+      "published": "Mon, 02 Nov 2026 19:20:00 GMT",
+      "summary": "Nuclear power plants back in motion… powering six semiconductor fabs and 19 AI data centers &nbsp;&nbsp; 머니투데이",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "The AI boom has made memory chips the star of the show; Singapore stakes its role in advanced packaging - Singapore Economic Development Board (EDB)",
+      "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQakFmeU1jT2QwYzVNa1BDbVF5Si1hLW1WS0Vxd05aMXZuUWpWLWViakdCaGRZZ1U2WnRwMnlpTWxLempuRGhxT0U4aHZmQVhjbnlZU2VkSVVnSUtPYlJzUlNsaUVrSDlVQzlLUG13Vk9DTlRhRTNhN1JMTG4zUGt4Q1NjU2hGNEZrd1lUVFpVaVY4TmtuRElLeUVhc1VjR3BwU1VwRVd5ak1DOVd3bUlsaWJDdXcxaE0tVUpxdm90djQ4RjhtdjA0RVpsR2NyQjczdnZuZy1vV21jOHV5NV9xOE91QnRzTEU?oc=5",
+      "published": "Thu, 05 Nov 2026 08:00:00 GMT",
+      "summary": "The AI boom has made memory chips the star of the show; Singapore stakes its role in advanced packaging &nbsp;&nbsp; Singapore Economic Development Board (EDB)",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "Investor scrutiny of the AI spending boom is rising, but Big Tech is unlikely to give up - The Straits Times",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQRVVHNlVtQWhDaHRlX25tOURGTnNBc2JycEdDN0pqXzVveVJ1dmhFeERYeV9VVVhUOXVyMGxxcFhJeWhnN2diU095Y1l5V2htZk9QX1VnTUI1SlVQVmRuajN3RWNHRlhBajZVLTgxbWU5a0h6bjZ0X0h3Ums3aHNyWnVrYVVyRHRpcUhnSlF4bFRTSy1GTGp3UkxRWENURnVneC1kaU1PS2lnem5fRXliUk42d18tczFIcENnVGRxX1VXNjA?oc=5",
+      "published": "Mon, 02 Nov 2026 07:45:00 GMT",
+      "summary": "Investor scrutiny of the AI spending boom is rising, but Big Tech is unlikely to give up &nbsp;&nbsp; The Straits Times",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "KOSPI Crashes Below 5,000 on 'Black Friday'... Blue Tsunami Fallout - 아시아경제",
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9sVjB3VG9NaUd2WWgwSGY0Qzhwdkc3Y3otU1l5STVLcWFENmZaNXZjck8yRnp5c19VSVFvWkdCZURDWXBWY3VxWTIzZGVIMGt4RXNtZXFBTXlUSExhVGl4VmZUWWM?oc=5",
+      "published": "Fri, 06 Nov 2026 01:31:23 GMT",
+      "summary": "KOSPI Crashes Below 5,000 on 'Black Friday'... Blue Tsunami Fallout &nbsp;&nbsp; 아시아경제",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "Ministry of Economy and Finance Holds Semiconductor Expert Meeting: \"Demand Base to Remain Stable for the Time Being\" - news.sbs.co.kr",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5mRUMtZWNPYTQ4XzBSVEtnRUI2bnNoVEs5MHN2SkhPdDJFZGh4RmpPVGZwVWY3cUZRcXg4WlVxanF2dUhSaF9xVDQzNjBjUjZjZ05HdFZlckJ6QzBJZ1dXYTMxYVlhRlc2THhMSXhB?oc=5",
+      "published": "Fri, 06 Nov 2026 06:54:17 GMT",
+      "summary": "Ministry of Economy and Finance Holds Semiconductor Expert Meeting: \"Demand Base to Remain Stable for the Time Being\" &nbsp;&nbsp; news.sbs.co.kr",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "How US Midterm Election Results, AI sell-off impacted US stock market, Nikkei 225, Kospi, Taiwan and China; data details - Livemint",
+      "url": "https://news.google.com/rss/articles/CBMikwJBVV95cUxOdkFFSTkyZnBWWHZkNW9SS3JxekkwNjQwblh6NC1ISkJOeG5GNkxWeWQ4VFBCMkIxazlsbUxOVE1SRzNtWUhTblJ1ZkVSTFdMZmFRLU5LMk9QRG92TG82ZFd0aW81QmxnWW9rOHNsR0E2VGZ2X0FhVk81UUUzWEhhWU40RmNNR1hKQ3AtWEFMenlVazI0MUlUNVVEMENqNEJsNTZNLTRpUi1YQ1RiM29qdlFuTHNzYUNyOG1RTUtJUmtJTUdKd2FLSEhkbExuSF9xTG1WT2Rkc2dRSzM4RG5KbFNhNHItWjlVQTVFRlB3bkJIdjgzY0F3c1dwMk5ISVN1eWxNUzdwelktNGFjdHJ2ZDNXa9IBmAJBVV95cUxNeUMxc0FLWUh4Y3BKa0k0OTVqQjBYb2ZQVmdZNGZWRmdlMjhWRThNTkVFNTBORHVKbVh6M1FfX1JISXVXTjJMZ2pYaGVqand2YnVMRUZVX0ZhdVFtSk1HQm9IeWptNU1XbGxwQkFFbUNLSUp4Vnh5YUJWbEhDeTdRdTJzSkVzaEJ4cWx6SlZDTVlyZ2VpSVJXeWFXdkdtT0xVWHkxWkFoYldYRElRb2hEQzZiVUx6MWxqdEtvcFg4bkNGemxPYWY2N3RVVVNqTU5zdFFYUDZBOVhYeC1CSk5QSEszcHJudU9KbXEtamJlY1ppdXZnOVRWVGJZYV83NU14Zy1kQ3c2RlNrTThtck11czRqX1I2UldC?oc=5",
+      "published": "Fri, 06 Nov 2026 07:15:56 GMT",
+      "summary": "How US Midterm Election Results, AI sell-off impacted US stock market, Nikkei 225, Kospi, Taiwan and China; data details &nbsp;&nbsp; Livemint",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "What Is Going On With KLA Stock on Tuesday? - TradingView",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNbWtBZEJBbXk5a2RFc1V1WDM0NkE2Z1ZkakhDTldiVTVYRGdwSGxsdEZVUy1UT2NsaHVDVHNuVEtzNEoySlRRalBuV3d4LWhQNzlVYXdObkVkcEVsU19UVUNqY3ZVa204OFVuUU9YckNGQ0MxYWduN1NWanMzTVRFNHJ3aTBGZWp6T18xMzkyQlc1Y3F6T056SlBLOXF2ZHoyWVZv?oc=5",
+      "published": "Tue, 03 Nov 2026 16:01:14 GMT",
+      "summary": "What Is Going On With KLA Stock on Tuesday? &nbsp;&nbsp; TradingView",
+      "query": "global semiconductor foundry advanced packaging HBM demand"
+    },
+    {
+      "title": "DRAM Wafer Revenue Tops $80,000, Outshining TSMC's 2nm Foundry Price - BigGo Finance",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE4zRU5hT0N6UWhuWlp3aWlTVFc4NkF0eHpYWXdvSDEyaUFGRmh3bm9kMzkyT1FHdnU5LTEtMDk2WjBYSTlPZ3FRVk4yV3F1YkZ0WE1USWdoTEdaUzl5QVk0ajJobVNkeXN5MF9Da3U2QUxVMkRNYnc?oc=5",
+      "published": "Thu, 05 Nov 2026 10:35:00 GMT",
+      "summary": "DRAM Wafer Revenue Tops $80,000, Outshining TSMC's 2nm Foundry Price &nbsp;&nbsp; BigGo Finance",
+      "query": "global semiconductor foundry advanced packaging HBM demand"
+    },
+    {
+      "title": "Samsung Builds Advanced Foundry Fab in Giheung - Businesskorea",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9jaG8tSVJzQlJwQmJ4MHhYSGVaMzdVb3JibEdLTXM1WnpnbWZHT3ZaQkFNaXpCR1JSSURMNFpCNXB0X3RTSGFTSVNyVDBwMlBPMWFPNmZzSzIzS0J4MzUtMGh3d21JWFlCZnVWVFFOQ0Jia1Zu?oc=5",
+      "published": "Wed, 04 Nov 2026 10:38:41 GMT",
+      "summary": "Samsung Builds Advanced Foundry Fab in Giheung &nbsp;&nbsp; Businesskorea",
+      "query": "global semiconductor foundry advanced packaging HBM demand"
+    },
+    {
+      "title": "Semiconductor Dry Cleaning Equipment Market Report, 2033 - Grand View Research",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPcGhtdGFNSklGRUp5VjlhV0NBRlZxbTJTRzFXdU5uNGhTRVM0QVlXZlg3WXhpa0x4a05GSHJULV9BSHJHckdrTGNodjBTdFVyY0pWc0VIWTBaclpvclQ5TnFzb2FEM3VHVWpsVHgyTk9MZk1LY1hmX2x5QU1QODBnOUdZSHVmLVVXWlg5ZVpIN002UTFKOElJR2dzSk9wMTJSa0I2Yw?oc=5",
+      "published": "Tue, 03 Nov 2026 11:06:43 GMT",
+      "summary": "Semiconductor Dry Cleaning Equipment Market Report, 2033 &nbsp;&nbsp; Grand View Research",
+      "query": "global semiconductor foundry advanced packaging HBM demand"
+    },
+    {
+      "title": "AMAT Shares Plunge 30% in a Month: Should You Buy, Sell or Hold? - TradingView",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQWkFjbmx3cXdpanhlX1dES2dGc01PRjJtWVk2bDlhRG1PZElxd2o5MXU0RFI0X3Z5azBxZ1lsS2xJajE3RUJEdmxpS1BJdUo5UGVFSjhqemVoSmF2akRDbEYtWXBjMmZ6SkZOY3Y0amZOZDN5T1pWei0tbEI4NDd2YTVCTmM4aVZTclg4ZmpCLV9FZTlQN2xwSmx6elhhVW9TTEd4UFRGZno3N3lpR1RmR3RjVm1FQQ?oc=5",
+      "published": "Thu, 05 Nov 2026 15:05:00 GMT",
+      "summary": "AMAT Shares Plunge 30% in a Month: Should You Buy, Sell or Hold? &nbsp;&nbsp; TradingView",
+      "query": "global semiconductor foundry advanced packaging HBM demand"
+    },
+    {
+      "title": "What makes Singapore a prime location for semiconductor companies driving innovation? - Singapore Economic Development Board (EDB)",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcHk2VDhreERGVnhzQTVYenhpMlZhemFZUng5ZnpPRHZPb2IwbEpleFlITUJTenJvM0YyblRwWWUzM0s2MThJWDRwd3hNU3RhR2t6NWVhaTZOenRlM1N4LU1MeEZ0M3lHQnA5VncybUJLRmR6TEtfX2lHUGFrNjRhQVo4cmtxLXVNMUpxNjdxUzJ2ZHJJX3VYang3eTlfZmw3bk56c0k1MDBRdzhNSzhQQXoyaUJIelRxX25xUkRuZjVicHM?oc=5",
+      "published": "Tue, 03 Nov 2026 08:00:00 GMT",
+      "summary": "What makes Singapore a prime location for semiconductor companies driving innovation? &nbsp;&nbsp; Singapore Economic Development Board (EDB)",
+      "query": "global semiconductor foundry advanced packaging HBM demand"
+    },
+    {
+      "title": "AI bubble fears? Samsung Chairman Lee Jae-yong steps up drive for advanced packaging - 머니투데이",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBFSFlKN2ZIMWQ3cmZWTlB5YnlhZ2otc29XbzdMUHBsOWhCYVNBS3N6QVBJdzhKcGFUZXhzXzQySWdWd3VIMGtmbjVmVXVtWVlNUlJhTGJNc0VBbjlMbmpzZS11eUdXQ0pFN2g4Z2dYLTg?oc=5",
+      "published": "Thu, 05 Nov 2026 05:32:00 GMT",
+      "summary": "AI bubble fears? Samsung Chairman Lee Jae-yong steps up drive for advanced packaging &nbsp;&nbsp; 머니투데이",
+      "query": "global semiconductor foundry advanced packaging HBM demand"
+    },
+    {
+      "title": "Singapore's seven WEF Lighthouse Factories: How they’re shaping the future of manufacturing in Southeast Asia - Singapore Economic Development Board (EDB)",
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOdTFndm1EeWRpM1M3Y3VUbE9SRmZaU0xqcTRTX19Ua0szVHI4dDJDanFzc1c4WXoxRzdHZHMxXzU2bHY5aUV4N1BYYlZMMk5nX2FWSkxRelBSSzVZazF3VVZJb0xtcWhFTHY4VUsxb1B5RDFudThoenJLZ0hzb3RKQ1haZEhkdWhVTlIxT25HUmVTQ3AzQmlhdkhhRkhwMlJnX0lYVmc2c0d3M2RNRXBuSjFyQmFJeU1mSlJxUm5lRWlzbkgzc1JFVVNpMk9BN0dUUDJJekVodkI?oc=5",
+      "published": "Sun, 01 Nov 2026 07:00:00 GMT",
+      "summary": "Singapore's seven WEF Lighthouse Factories: How they’re shaping the future of manufacturing in Southeast Asia &nbsp;&nbsp; Singapore Economic Development Board (EDB)",
+      "query": "global semiconductor foundry advanced packaging HBM demand"
+    },
+    {
+      "title": "High Bandwidth Memory Market Will Reach USD 29.65 Billion by 2035 - openPR.com",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxONVJicFVPMzlHdTg4MjFob0M1amZNNkw0RWlEMHo4SUhLUXRfaWhTN2RhX1JpejV1VGJEQWRqdF96ZzFzSUVNeXZzUWllQTI3dTVMcFpMN3ZfTnRKcWxKcnNPY09PaFVBZ05VSTVpUTItMkEzR1NIZ0ZIa0ZBbTdNZ3ltZ3k1WmFJYWExVUJ1VUJGV250dkpZMUtXemNBNzhNUG9j?oc=5",
+      "published": "Wed, 04 Nov 2026 13:08:18 GMT",
+      "summary": "High Bandwidth Memory Market Will Reach USD 29.65 Billion by 2035 &nbsp;&nbsp; openPR.com",
+      "query": "global semiconductor foundry advanced packaging HBM demand"
+    },
+    {
+      "title": "Semiconductors Market to Reach US$2.14 Trillion by 2035 as AI - openPR.com",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPQ3ZoTXVEN2pReXZUVGdhczJxQVJ2WHMtX2gyb2hfUzZwV2g5cFIzaFJGb3VndWZyRDk2Uy1kOGhENENuRjZNeHJycDNKMmVSaGM0SjVULXRXYXFfTnRTNU5VNHduU29vMTBBUGc3UkVTbXgzbTVFeHZQRGllOTRQek1oRVZUSE9DSTF2Sk0xU3FmT2xhWnphTENOQkxGUQ?oc=5",
+      "published": "Fri, 06 Nov 2026 13:06:55 GMT",
+      "summary": "Semiconductors Market to Reach US$2.14 Trillion by 2035 as AI &nbsp;&nbsp; openPR.com",
+      "query": "global semiconductor foundry advanced packaging HBM demand"
+    },
+    {
+      "title": "Business of Automation Episode: Aaron Prather - A3 Association for Advancing Automation",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOYVFSQ0pZQkJFeUtYc0dmVzhOaUMxWDlTUjBRRTdUVTgySV9YYUp2N3BmUjkzbmJBTkNmVlhGdFVMTklOdUhrX3h5Ny1IRC0yeTA2RmlIQ1hqVm01OWdnN2FLSTRJWFNSRXAtOHo3VXR4QjhoWlVzM3NaeHpkczhNQjY1d3B6N1lZcGdfVzc3MGtvclBqY0JsR1gtajliblo3Q08yYW82NlFuN0gzSXItTHZNSU96SVVhNXVXaWFjSGxnOV9GNHZv?oc=5",
+      "published": "Fri, 06 Nov 2026 15:21:38 GMT",
+      "summary": "Business of Automation Episode: Aaron Prather &nbsp;&nbsp; A3 Association for Advancing Automation",
+      "query": "global robotics automation humanoid industrial robots"
+    },
+    {
+      "title": "Agility Robotics says more than 30 companies considering Digit humanoid robot - Robotics & Automation News",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQbzNjNUJ5cmRhOUt3a0JnOHZFN2RwYWZrOHVtbVJSdnZPTWNmSHVmUHFJblJid2FfRzJlU1NBREtKb0prNXFUb0ozaUlpSENFNXlkcm1TYTF5Um5kUVV4NUNNX2xnRTBWZE5NcGFJN2Jsc3lRckVaX3F6Wld2RkNIME5EOF9iTWJfZHNhX2RTRmswSTVNdDBWeXhOTkJYOXFmMEE1enlFVzlNTGFyRzJUSHNWSC1oYTl3NkItNXVmaUZMOXRZSUtybjQzN29UVHM?oc=5",
+      "published": "Mon, 02 Nov 2026 11:24:37 GMT",
+      "summary": "Agility Robotics says more than 30 companies considering Digit humanoid robot &nbsp;&nbsp; Robotics & Automation News",
+      "query": "global robotics automation humanoid industrial robots"
+    },
+    {
+      "title": "UK cyber chief says the UK will face AI cyberattacks on critical infrastructure by 2028 - Barchart.com",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQdHo2QTdNcnpOTkJJc0tfRHZoVDZrTHJmWFQwNG5LQk5SZUtuaURFNFhONUZMSk1UVkQ2QlR5VUw5OUZhNnFRNklERUt6UmlEc3lMMG9oYmNIeFZUUEFLaVZsRVg1dHhuV2pXc01CT2F4aDBJRDJiS2RTVlNydTVqVWI4NmVJeUxYb1hQWDM3SURnRmNka04wUTlSN2l5eEY5U0RCNHVUNko1REthTEY1STg1OVMxNW5yM19MNFBwcThxN3lOZzEtUXVLOA?oc=5",
+      "published": "Tue, 03 Nov 2026 00:08:57 GMT",
+      "summary": "UK cyber chief says the UK will face AI cyberattacks on critical infrastructure by 2028 &nbsp;&nbsp; Barchart.com",
+      "query": "global robotics automation humanoid industrial robots"
+    },
+    {
+      "title": "China's robot makers have mastered the moves. Now comes the race for brains - electronics.economictimes.indiatimes.com",
+      "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxPVVk3Y2FsVmpWcVp2SktuaHVpS1BZY3VYNFZGaDB2NVZLVGVQamVlYkd4THR5SVdZRjN4cVR6Vm5YY2ctX1lIYnl5amQxMTVxZENSazJqMHQ1eFo0TDVtU1BxdGdZQ2JxOVR1dXphOWZJbWNrREN0WmdfU1JoM3d0M3lvc3dJZTVzc1RRTWl1Zl9FbklnSmVSSllSelZJRGpMTzJ5UXUtc2dYSUk5YnZqY0k5c3UzazllOEN5UTlwcm0tbGdYSEdDRHpwLS1ZV1c0TU9KVHhYMTA4YmI1YVJoVS1QaUtoaHFKWmhNQjhjVEFZUQ?oc=5",
+      "published": "Mon, 02 Nov 2026 02:04:36 GMT",
+      "summary": "China's robot makers have mastered the moves. Now comes the race for brains &nbsp;&nbsp; electronics.economictimes.indiatimes.com",
+      "query": "global robotics automation humanoid industrial robots"
+    },
+    {
+      "title": "3 Robotics ETFs, 3 Different Ways to Bet on Humanoid Robots - MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQbV9YRWZXYmNJWHZaMHNCUWhvVWtsRTVRMFQ5UFVjUjl5U2Nqc0pLcjlVeVRLQXVxdDJUeFBqTGR0anFDX3hReDc2X3lTWi1feDBoLTNkOTZRYmFVYVg3aHVZWC1tRzN3SWxjX2NrQ0lGRnpIUWJpaVRHMURXRklJU083N2s3WWVrd0cwQmVGckVIZ21FUUxVcFB4QQ?oc=5",
+      "published": "Sat, 31 Oct 2026 14:38:27 GMT",
+      "summary": "3 Robotics ETFs, 3 Different Ways to Bet on Humanoid Robots &nbsp;&nbsp; MarketBeat",
+      "query": "global robotics automation humanoid industrial robots"
+    },
+    {
+      "title": "Anthropic posts $17B quarterly revenue but losses continue in fresh IPO filing - Barchart.com",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQSGg5bzFzV1R3SlZpY092MDl3dFRzZ0k3YU5jRjdPLVNUOTluZ0dwWlFyNnBvM0pTYUo0WGt4YWRWOTFGTzI0ckhjQS1TNXhzMFU4QjRTWE5QNUttOFZkY0hFZjVLZmdzU1hzUmswSnpPSjd3NWNBLU5hLXdUdmcyQ3RjTDNsUk5TZ1VzOHMxdGZRUzJLRWxBX2FOMVhFV2RGTGs2N3FacWhoRjhYSkZFU0pTQ0JzbVhpQ1lrMlJB?oc=5",
+      "published": "Mon, 02 Nov 2026 17:06:19 GMT",
+      "summary": "Anthropic posts $17B quarterly revenue but losses continue in fresh IPO filing &nbsp;&nbsp; Barchart.com",
+      "query": "global robotics automation humanoid industrial robots"
+    },
+    {
+      "title": "World shares mostly gain after US midterm elections as AI-related stocks sink - Barchart.com",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOeFZGbWpTMEhYZER0MGxMSlFTNmxkS2tlQTJpeEVEQVBKOWJHVDVKSHZfWmNSSmxDYkZPeDJmTjcycW05ZnhneVV0bERQYnNiMTlpNTUyZE9FUXUyY0NRTFRfck5NWmp5LXMwc0R5WVlqc0M0UUI0RWNKdUJnaXpfSWJqRWljbjdhcDQwOUlUTTNJVk94X1J6Y19RbERGTThQTmQ4cm5CazNqWHhzc1YyTDJnYklzMUs1Y3pndUNR?oc=5",
+      "published": "Thu, 05 Nov 2026 09:11:52 GMT",
+      "summary": "World shares mostly gain after US midterm elections as AI-related stocks sink &nbsp;&nbsp; Barchart.com",
+      "query": "global robotics automation humanoid industrial robots"
+    },
+    {
+      "title": "A weak Indian Monsoon & global economic worries hit silver prices - Barchart.com",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQRHVvSy1kZkQ5akx0UW1xRTFuVjBlOW8xQmxHWk9vNjlMa2ZENkZCb1lnYzVRVnFEeGV4YUlSZWFTcUZFTUhXS05pX1NIVHZQelZuM0tET1J6SWVELW9xSnJibEFwLXl6OXFHOHNJN3FCaGtQUG5ReURYTG1FaWdLbW9WTHZWYmlCbUdiMEhOTTh1THFCV0xJeVdLQjk1anhYWnFVNngyUWlfLVE?oc=5",
+      "published": "Mon, 02 Nov 2026 23:22:11 GMT",
+      "summary": "A weak Indian Monsoon & global economic worries hit silver prices &nbsp;&nbsp; Barchart.com",
+      "query": "global robotics automation humanoid industrial robots"
+    },
+    {
+      "title": "Humanoid robots: Blurring the lines between reality and virtuality. - Vietnam.vn",
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBkVTN4SFg2Z1lDdHdkT3ZlQUJUOExFblV2Y0FQTHc5djJ4VnQzQ2VSd0lsZWxxX0YtM095eXpiME1PVUUwcFpLTWEtVWl6OW1MYlBFRTBueEg4TldiR2xhS3BJQmZ4blNfNjJ3N3hnYlp3dE8yQzJEUw?oc=5",
+      "published": "Thu, 05 Nov 2026 02:42:21 GMT",
+      "summary": "Humanoid robots: Blurring the lines between reality and virtuality. &nbsp;&nbsp; Vietnam.vn",
+      "query": "global robotics automation humanoid industrial robots"
+    },
+    {
+      "title": "Humanoid and Manufacturing AX Technologies from Around the World Converge as '2026 RoboWorld' Opens - 아시아경제",
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5XbVVrX3B6QzJ0cFJHZGlGQUV3UkNTcFgtc0RVcUs1dnJDSUtOVUExQVZkUXVvNjhBbFNiRVpmR1ljZGRJVXhibWZ4cmN5WHd3ekREZmgzRERZeHExcnE2V3hmS1c?oc=5",
+      "published": "Wed, 04 Nov 2026 05:03:13 GMT",
+      "summary": "Humanoid and Manufacturing AX Technologies from Around the World Converge as '2026 RoboWorld' Opens &nbsp;&nbsp; 아시아경제",
+      "query": "global robotics automation humanoid industrial robots"
+    },
+    {
+      "title": "Developing the robotics industry: Prospects for strategic cooperation between Vietnam and Italy. - Vietnam.vn",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQVzF5SG1hSlVYRk5GbUxMWnJFM2ZyQl9pVzJJeUstTUVQSlRPMU02bHR2NjJHOUtJeUY1TGJMeVZhY2ZhSW1iUG1pR2RqcWdjM2pySDVzN3VqZWtvNWdKa2pDbVFyNzFwcGNSM1VTUHlibVZtMFZScEI3SkhZZHhtcEkyVm9mYU9qSjFVV0hfdGlTY3hFbGZteQ?oc=5",
+      "published": "Fri, 06 Nov 2026 10:51:55 GMT",
+      "summary": "Developing the robotics industry: Prospects for strategic cooperation between Vietnam and Italy. &nbsp;&nbsp; Vietnam.vn",
+      "query": "global robotics automation humanoid industrial robots"
+    },
+    {
+      "title": "Lockheed Martin Wins $80 Million Air Force Mission Planning Software Contract - The Defense Watch",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNYmJ5TURFRVNHN1FUeGF3SHBiSUk5b2xmNWxGd2U1U2p1RmVFcjdUcUZGRHVBLWxrM1lmYl9oRXYyYlkxa2ZnOEgzTzhab2tMS1lfRnJOZVFTSkk1cTVGYzdZdUhEa2RtY05RYUs1WG00S0N4WnE0cXpMbTBuSFVKeHpaYkMzRzVjRlhuYzBxY185WGhoVDJzZVVPNkZ0V2pZSGt6OEFrMFNWdw?oc=5",
+      "published": "Wed, 04 Nov 2026 08:07:08 GMT",
+      "summary": "Lockheed Martin Wins $80 Million Air Force Mission Planning Software Contract &nbsp;&nbsp; The Defense Watch",
+      "query": "global defense aerospace military procurement"
+    },
+    {
+      "title": "Helsing hands Germany ownership of combat-system software - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPdkxMTHV1dTh5bnpCdkszQUQ2aE8tWnNibHVpNFljY0RHNjVnUU1ab29scVQ1T0Z6VFR5VFR0XzlQdEVYWUx1cFVMSDJWdUVISXhMVS1UR0NfMlc1SHFtNGhBT05QNmxaUDI4VjJWcmJWcElXd1dOM1lNeXRyMXgydllRZzVUaFFwaFlqWDNYeEpSblBpdDNjd1U5NmFtaDFDSnNlWXVFZ3Q1VkR4T2ZvU2hlczB4bDFO?oc=5",
+      "published": "Wed, 04 Nov 2026 09:25:44 GMT",
+      "summary": "Helsing hands Germany ownership of combat-system software &nbsp;&nbsp; Reuters",
+      "query": "global defense aerospace military procurement"
+    },
+    {
+      "title": "Best Defense Stocks for November 2026 - Zacks Investment Research",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5yRjNlaFk5UlhpMkxENnA3SmtyQm5BbVBjQ1BLek04emxCS0NuOHhJc0RfdnlPLWxCbTBUWVhINUtJeE5hc25tYXlTVlVsZlpnWEhKTUUzM096THZpLXlMMHhZeUktY2pNQ2xOSjdvblA?oc=5",
+      "published": "Wed, 04 Nov 2026 08:00:00 GMT",
+      "summary": "Best Defense Stocks for November 2026 &nbsp;&nbsp; Zacks Investment Research",
+      "query": "global defense aerospace military procurement"
+    },
+    {
+      "title": "Midterm Results Trigger a Showdown Over Defense Spending - Defense Security Monitor",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPSGV1SXk2MnFXVlI3UkNZVDkweVNkaTBZdF9jZ3NJSVd1VlRfUVVDV1R4UXVWcEN1OEhIMlRwUVlKVmxxdzdseHVkWEQtLXJxcWNRdmVhSXVFUEZmMzcxTDBJdkFqd3ZzYjE1c1pKX2M5bWx0eE5FbFJ0X3Y4S3Y4TFdfMnQ1R2l2SGJfQlFiWEtvS1FGcmswOTkwNkRrLTktVUo3WEIxQW5nUQ?oc=5",
+      "published": "Fri, 06 Nov 2026 14:00:26 GMT",
+      "summary": "Midterm Results Trigger a Showdown Over Defense Spending &nbsp;&nbsp; Defense Security Monitor",
+      "query": "global defense aerospace military procurement"
+    },
+    {
+      "title": "Defense Stocks To Research As Middle East Risk Puts Aerospace Shares In Focus - Yahoo Finance UK",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQWjBMOURWOGpPVk1hV0hWVVRiODRXckFDY1Z2ZzkxNUpwVXVHSHdFd1duRkpDdExOWHJwS0ktWmYtdVRLVWNKcDZJbGdrOE1SMmlQVXQyc05LaS1LTEViZ0pIam1HOERGTEhPNjkxcU1Ybk9Ia09BMUVUbnlNeHVaeDM1UjdLV2llUkNXMA?oc=5",
+      "published": "Tue, 03 Nov 2026 11:08:50 GMT",
+      "summary": "Defense Stocks To Research As Middle East Risk Puts Aerospace Shares In Focus &nbsp;&nbsp; Yahoo Finance UK",
+      "query": "global defense aerospace military procurement"
+    },
+    {
+      "title": "Inside Korean Air’s defence ambitions - FlightGlobal",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNOHBvVWlPc2RRdzZ4ZnpyUWROSXU0Vkx4QXNua09Nb3BYTzhLV3Azc3Z4b0gxRFNVbGVXME1kNUV5c1RkV09nemY2cWk4YjMtNDNTR081cDFmeFFWWVpVLUhHdkJkZks1QjdBVTJFUHJWNHJObXVXVHRWUENKTmZvbjN4RmdSRE9FM2c?oc=5",
+      "published": "Thu, 05 Nov 2026 01:59:54 GMT",
+      "summary": "Inside Korean Air’s defence ambitions &nbsp;&nbsp; FlightGlobal",
+      "query": "global defense aerospace military procurement"
+    },
+    {
+      "title": "DLA Energy Equips Workforce with Essential Petroleum Quality Training - Defense Logistics Agency (DLA) (.mil)",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOUldhMEZYTVAtZFZpMzhHS204dnViUzN0Vm1nUXNZUUtTbmJkOVFQRmJOMi1WbXY0cEF5bmZZdXk0LXlhaWVxSXRnNTVReUdKbU9pOVFjbm1WOVZGdDVqM1BDMk4tcDA1VmxyWE9QWGFILXVSRkFQTS1rY0hFa21CWnlLbE9NNlA0dnpUcVJPWmpYbE1VZ0pra1hBTVlWV0YzTnNPM1FDS20zUjVZTUpIdGFzYi1FdEZrV2pfYVlWNnotUmp1dmw1OFRTY0U0ZHZReUxxaGR3?oc=5",
+      "published": "Mon, 02 Nov 2026 16:17:21 GMT",
+      "summary": "DLA Energy Equips Workforce with Essential Petroleum Quality Training &nbsp;&nbsp; Defense Logistics Agency (DLA) (.mil)",
+      "query": "global defense aerospace military procurement"
+    },
+    {
+      "title": "Spain to modernize armed forces with €4 billion in defense procurement - Defensehere",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQYjJRb1pxLXIzMWlKMDN5OTZKLUhFcFlpRkVJUVJTd05yc0FGYW0xY2h6WmpVY2t2UDh4VFRubEdVaDBLY1FhY1VUdmRvVUZ2MUpiRXNCMXVXV2tQZ0tvZm9EbmtMSy0xOEJOcEJYM0NoTWRFbGhBbWYtSGEyN3pxSFhFZ2pwanc0b1FULUpEdFd5NUJSUzhVWERGcENXLW8?oc=5",
+      "published": "Wed, 04 Nov 2026 06:45:08 GMT",
+      "summary": "Spain to modernize armed forces with €4 billion in defense procurement &nbsp;&nbsp; Defensehere",
+      "query": "global defense aerospace military procurement"
+    }
+  ]
 }

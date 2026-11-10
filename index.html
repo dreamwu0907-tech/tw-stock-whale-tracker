@@ -154,7 +154,7 @@ async function renderTrendStockMatch(p){
  if(!unique.length){el.innerHTML='<div class="muted">本週週報沒有具備明確供應鏈證據的台股候選。</div>';return;}
  let cache={};try{const r=await fetch("./data/technical_cache.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const d=await r.json();(d.rows||[]).forEach(x=>cache[String(x.code)]=x);}}catch(e){console.warn(e);}
  el.innerHTML=unique.slice(0,20).map(c=>{
-  const code=String(c.ticker||c.code||"").trim(),row=cache[code]||allRows.find(x=>String(x.code)===code);
+  const code=String(c.ticker||c.code||"").trim(),row=cache[code]||null;
   const thesis=c.thesis||c.why_benefit||"週報列為觀察標的";let signal="待補技術資料",detail="尚未取得此股獨立歷史行情。";
   if(row?.status==="insufficient")detail="行情資料不足："+(row.reason||"來源未提供足夠歷史日 K");
   else if(row){signal=row.dmi_near_cross?"接近交叉":row.dmi_early_warning?"提前觀察":row.dmi_cross_valid?"多方交叉確認":row.strategy_qualified?"策略合格":"尚未符合起漲條件";
@@ -274,12 +274,10 @@ async function renderStockAnalysis(){
   let x=allRows.find(r=>String(r.code)===q||String(r.name||"").toLowerCase()===q||String(r.name||"").toLowerCase().includes(q));
   let code=x?.code||(/^\d{4,6}$/.test(q)?q:null);
   if(!code)throw new Error("找不到這檔股票。請輸入台灣股票代號，或使用排行資料中可辨識的公司名稱。");
-  let history=x?.ohlc_history||x?.ohlc_60||[],source="網站每日排行資料";
+  let history=[],source="GitHub Actions 共用技術快取";
   let latest=x?.close,name=x?.name||"";
-  if(history.length<22){
-   const fetched=await fetchStockHistory(code);history=fetched.rows;source=fetched.source;latest=fetched.latest||history.at(-1).close;
-   name=name||fetched.meta?.name||fetched.meta?.longName||fetched.meta?.shortName||"";
-  }
+  const fetched=await fetchStockHistory(code);history=fetched.rows;source=fetched.source;latest=fetched.latest||history.at(-1).close;
+  name=name||fetched.meta?.name||fetched.meta?.longName||fetched.meta?.shortName||"";
   if(!x)x={code,name,close:latest,change_pct:null};
   const t=analyzeTechnical(x,history),cls=t.side==="buy"?"buy":t.side==="sell"?"sell":"wait";
   const last=history.at(-1),prev=history.at(-2),change=prev?.close?((last.close/prev.close)-1)*100:null;

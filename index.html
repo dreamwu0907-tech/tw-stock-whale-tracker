@@ -146,30 +146,21 @@ async function loadWeeklyArchive(){
   el.innerHTML=rows.map(x=>'<article class="watch-item"><strong>'+safeText(x.date)+'</strong><p class="watch-detail">資料期間：'+safeText(x.period_start||"—")+' ～ '+safeText(x.period_end||"—")+'</p><a href="./data/weekly_reports/'+encodeURIComponent(x.file)+'" target="_blank" rel="noopener noreferrer">查看該週報 JSON</a></article>').join("")||'<div class="muted">尚無歷史週報。</div>';
  }catch(e){el.innerHTML='<div class="muted">尚無歷史週報；完成第一次週報後會自動建立。</div>';}
 }
-function renderTrendStockMatch(p){
- const el=document.getElementById("trendStockMatch");
- const industries=p.industries||[];
+async function renderTrendStockMatch(p){
+ const el=document.getElementById("trendStockMatch"),industries=p.industries||[];
  const candidates=(p.watchlist||[]).map(x=>Object.assign({industry:x.industry||"週報觀察名單"},x));
  industries.forEach(ind=>(ind.taiwan_candidates||[]).forEach(x=>candidates.push(Object.assign({industry:ind.name,direction:ind.direction,trend_stage:ind.trend_stage},x))));
- const seen=new Set(), unique=candidates.filter(x=>{const k=String(x.ticker||x.code||"").trim();if(!k||seen.has(k))return false;seen.add(k);return true;});
- if(!unique.length){el.innerHTML='<div class="muted">本週週報沒有具備明確供應鏈證據的台股候選。這是資料品質控管，不代表沒有產業機會；請先補足公司與供應鏈證據。</div>';return;}
+ const seen=new Set(),unique=candidates.filter(x=>{const k=String(x.ticker||x.code||"").trim();if(!k||seen.has(k))return false;seen.add(k);return true;});
+ if(!unique.length){el.innerHTML='<div class="muted">本週週報沒有具備明確供應鏈證據的台股候選。</div>';return;}
+ let cache={};try{const r=await fetch("./data/weekly_technical.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const d=await r.json();(d.rows||[]).forEach(x=>cache[String(x.code)]=x);}}catch(e){console.warn(e);}
  el.innerHTML=unique.slice(0,20).map(c=>{
-  const code=String(c.ticker||c.code||"").trim();
-  const row=allRows.find(x=>String(x.code)===code);
-  const thesis=c.thesis||c.why_benefit||"週報列為觀察標的";
-  let signal="尚無技術結論",detail="目前行情排行資料未找到此股，或技術資料不足。";
-  if(row){
-   const tags=[];
-   if(row.dmi_early_warning)tags.push("DMI 提前觀察");
-   if(row.dmi_near_cross)tags.push("DMI 接近交叉");
-   if(row.dmi_cross_valid)tags.push("DMI 多方交叉");
-   if(row.strategy_qualified)tags.push("符合市場策略條件");
-   if(row.history_pattern_label)tags.push("歷史型態："+row.history_pattern_label);
-   signal=row.dmi_near_cross?"接近交叉":row.dmi_early_warning?"提前觀察":row.dmi_cross_valid?"多方交叉確認":row.strategy_qualified?"策略合格":"尚未符合起漲條件";
-   detail="收盤 "+fmt(row.close)+"｜漲跌 "+fmt(row.change_pct)+"%｜外資近5日 "+fmt(row.foreign_5d,0)+" 張｜投信近5日 "+fmt(row.trust_5d,0)+" 張｜歷史 K 線相似度 "+(row.history_pattern_similarity==null?"—":fmt(row.history_pattern_similarity,1)+"%")+"｜"+(tags.join("；")||"尚無明確多方訊號");
-  }
+  const code=String(c.ticker||c.code||"").trim(),row=cache[code]||allRows.find(x=>String(x.code)===code);
+  const thesis=c.thesis||c.why_benefit||"週報列為觀察標的";let signal="待補技術資料",detail="尚未取得此股獨立歷史行情。";
+  if(row?.status==="insufficient")detail="行情資料不足："+(row.reason||"來源未提供足夠歷史日 K");
+  else if(row){signal=row.dmi_near_cross?"接近交叉":row.dmi_early_warning?"提前觀察":row.dmi_cross_valid?"多方交叉確認":row.strategy_qualified?"策略合格":"尚未符合起漲條件";
+   detail="行情日期 "+(row.data_date||"—")+"｜收盤 "+fmt(row.close)+"｜漲跌 "+fmt(row.change_pct)+"%｜MA5/10/20 "+fmt(row.ma5)+"/"+fmt(row.ma10)+"/"+fmt(row.ma20)+"｜+DI/−DI/ADX "+fmt(row.plus_di)+"/"+fmt(row.minus_di)+"/"+fmt(row.adx)+"｜ATR14 "+fmt(row.atr14)+"｜"+(row.dmi_signal_label||"尚無明確多方訊號")+"｜歷史日 K "+(row.history_count||"—")+" 筆";}
   const cls=row&&(row.dmi_early_warning||row.dmi_near_cross||row.dmi_cross_valid||row.strategy_qualified)?"buy":"wait";
-  return '<article class="watch-item"><div class="watch-head"><strong>'+safeText(code+' '+(c.company||c.name||""))+'</strong><span class="watch-advice '+cls+'">'+safeText(signal)+'</span></div><p class="watch-detail">產業：'+safeText(c.industry||"—")+'｜趨勢：'+safeText(c.direction||c.trend_stage||"待確認")+'</p><p class="watch-detail">'+safeText(thesis)+'</p><p class="watch-detail">'+safeText(detail)+'</p><p class="watch-detail">風險：'+safeText(c.risk||((c.risks||[]).join("；"))||"仍需檢查財報、估值及重大訊息")+'</p><p class="watch-detail">'+sourceLinks(c.evidence_urls)+'</p></article>';
+  return '<article class="watch-item"><div class="watch-head"><strong>'+safeText(code+" "+(c.company||c.name||""))+'</strong><span class="watch-advice '+cls+'">'+safeText(signal)+'</span></div><p class="watch-detail">產業：'+safeText(c.industry||"—")+'｜趨勢：'+safeText(c.direction||c.trend_stage||"待確認")+'</p><p class="watch-detail">'+safeText(thesis)+'</p><p class="watch-detail">'+safeText(detail)+'</p><p class="watch-detail">風險：'+safeText(c.risk||((c.risks||[]).join("；"))||"仍需檢查財報、估值及重大訊息")+'</p><p class="watch-detail">'+sourceLinks(c.evidence_urls)+'</p></article>';
  }).join("");
 }
 async function loadWeeklyReport(){

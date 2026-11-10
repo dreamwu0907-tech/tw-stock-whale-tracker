@@ -203,27 +203,34 @@ async function loadWeeklyReport(){
 }
 
 async function fetchStockHistory(code){
- let root=null,lastError="";
+ const now=new Date(),start=new Date(now);start.setMonth(start.getMonth()-6);
+ const dateText=d=>d.toISOString().slice(0,10);
+ const params=new URLSearchParams({dataset:"TaiwanStockPrice",data_id:code,start_date:dateText(start),end_date:dateText(now)});
+ let lastError="";
+ try{
+  const r=await fetch("https://api.finmindtrade.com/api/v4/data?"+params.toString(),{cache:"no-store"});
+  if(!r.ok)throw new Error("HTTP "+r.status);
+  const j=await r.json();if(!Array.isArray(j.data))throw new Error(j.msg||"回傳格式不符");
+  const rows=j.data.map(z=>({date:z.date,open:Number(z.open),high:Number(z.max),low:Number(z.min),close:Number(z.close),volume:Number(z.Trading_Volume||0)}))
+   .filter(z=>z.date&&[z.open,z.high,z.low,z.close].every(v=>Number.isFinite(v)&&v>0)).sort((x,y)=>x.date.localeCompare(y.date));
+  if(rows.length>=22)return {rows,source:"FinMind 台股歷史日成交資料（免費公開額度）",latest:rows.at(-1).close,meta:{}};
+  lastError="FinMind 僅回傳 "+rows.length+" 筆有效日 K";
+ }catch(e){lastError="FinMind："+e.message;}
  for(const suffix of [".TW",".TWO"]){
   try{
-   const url="https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(code+suffix)+"?range=6mo&interval=1d";
-   const r=await fetch(url,{cache:"no-store"});
+   const r=await fetch("https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(code+suffix)+"?range=6mo&interval=1d",{cache:"no-store"});
    if(!r.ok)throw new Error("HTTP "+r.status);
-   const j=await r.json();root=j.chart&&j.chart.result&&j.chart.result[0];
-   if(root)break;
-   lastError=j.chart?.error?.description||"沒有回傳行情";
-  }catch(e){lastError=e.message;}
+   const j=await r.json(),root=j.chart&&j.chart.result&&j.chart.result[0];
+   if(!root){lastError+="；Yahoo "+suffix+" 無資料";continue;}
+   const q=root.indicators?.quote?.[0];if(!q)throw new Error("缺少 OHLC 欄位");
+   const rows=(root.timestamp||[]).map((ts,i)=>({date:new Date(ts*1000).toISOString().slice(0,10),open:q.open?.[i],high:q.high?.[i],low:q.low?.[i],close:q.close?.[i],volume:q.volume?.[i]}))
+    .filter(z=>[z.open,z.high,z.low,z.close].every(v=>Number.isFinite(Number(v))&&Number(v)>0))
+    .map(z=>({...z,open:Number(z.open),high:Number(z.high),low:Number(z.low),close:Number(z.close),volume:Number(z.volume||0)}));
+   if(rows.length>=22)return {rows,source:"Yahoo Finance 歷史日 K（備援）",latest:root.meta?.regularMarketPrice||rows.at(-1).close,meta:root.meta||{}};
+   lastError+="；Yahoo "+suffix+" 僅有 "+rows.length+" 筆有效日 K";
+  }catch(e){lastError+="；Yahoo "+suffix+"："+e.message;}
  }
- if(!root)throw new Error("上市（.TW）與上櫃（.TWO）行情查詢均未成功："+lastError);
- const q=root.indicators&&root.indicators.quote&&root.indicators.quote[0];
- if(!q)throw new Error("行情資料缺少 OHLC 欄位");
- const rows=(root.timestamp||[]).map((ts,i)=>({
-  date:new Date(ts*1000).toISOString().slice(0,10),
-  open:q.open?.[i],high:q.high?.[i],low:q.low?.[i],close:q.close?.[i],volume:q.volume?.[i]
- })).filter(z=>[z.open,z.high,z.low,z.close].every(v=>Number.isFinite(Number(v))&&Number(v)>0))
- .map(z=>({...z,open:Number(z.open),high:Number(z.high),low:Number(z.low),close:Number(z.close),volume:Number(z.volume||0)}));
- if(rows.length<22)throw new Error("取得 "+rows.length+" 根日 K，少於技術分析最低需求 22 根");
- return {rows,source:"Yahoo Finance 公開歷史行情",latest:root.meta?.regularMarketPrice||rows.at(-1).close,meta:root.meta||{}};
+ throw new Error("FinMind 與 Yahoo 歷史行情來源皆未成功。"+lastError);
 }
 function calcDmiFromHistory(a,period=14){
  if(a.length<period*2+2)return null;

@@ -9,6 +9,8 @@ on:
   schedule:
     # 10:00 UTC = 18:00 Taiwan time, Monday-Friday; TWSE daily closing data is produced again around 17:30.
     - cron: "0 10 * * 1-5"
+    # Refresh weekly-report candidate technical cache after Saturday report publication.
+    - cron: "30 12 * * 6"
 concurrency:
   group: update-stock-data
   cancel-in-progress: false

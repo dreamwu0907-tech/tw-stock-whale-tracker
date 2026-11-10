@@ -52,6 +52,44 @@
     {
       "date": "20261109",
       "stocks": []
+    },
+    {
+      "date": "20261110",
+      "stocks": [
+        {
+          "code": "6672",
+          "name": "騰輝電子-KY",
+          "close": 504.0,
+          "dmi_pick_score": 100,
+          "dmi_signal_label": "三條件交叉合格",
+          "plus_di": 28.86,
+          "minus_di": 20.1,
+          "adx": 40.14,
+          "score": 80
+        },
+        {
+          "code": "1802",
+          "name": "台玻",
+          "close": 69.8,
+          "dmi_pick_score": 100,
+          "dmi_signal_label": "三條件交叉合格",
+          "plus_di": 32.01,
+          "minus_di": 20.72,
+          "adx": 24.93,
+          "score": 71
+        },
+        {
+          "code": "1301",
+          "name": "台塑",
+          "close": 69.9,
+          "dmi_pick_score": 100,
+          "dmi_signal_label": "三條件交叉合格",
+          "plus_di": 27.92,
+          "minus_di": 27.72,
+          "adx": 24.23,
+          "score": 67
+        }
+      ]
     }
   ],
   "picks": [
@@ -90,6 +128,10 @@
         {
           "date": "20261109",
           "close": 7.16
+        },
+        {
+          "date": "20261110",
+          "close": 7.27
         }
       ],
       "outcomes": {
@@ -136,6 +178,10 @@
         {
           "date": "20261109",
           "close": 163.5
+        },
+        {
+          "date": "20261110",
+          "close": 166.5
         }
       ],
       "outcomes": {
@@ -178,6 +224,10 @@
         {
           "date": "20261109",
           "close": 25.7
+        },
+        {
+          "date": "20261110",
+          "close": 25.7
         }
       ],
       "outcomes": {
@@ -216,6 +266,62 @@
         {
           "date": "20261109",
           "close": 33.35
+        },
+        {
+          "date": "20261110",
+          "close": 33.7
+        }
+      ],
+      "outcomes": {
+        "5": {
+          "return_pct": -3.71,
+          "max_close_gain_pct": -1.57,
+          "max_close_drawdown_pct": -10.14,
+          "end_date": "20261110"
+        }
+      }
+    },
+    {
+      "date": "20261110",
+      "code": "6672",
+      "name": "騰輝電子-KY",
+      "entry_close": 504.0,
+      "dmi_pick_score": 100,
+      "signal": "三條件交叉合格",
+      "observations": [
+        {
+          "date": "20261110",
+          "close": 504.0
+        }
+      ],
+      "outcomes": {}
+    },
+    {
+      "date": "20261110",
+      "code": "1802",
+      "name": "台玻",
+      "entry_close": 69.8,
+      "dmi_pick_score": 100,
+      "signal": "三條件交叉合格",
+      "observations": [
+        {
+          "date": "20261110",
+          "close": 69.8
+        }
+      ],
+      "outcomes": {}
+    },
+    {
+      "date": "20261110",
+      "code": "1301",
+      "name": "台塑",
+      "entry_close": 69.9,
+      "dmi_pick_score": 100,
+      "signal": "三條件交叉合格",
+      "observations": [
+        {
+          "date": "20261110",
+          "close": 69.9
         }
       ],
       "outcomes": {}
@@ -223,9 +329,9 @@
   ],
   "stats": {
     "5": {
-      "sample_size": 3,
+      "sample_size": 4,
       "win_rate_pct": 0.0,
-      "average_return_pct": -2.1
+      "average_return_pct": -2.5
     },
     "10": {
       "sample_size": 0,
@@ -238,5 +344,5 @@
       "average_return_pct": null
     }
   },
-  "updated_at": "2026-11-09 19:09 Taipei"
+  "updated_at": "2026-11-10 15:03 Taipei"
 }

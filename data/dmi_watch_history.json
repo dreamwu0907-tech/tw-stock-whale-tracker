@@ -65,7 +65,18 @@
           "plus_di": 28.86,
           "minus_di": 20.1,
           "adx": 40.14,
-          "score": 80
+          "score": 82
+        },
+        {
+          "code": "1301",
+          "name": "台塑",
+          "close": 69.9,
+          "dmi_pick_score": 100,
+          "dmi_signal_label": "三條件交叉合格",
+          "plus_di": 28.0,
+          "minus_di": 27.63,
+          "adx": 27.22,
+          "score": 75
         },
         {
           "code": "1802",
@@ -76,18 +87,7 @@
           "plus_di": 32.01,
           "minus_di": 20.72,
           "adx": 24.93,
-          "score": 71
-        },
-        {
-          "code": "1301",
-          "name": "台塑",
-          "close": 69.9,
-          "dmi_pick_score": 100,
-          "dmi_signal_label": "三條件交叉合格",
-          "plus_di": 27.92,
-          "minus_di": 27.72,
-          "adx": 24.23,
-          "score": 67
+          "score": 72
         }
       ]
     }
@@ -344,5 +344,5 @@
       "average_return_pct": null
     }
   },
-  "updated_at": "2026-11-10 15:03 Taipei"
+  "updated_at": "2026-11-10 19:08 Taipei"
 }

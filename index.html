@@ -152,7 +152,7 @@ async function renderTrendStockMatch(p){
  industries.forEach(ind=>(ind.taiwan_candidates||[]).forEach(x=>candidates.push(Object.assign({industry:ind.name,direction:ind.direction,trend_stage:ind.trend_stage},x))));
  const seen=new Set(),unique=candidates.filter(x=>{const k=String(x.ticker||x.code||"").trim();if(!k||seen.has(k))return false;seen.add(k);return true;});
  if(!unique.length){el.innerHTML='<div class="muted">本週週報沒有具備明確供應鏈證據的台股候選。</div>';return;}
- let cache={};try{const r=await fetch("./data/weekly_technical.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const d=await r.json();(d.rows||[]).forEach(x=>cache[String(x.code)]=x);}}catch(e){console.warn(e);}
+ let cache={};try{const r=await fetch("./data/technical_cache.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const d=await r.json();(d.rows||[]).forEach(x=>cache[String(x.code)]=x);}}catch(e){console.warn(e);}
  el.innerHTML=unique.slice(0,20).map(c=>{
   const code=String(c.ticker||c.code||"").trim(),row=cache[code]||allRows.find(x=>String(x.code)===code);
   const thesis=c.thesis||c.why_benefit||"週報列為觀察標的";let signal="待補技術資料",detail="尚未取得此股獨立歷史行情。";
@@ -194,35 +194,14 @@ async function loadWeeklyReport(){
 }
 
 async function fetchStockHistory(code){
- const now=new Date(),start=new Date(now);start.setMonth(start.getMonth()-6);
- const dateText=d=>d.toISOString().slice(0,10);
- const params=new URLSearchParams({dataset:"TaiwanStockPrice",data_id:code,start_date:dateText(start),end_date:dateText(now)});
- let lastError="";
- try{
-  const r=await fetch("https://api.finmindtrade.com/api/v4/data?"+params.toString(),{cache:"no-store"});
-  if(!r.ok)throw new Error("HTTP "+r.status);
-  const j=await r.json();if(!Array.isArray(j.data))throw new Error(j.msg||"回傳格式不符");
-  const rows=j.data.map(z=>({date:z.date,open:Number(z.open),high:Number(z.max),low:Number(z.min),close:Number(z.close),volume:Number(z.Trading_Volume||0)}))
-   .filter(z=>z.date&&[z.open,z.high,z.low,z.close].every(v=>Number.isFinite(v)&&v>0)).sort((x,y)=>x.date.localeCompare(y.date));
-  if(rows.length>=22)return {rows,source:"FinMind 台股歷史日成交資料（免費公開額度）",latest:rows.at(-1).close,meta:{}};
-  lastError="FinMind 僅回傳 "+rows.length+" 筆有效日 K";
- }catch(e){lastError="FinMind："+e.message;}
- for(const suffix of [".TW",".TWO"]){
-  try{
-   const r=await fetch("https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(code+suffix)+"?range=6mo&interval=1d",{cache:"no-store"});
-   if(!r.ok)throw new Error("HTTP "+r.status);
-   const j=await r.json(),root=j.chart&&j.chart.result&&j.chart.result[0];
-   if(!root){lastError+="；Yahoo "+suffix+" 無資料";continue;}
-   const q=root.indicators?.quote?.[0];if(!q)throw new Error("缺少 OHLC 欄位");
-   const rows=(root.timestamp||[]).map((ts,i)=>({date:new Date(ts*1000).toISOString().slice(0,10),open:q.open?.[i],high:q.high?.[i],low:q.low?.[i],close:q.close?.[i],volume:q.volume?.[i]}))
-    .filter(z=>[z.open,z.high,z.low,z.close].every(v=>Number.isFinite(Number(v))&&Number(v)>0))
-    .map(z=>({...z,open:Number(z.open),high:Number(z.high),low:Number(z.low),close:Number(z.close),volume:Number(z.volume||0)}));
-   if(rows.length>=22)return {rows,source:"Yahoo Finance 歷史日 K（備援）",latest:root.meta?.regularMarketPrice||rows.at(-1).close,meta:root.meta||{}};
-   lastError+="；Yahoo "+suffix+" 僅有 "+rows.length+" 筆有效日 K";
-  }catch(e){lastError+="；Yahoo "+suffix+"："+e.message;}
- }
- throw new Error("FinMind 與 Yahoo 歷史行情來源皆未成功。"+lastError);
+ const r=await fetch("./data/technical_cache.json?t="+Date.now(),{cache:"no-store"});
+ if(!r.ok)throw new Error("共用技術快取尚未建立（HTTP "+r.status+"），請稍後再試。");
+ const cache=await r.json(),row=(cache.rows||[]).find(x=>String(x.code)===String(code));
+ if(!row)throw new Error("此股票目前不在共用技術快取範圍內。快取會收錄每日排行與本週週報候選股；請確認代號或等待下一次資料更新。");
+ if(row.status!=="ready"||!Array.isArray(row.ohlc_history))throw new Error("共用快取尚無足夠歷史行情："+(row.reason||"資料不足"));
+ return {rows:row.ohlc_history,source:"GitHub Actions 共用技術快取（"+(row.source||"FinMind")+"）",latest:row.close,meta:{name:row.name},dataDate:row.data_date};
 }
+
 function calcDmiFromHistory(a,period=14){
  if(a.length<period*2+2)return null;
  const tr=[],pdm=[],mdm=[];
@@ -299,7 +278,7 @@ async function renderStockAnalysis(){
   let latest=x?.close,name=x?.name||"";
   if(history.length<22){
    const fetched=await fetchStockHistory(code);history=fetched.rows;source=fetched.source;latest=fetched.latest||history.at(-1).close;
-   name=name||fetched.meta?.longName||fetched.meta?.shortName||"";
+   name=name||fetched.meta?.name||fetched.meta?.longName||fetched.meta?.shortName||"";
   }
   if(!x)x={code,name,close:latest,change_pct:null};
   const t=analyzeTechnical(x,history),cls=t.side==="buy"?"buy":t.side==="sell"?"sell":"wait";

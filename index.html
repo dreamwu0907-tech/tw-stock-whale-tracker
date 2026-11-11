@@ -71,6 +71,8 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 </main>
 <script>
 const DATA_URL = './data/ranking.json';
+// Deploy worker/stock-history-worker.js to Cloudflare, then replace this URL with its workers.dev URL.
+const STOCK_HISTORY_API = 'https://REPLACE-WITH-YOUR-WORKER.workers.dev/api/history';
 const TRACK_URL = './data/dmi_watch_history.json';
 let allRows=[];
 let mobileLimit=50;
@@ -194,12 +196,27 @@ async function loadWeeklyReport(){
 }
 
 async function fetchStockHistory(code){
- const r=await fetch("./data/technical_cache.json?t="+Date.now(),{cache:"no-store"});
- if(!r.ok)throw new Error("共用技術快取尚未建立（HTTP "+r.status+"），請稍後再試。");
- const cache=await r.json(),row=(cache.rows||[]).find(x=>String(x.code)===String(code));
- if(!row)throw new Error("此股票目前不在共用技術快取範圍內。快取會收錄每日排行與本週週報候選股；請確認代號或等待下一次資料更新。");
- if(row.status!=="ready"||!Array.isArray(row.ohlc_history))throw new Error("共用快取尚無足夠歷史行情："+(row.reason||"資料不足"));
- return {rows:row.ohlc_history,source:"GitHub Actions 共用技術快取（"+(row.source||"FinMind")+"）",latest:row.close,meta:{name:row.name},dataDate:row.data_date};
+ let cacheMessage="";
+ try{
+  const r=await fetch("./data/technical_cache.json?t="+Date.now(),{cache:"no-store"});
+  if(r.ok){
+   const cache=await r.json(),row=(cache.rows||[]).find(x=>String(x.code)===String(code));
+   if(row?.status==="ready"&&Array.isArray(row.ohlc_history)&&row.ohlc_history.length>=30){
+    return {rows:row.ohlc_history,source:"GitHub Actions 共用技術快取（"+(row.source||"官方行情")+"）",latest:row.close,meta:{name:row.name},dataDate:row.data_date};
+   }
+   cacheMessage=row?"共用快取資料不足，改查官方歷史行情。":"此股票不在每日快取名單，改查官方歷史行情。";
+  }else cacheMessage="共用快取讀取失敗，改查官方歷史行情。";
+ }catch(e){cacheMessage="共用快取暫時無法讀取，改查官方歷史行情。";}
+ if(STOCK_HISTORY_API.includes("REPLACE-WITH-YOUR-WORKER")){
+  throw new Error(cacheMessage+" 即時查詢服務尚未部署：請先部署 stock-history-worker.js，並設定 STOCK_HISTORY_API。");
+ }
+ const url=STOCK_HISTORY_API+"?code="+encodeURIComponent(code)+"&months=9";
+ const response=await fetch(url,{cache:"no-store"});
+ const payload=await response.json().catch(()=>({}));
+ if(!response.ok||!Array.isArray(payload.rows))throw new Error(payload.error||("官方歷史行情查詢失敗（HTTP "+response.status+"）。"));
+ const rows=payload.rows.filter(x=>[x.open,x.high,x.low,x.close].every(v=>Number.isFinite(Number(v))&&Number(v)>0)).sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+ if(rows.length<30)throw new Error("官方來源僅取得 "+rows.length+" 根有效日 K，至少需要 30 根才能分析。");
+ return {rows,source:payload.source||"TWSE／TPEx 官方歷史行情（即時查詢）",latest:rows.at(-1).close,meta:{name:payload.name||""},dataDate:rows.at(-1).date};
 }
 
 function calcDmiFromHistory(a,period=14){

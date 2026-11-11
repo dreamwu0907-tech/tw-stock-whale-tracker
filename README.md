@@ -61,3 +61,22 @@
 - TWSE 公開資料平台：<https://www.twse.com.tw/>
 - TDCC 集保戶股權分散表：<https://www.tdcc.com.tw/portal/zh/smWeb/qryStock>
 - 政府資料開放平台：<https://data.gov.tw/>
+
+## 自選股即時歷史行情查詢（新增）
+
+第二頁自選股評估現在採用兩段式查詢：
+1. 股票已存在 `data/technical_cache.json` 且有至少 30 根日 K 時，優先使用 GitHub Actions 共用快取。
+2. 不在快取或快取資料不足時，改由 Cloudflare Worker 即時查詢證交所／櫃買中心的官方月行情 API，向前抓取最多 9 個月、最多 180 根日 K，再由網頁計算 MA5/10/20、DMI(14)、ADX、ATR(14)、K 線型態及風險區間。
+
+### 啟用即時查詢服務（一次性設定）
+
+1. 登入 Cloudflare Dashboard → Workers & Pages → Create → Worker。
+2. 建立 Worker，名稱建議使用 `tw-stock-history-api`。
+3. 將本 repository 的 `worker/stock-history-worker.js` 全文貼入 Worker 編輯器並 Deploy。
+4. 複製 Cloudflare 提供的 Worker 網址，例如 `https://tw-stock-history-api.<你的Cloudflare子網域>.workers.dev`。
+5. 開啟本 repository 的 `index.html`，找到 `STOCK_HISTORY_API`，把預設的 `https://REPLACE-WITH-YOUR-WORKER.workers.dev/api/history` 改成你的 Worker 網址加上 `/api/history`，儲存並推送 GitHub。
+6. 等 GitHub Pages 部署完成後，第二頁輸入股票代號即可查詢。手機與電腦都使用同一個服務，不需要輸入 API Key。
+
+Worker 僅允許本 GitHub Pages 網站來源呼叫；不需要儲存使用者資料或任何金鑰。若未完成 Worker 部署與網址設定，第二頁仍可讀取既有共用快取，但快取以外的股票會提示尚未啟用即時查詢。
+
+**資料限制：** 僅使用日收盤歷史資料，不是盤中即時報價；官方端點可能限流或調整格式。若官方來源無法取得至少 30 根有效日 K，系統會明確顯示資料不足，不會自行補造指標。

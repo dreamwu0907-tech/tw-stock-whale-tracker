@@ -1,0 +1,7 @@
+name = "tw-stock-history-api"
+main = "stock-history-worker.js"
+compatibility_date = "2026-11-01"
+
+[vars]
+# Worker code currently allows only this GitHub Pages origin.
+ALLOWED_ORIGIN = "https://dreamwu0907-tech.github.io"

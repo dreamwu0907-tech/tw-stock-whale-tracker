@@ -73,9 +73,8 @@
 1. 登入 Cloudflare Dashboard → Workers & Pages → Create → Worker。
 2. 建立 Worker，名稱建議使用 `tw-stock-history-api`。
 3. 將本 repository 的 `worker/stock-history-worker.js` 全文貼入 Worker 編輯器並 Deploy。
-4. 複製 Cloudflare 提供的 Worker 網址，例如 `https://tw-stock-history-api.<你的Cloudflare子網域>.workers.dev`。
-5. 開啟本 repository 的 `index.html`，找到 `STOCK_HISTORY_API`，把預設的 `https://REPLACE-WITH-YOUR-WORKER.workers.dev/api/history` 改成你的 Worker 網址加上 `/api/history`，儲存並推送 GitHub。
-6. 等 GitHub Pages 部署完成後，第二頁輸入股票代號即可查詢。手機與電腦都使用同一個服務，不需要輸入 API Key。
+4. Worker 網址已預先設定為 `https://tw-stock-history-api.dreamwu0907.workers.dev/api/history`；請確認 Cloudflare 帳號的 Workers 子網域為 `dreamwu0907`。若不同，需在 `index.html` 的 `STOCK_HISTORY_API` 改成實際 Worker 網址。
+5. 等 GitHub Pages 部署完成後，第二頁輸入股票代號即可查詢。手機與電腦都使用同一個服務，不需要輸入 API Key。
 
 Worker 僅允許本 GitHub Pages 網站來源呼叫；不需要儲存使用者資料或任何金鑰。若未完成 Worker 部署與網址設定，第二頁仍可讀取既有共用快取，但快取以外的股票會提示尚未啟用即時查詢。
 

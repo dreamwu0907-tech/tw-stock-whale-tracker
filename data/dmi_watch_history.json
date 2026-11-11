@@ -90,6 +90,33 @@
           "score": 72
         }
       ]
+    },
+    {
+      "date": "20261111",
+      "stocks": [
+        {
+          "code": "2609",
+          "name": "陽明",
+          "close": 59.1,
+          "dmi_pick_score": 100,
+          "dmi_signal_label": "三條件交叉合格",
+          "plus_di": 24.16,
+          "minus_di": 21.47,
+          "adx": 22.31,
+          "score": 77
+        },
+        {
+          "code": "6456",
+          "name": "GIS-KY",
+          "close": 92.6,
+          "dmi_pick_score": 100,
+          "dmi_signal_label": "三條件交叉合格",
+          "plus_di": 25.39,
+          "minus_di": 24.18,
+          "adx": 22.87,
+          "score": 62
+        }
+      ]
     }
   ],
   "picks": [
@@ -132,6 +159,10 @@
         {
           "date": "20261110",
           "close": 7.27
+        },
+        {
+          "date": "20261111",
+          "close": 7.14
         }
       ],
       "outcomes": {
@@ -182,6 +213,10 @@
         {
           "date": "20261110",
           "close": 166.5
+        },
+        {
+          "date": "20261111",
+          "close": 163.0
         }
       ],
       "outcomes": {
@@ -228,6 +263,10 @@
         {
           "date": "20261110",
           "close": 25.7
+        },
+        {
+          "date": "20261111",
+          "close": 25.85
         }
       ],
       "outcomes": {
@@ -270,6 +309,10 @@
         {
           "date": "20261110",
           "close": 33.7
+        },
+        {
+          "date": "20261111",
+          "close": 34.05
         }
       ],
       "outcomes": {
@@ -292,6 +335,10 @@
         {
           "date": "20261110",
           "close": 504.0
+        },
+        {
+          "date": "20261111",
+          "close": 525.0
         }
       ],
       "outcomes": {}
@@ -307,6 +354,10 @@
         {
           "date": "20261110",
           "close": 69.8
+        },
+        {
+          "date": "20261111",
+          "close": 76.7
         }
       ],
       "outcomes": {}
@@ -322,6 +373,40 @@
         {
           "date": "20261110",
           "close": 69.9
+        },
+        {
+          "date": "20261111",
+          "close": 70.2
+        }
+      ],
+      "outcomes": {}
+    },
+    {
+      "date": "20261111",
+      "code": "2609",
+      "name": "陽明",
+      "entry_close": 59.1,
+      "dmi_pick_score": 100,
+      "signal": "三條件交叉合格",
+      "observations": [
+        {
+          "date": "20261111",
+          "close": 59.1
+        }
+      ],
+      "outcomes": {}
+    },
+    {
+      "date": "20261111",
+      "code": "6456",
+      "name": "GIS-KY",
+      "entry_close": 92.6,
+      "dmi_pick_score": 100,
+      "signal": "三條件交叉合格",
+      "observations": [
+        {
+          "date": "20261111",
+          "close": 92.6
         }
       ],
       "outcomes": {}
@@ -344,5 +429,5 @@
       "average_return_pct": null
     }
   },
-  "updated_at": "2026-11-10 19:08 Taipei"
+  "updated_at": "2026-11-11 19:13 Taipei"
 }

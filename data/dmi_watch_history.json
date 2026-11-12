@@ -117,6 +117,33 @@
           "score": 62
         }
       ]
+    },
+    {
+      "date": "20261112",
+      "stocks": [
+        {
+          "code": "1216",
+          "name": "統一",
+          "close": 77.9,
+          "dmi_pick_score": 100,
+          "dmi_signal_label": "三條件交叉合格",
+          "plus_di": 29.33,
+          "minus_di": 23.51,
+          "adx": 26.17,
+          "score": 76
+        },
+        {
+          "code": "2892",
+          "name": "第一金",
+          "close": 42.7,
+          "dmi_pick_score": 100,
+          "dmi_signal_label": "三條件交叉合格",
+          "plus_di": 28.15,
+          "minus_di": 23.56,
+          "adx": 32.41,
+          "score": 75
+        }
+      ]
     }
   ],
   "picks": [
@@ -163,6 +190,10 @@
         {
           "date": "20261111",
           "close": 7.14
+        },
+        {
+          "date": "20261112",
+          "close": 7.04
         }
       ],
       "outcomes": {
@@ -217,6 +248,10 @@
         {
           "date": "20261111",
           "close": 163.0
+        },
+        {
+          "date": "20261112",
+          "close": 166.0
         }
       ],
       "outcomes": {
@@ -267,6 +302,10 @@
         {
           "date": "20261111",
           "close": 25.85
+        },
+        {
+          "date": "20261112",
+          "close": 25.75
         }
       ],
       "outcomes": {
@@ -313,6 +352,10 @@
         {
           "date": "20261111",
           "close": 34.05
+        },
+        {
+          "date": "20261112",
+          "close": 33.2
         }
       ],
       "outcomes": {
@@ -339,6 +382,10 @@
         {
           "date": "20261111",
           "close": 525.0
+        },
+        {
+          "date": "20261112",
+          "close": 497.0
         }
       ],
       "outcomes": {}
@@ -358,6 +405,10 @@
         {
           "date": "20261111",
           "close": 76.7
+        },
+        {
+          "date": "20261112",
+          "close": 81.7
         }
       ],
       "outcomes": {}
@@ -377,6 +428,10 @@
         {
           "date": "20261111",
           "close": 70.2
+        },
+        {
+          "date": "20261112",
+          "close": 68.3
         }
       ],
       "outcomes": {}
@@ -392,6 +447,10 @@
         {
           "date": "20261111",
           "close": 59.1
+        },
+        {
+          "date": "20261112",
+          "close": 58.2
         }
       ],
       "outcomes": {}
@@ -407,6 +466,40 @@
         {
           "date": "20261111",
           "close": 92.6
+        },
+        {
+          "date": "20261112",
+          "close": 101.5
+        }
+      ],
+      "outcomes": {}
+    },
+    {
+      "date": "20261112",
+      "code": "1216",
+      "name": "統一",
+      "entry_close": 77.9,
+      "dmi_pick_score": 100,
+      "signal": "三條件交叉合格",
+      "observations": [
+        {
+          "date": "20261112",
+          "close": 77.9
+        }
+      ],
+      "outcomes": {}
+    },
+    {
+      "date": "20261112",
+      "code": "2892",
+      "name": "第一金",
+      "entry_close": 42.7,
+      "dmi_pick_score": 100,
+      "signal": "三條件交叉合格",
+      "observations": [
+        {
+          "date": "20261112",
+          "close": 42.7
         }
       ],
       "outcomes": {}
@@ -429,5 +522,5 @@
       "average_return_pct": null
     }
   },
-  "updated_at": "2026-11-11 19:13 Taipei"
+  "updated_at": "2026-11-12 19:15 Taipei"
 }

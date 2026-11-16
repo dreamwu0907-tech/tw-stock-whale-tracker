@@ -148,6 +148,22 @@
     {
       "date": "20261113",
       "stocks": []
+    },
+    {
+      "date": "20261116",
+      "stocks": [
+        {
+          "code": "2880",
+          "name": "華南金",
+          "close": 50.7,
+          "dmi_pick_score": 100,
+          "dmi_signal_label": "三條件交叉合格",
+          "plus_di": 21.3,
+          "minus_di": 19.12,
+          "adx": 24.69,
+          "score": 66
+        }
+      ]
     }
   ],
   "picks": [
@@ -202,6 +218,10 @@
         {
           "date": "20261113",
           "close": 6.83
+        },
+        {
+          "date": "20261116",
+          "close": 6.78
         }
       ],
       "outcomes": {
@@ -270,6 +290,10 @@
         {
           "date": "20261113",
           "close": 160.5
+        },
+        {
+          "date": "20261116",
+          "close": 166.0
         }
       ],
       "outcomes": {
@@ -334,6 +358,10 @@
         {
           "date": "20261113",
           "close": 26.0
+        },
+        {
+          "date": "20261116",
+          "close": 26.8
         }
       ],
       "outcomes": {
@@ -342,6 +370,12 @@
           "max_close_gain_pct": 0.58,
           "max_close_drawdown_pct": -1.55,
           "end_date": "20261109"
+        },
+        "10": {
+          "return_pct": 3.68,
+          "max_close_gain_pct": 3.68,
+          "max_close_drawdown_pct": -1.55,
+          "end_date": "20261116"
         }
       }
     },
@@ -388,6 +422,10 @@
         {
           "date": "20261113",
           "close": 33.25
+        },
+        {
+          "date": "20261116",
+          "close": 30.9
         }
       ],
       "outcomes": {
@@ -422,6 +460,10 @@
         {
           "date": "20261113",
           "close": 510.0
+        },
+        {
+          "date": "20261116",
+          "close": 459.0
         }
       ],
       "outcomes": {}
@@ -449,6 +491,10 @@
         {
           "date": "20261113",
           "close": 85.1
+        },
+        {
+          "date": "20261116",
+          "close": 76.6
         }
       ],
       "outcomes": {}
@@ -476,6 +522,10 @@
         {
           "date": "20261113",
           "close": 71.1
+        },
+        {
+          "date": "20261116",
+          "close": 67.0
         }
       ],
       "outcomes": {}
@@ -499,6 +549,10 @@
         {
           "date": "20261113",
           "close": 60.3
+        },
+        {
+          "date": "20261116",
+          "close": 60.0
         }
       ],
       "outcomes": {}
@@ -522,6 +576,10 @@
         {
           "date": "20261113",
           "close": 101.5
+        },
+        {
+          "date": "20261116",
+          "close": 91.4
         }
       ],
       "outcomes": {}
@@ -541,6 +599,10 @@
         {
           "date": "20261113",
           "close": 78.3
+        },
+        {
+          "date": "20261116",
+          "close": 78.5
         }
       ],
       "outcomes": {}
@@ -560,6 +622,25 @@
         {
           "date": "20261113",
           "close": 43.45
+        },
+        {
+          "date": "20261116",
+          "close": 42.35
+        }
+      ],
+      "outcomes": {}
+    },
+    {
+      "date": "20261116",
+      "code": "2880",
+      "name": "華南金",
+      "entry_close": 50.7,
+      "dmi_pick_score": 100,
+      "signal": "三條件交叉合格",
+      "observations": [
+        {
+          "date": "20261116",
+          "close": 50.7
         }
       ],
       "outcomes": {}
@@ -572,9 +653,9 @@
       "average_return_pct": -2.5
     },
     "10": {
-      "sample_size": 2,
-      "win_rate_pct": 0.0,
-      "average_return_pct": -9.34
+      "sample_size": 3,
+      "win_rate_pct": 33.3,
+      "average_return_pct": -5.0
     },
     "15": {
       "sample_size": 0,
@@ -582,5 +663,5 @@
       "average_return_pct": null
     }
   },
-  "updated_at": "2026-11-14 21:47 Taipei"
+  "updated_at": "2026-11-16 19:31 Taipei"
 }

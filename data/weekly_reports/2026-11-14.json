@@ -1,0 +1,500 @@
+{
+  "status": "published",
+  "generated_at": "2026-11-16T15:00:00+08:00",
+  "period_start": "2026-11-07T18:28:19.722497+08:00",
+  "period_end": "2026-11-14T18:28:19.722497+08:00",
+  "article_count": 178,
+  "model": "ChatGPT manual analysis with source verification",
+  "source_method": "Google News RSS raw feed; manually analyzed in ChatGPT; key market and company claims cross-checked against official filings, TWSE data and news sources; no paid API",
+  "report": {
+    "executive_summary": "本週（11/7–11/14）最重要的變化是：台股在前一週急跌後強力反彈，但市場內部資金並未全面回流。11/9–11/13 加權指數由 39,701.64 點升至 43,675.12 點，週漲約 10.01%；外資現貨仍週賣超約 967.9 億元，投信週買超約 1,119 億元。AI 基礎建設需求仍有實際投資支撐，日月光投控宣布高雄兩座新廠投資新台幣 1,000 億元，是本週最具體的台灣供應鏈資本支出訊號。短線操作應把「指數反彈」與「個股趨勢反轉」分開判斷，候選股仍須再用日線、DMI、營收與估值確認。",
+    "global_macro": "美國科技與半導體市場本週受到 AI 投資回報、資料中心融資與 NVIDIA 管理層變動等因素影響，波動升高。NVIDIA 共同創辦人黃仁勳於 11/11 辭去董事長以外的 CEO 職務、由 CFO Colette Kress 暫代，已由公司公告及 SEC 8-K 文件確認；因此 RSS 中相關標題並非可直接判定為假消息，但部分標題以未核實的「董事會危機」或人事傳聞擴大敘事，應以公司公告為準。台股 11/9–13 加權指數週漲約 10.01%、櫃買指數週漲約 12.63%，反映急跌後快速修復；但外資週現貨賣超約 NT$96.79B，投信週買超約 NT$111.90B，資金方向分歧。另央行總裁表示 11 月以來外資資金匯出約 US$10B，並指出其中包含獲利了結與股利匯出，不宜全數解讀為看空台灣。",
+    "industries": [
+      {
+        "name": "先進封裝／AI 半導體製造",
+        "direction": "偏多觀察｜本週最明確的實體投資訊號",
+        "trend_stage": "產能擴充與資本支出落地",
+        "short_term": "日月光投控宣布在高雄路竹投資新台幣 1,000 億元興建兩座新廠，以因應 AI 運算硬體需求；報導指出兩座廠房預估每年可創造約 800 億元營收及 5,000 個工作機會。這是產業投資訊號，不等於所有台灣設備、材料廠都已取得訂單。",
+        "long_term": "AI 晶片複雜度與封裝需求提升，先進封裝、測試與相關材料設備仍是值得追蹤的結構性方向；需觀察資本支出轉化為產能、稼動率與獲利的時間差。",
+        "evidence": [
+          {
+            "claim": "日月光於 2026/11/13 對外說明高雄路竹兩座新廠投資計畫，投資金額約 NT$100B。",
+            "url": "https://www.taipeitimes.com/News/biz/archives/2026/11/14/2003867696"
+          }
+        ],
+        "risks": [
+          "投資金額不代表供應商已取得採購合約。",
+          "新廠建置、設備進駐、客戶認證與量產爬坡存在時間差。",
+          "需留意資本支出折舊、產能利用率及客戶需求變化。"
+        ],
+        "taiwan_candidates": [
+          {
+            "ticker": "3711",
+            "company": "日月光投控",
+            "role": "封裝測試與高雄擴產主體",
+            "why_benefit": "本週具體公告高雄新廠投資，是直接的產業擴產主體；仍需追蹤投資進度、產能開出與獲利貢獻。",
+            "evidence_urls": [
+              "https://www.taipeitimes.com/News/biz/archives/2026/11/14/2003867696"
+            ],
+            "risks": [
+              "資本支出與營收貢獻存在時間差。",
+              "新產能利用率及先進封裝產品組合仍待後續財報驗證。"
+            ],
+            "price_reflection": "本週報未取得完整個股日線、估值與技術指標，無法判定利多是否已反映。"
+          }
+        ]
+      },
+      {
+        "name": "AI 資料中心／電源／液冷／電網",
+        "direction": "中長期偏多｜短線等籌碼與訂單驗證",
+        "trend_stage": "需求擴張，但資金對建置成本與回收期更敏感",
+        "short_term": "RSS 涵蓋 AI 資料中心投資、融資風險與電力基礎建設議題；市場開始同時評估電力供應、資本成本及投資回收。台灣候選包含電源、散熱液冷與電網設備，但本週資料未提供這些公司新增訂單的充分直接證據。",
+        "long_term": "AI 機櫃功率密度提高，將持續帶動高效率電源、冷板、CDU、manifold、配電、變壓器與電網升級需求；受惠程度需以公司營收結構、客戶認證及量產狀態確認。",
+        "evidence": [
+          {
+            "claim": "本週 RSS 收錄 AI 資料中心融資與建置風險討論，顯示資本支出回收期及融資條件已成為市場關注點；RSS 摘要僅作為線索。",
+            "url": "https://news.google.com/"
+          }
+        ],
+        "risks": [
+          "資料中心投資計畫可能受電力取得、融資成本及建置延遲影響。",
+          "產業需求成長不等於個別台廠取得訂單或已量產。",
+          "市場反彈期間若股價先行大漲，需避免只憑題材追價。"
+        ],
+        "taiwan_candidates": [
+          {
+            "ticker": "2308",
+            "company": "台達電",
+            "role": "資料中心電源與電力電子",
+            "why_benefit": "具電源與電力電子產品線，與資料中心供電需求方向相關；本週 RSS 未提供可量化的新增訂單證據。",
+            "evidence_urls": [],
+            "risks": [
+              "需查核資料中心相關營收比重、訂單能見度與毛利率。",
+              "估值及股價位置未於本週報中完成驗證。"
+            ],
+            "price_reflection": "未取得本週完整行情與估值資料，暫不判斷。"
+          },
+          {
+            "ticker": "3017",
+            "company": "奇鋐",
+            "role": "伺服器散熱與液冷",
+            "why_benefit": "列為 AI 散熱與液冷供應鏈觀察股；本週新聞資料不足以證明新增客戶訂單或認證。",
+            "evidence_urls": [],
+            "risks": [
+              "需驗證液冷產品營收占比、量產良率、客戶拉貨與毛利率。"
+            ],
+            "price_reflection": "未取得完整行情與籌碼資料，暫不判斷。 "
+          },
+          {
+            "ticker": "3324",
+            "company": "雙鴻",
+            "role": "伺服器散熱與液冷",
+            "why_benefit": "列為液冷供應鏈觀察股，重點在量產出貨、產品組合及獲利轉換。",
+            "evidence_urls": [],
+            "risks": [
+              "訂單能見度、客戶集中、良率及毛利率風險。"
+            ],
+            "price_reflection": "未取得完整行情與籌碼資料，暫不判斷。 "
+          },
+          {
+            "ticker": "1519",
+            "company": "華城",
+            "role": "變壓器與電力設備",
+            "why_benefit": "電網擴建的長期觀察方向；本週 RSS 未提供公司層級新增得標或訂單資料。",
+            "evidence_urls": [],
+            "risks": [
+              "海外專案交期、原物料成本與驗收認列風險。"
+            ],
+            "price_reflection": "未取得完整行情與籌碼資料，暫不判斷。"
+          }
+        ]
+      },
+      {
+        "name": "光通訊／CPO／高速互連",
+        "direction": "中長期偏多｜個股證據需分級",
+        "trend_stage": "高速互連技術升級與供應鏈投資階段",
+        "short_term": "本週 RSS 持續出現 AI 資料中心光學互連、雷射與高速傳輸相關報導；但產業層級趨勢不能直接推導台廠已取得 CPO 量產訂單。應逐一確認 FAU、光收發模組、磊晶與雷射產品的客戶驗證、規格及出貨。",
+        "long_term": "AI 叢集頻寬與功耗需求可能提高光互連重要性，CPO 仍須追蹤量產時程、技術路線與成本效益。",
+        "evidence": [
+          {
+            "claim": "Marvell 與 Lumentum 的交易相關報導顯示市場持續重視 AI 資料中心光學互連，但此為產業趨勢證據，非台灣供應商訂單證明。",
+            "url": "https://www.marvell.com/company/newsroom.html"
+          }
+        ],
+        "risks": [
+          "CPO 商業化時程與技術路線仍有不確定性。",
+          "客戶驗證、良率與量產規模可能不如市場預期。",
+          "題材股波動可能大於基本面變化。"
+        ],
+        "taiwan_candidates": [
+          {
+            "ticker": "3363",
+            "company": "上詮",
+            "role": "光纖陣列／FAU 與 CPO 相關供應鏈",
+            "why_benefit": "列為 FAU／CPO 供應鏈觀察股；仍需查核客戶驗證、產能與實際出貨。",
+            "evidence_urls": [
+              "https://www.marvell.com/company/newsroom.html"
+            ],
+            "risks": [
+              "產業交易消息不等於公司已取得訂單。",
+              "量產時程、良率與營收認列需查證。"
+            ],
+            "price_reflection": "未取得完整行情、籌碼與估值資料，暫不判斷。"
+          },
+          {
+            "ticker": "4979",
+            "company": "華星光",
+            "role": "光通訊元件",
+            "why_benefit": "列為光通訊供應鏈延伸觀察，需確認高速產品出貨、客戶結構與毛利率。",
+            "evidence_urls": [],
+            "risks": [
+              "公司層級產品及客戶證據不足。"
+            ],
+            "price_reflection": "未取得完整行情與估值資料，暫不判斷。"
+          },
+          {
+            "ticker": "3081",
+            "company": "聯亞",
+            "role": "光通訊磊晶／光電元件",
+            "why_benefit": "列為光通訊供應鏈觀察，需追蹤高速產品營收與客戶拉貨。",
+            "evidence_urls": [],
+            "risks": [
+              "產品組合、客戶集中與資本支出風險。"
+            ],
+            "price_reflection": "未取得完整行情與估值資料，暫不判斷。"
+          }
+        ]
+      },
+      {
+        "name": "電子級玻纖／高階 PCB 材料",
+        "direction": "中性偏多觀察｜個股需看營收與資金延續性",
+        "trend_stage": "規格升級題材持續，需從市場熱度轉向公司獲利驗證",
+        "short_term": "本週市場資訊中，富喬 1815 在 11/13 的市場彙整榜單列為外資買超焦點之一；這是單日資金線索，不能據此認定週線資金已持續流入或高階玻纖產品已放量。",
+        "long_term": "AI 伺服器與高速交換器對高頻高速 PCB 材料的要求提升，低介電材料具長期研究價值；應查核高階產品比重、稼動率與毛利率。",
+        "evidence": [
+          {
+            "claim": "11/13 市場彙整資料將富喬列入當日外資買超焦點；需以 TWSE 原始資料及後續交易日確認延續性。",
+            "url": "https://blave.org/studio/twstock/en/dashboard"
+          }
+        ],
+        "risks": [
+          "單日買超不是連續資金進場訊號。",
+          "產業成長不代表所有玻纖廠均有相同高階產品比重。",
+          "股價可能先反映題材，需以營收及技術位置交叉確認。"
+        ],
+        "taiwan_candidates": [
+          {
+            "ticker": "1815",
+            "company": "富喬",
+            "role": "電子級玻纖材料",
+            "why_benefit": "玻纖材料與高速 PCB 題材連結較直接；11/13 市場彙整榜單出現單日買超線索，後續需確認法人買超延續、產品組合與毛利率。",
+            "evidence_urls": [
+              "https://blave.org/studio/twstock/en/dashboard"
+            ],
+            "risks": [
+              "高階產品出貨占比、客戶認證與獲利轉換尚需財報驗證。",
+              "單日資金流入不可視為趨勢確認。"
+            ],
+            "price_reflection": "本週報未取得完整日線及估值資料，無法判斷利多反映程度。"
+          }
+        ]
+      }
+    ],
+    "capital_flow": [
+      {
+        "market_or_asset": "台灣上市市場／加權指數",
+        "observation": "11/6 收盤 39,701.64 點，11/13 收盤 43,675.12 點，11/9–13 週漲約 10.01%；這是前週急跌後的強力反彈，不代表所有個股已形成中期多頭趨勢。",
+        "confidence": "高；TWSE 每日行情資料",
+        "evidence_urls": [
+          "https://www.twse.com.tw/en/exchangeReport/FMTQIK?response=html"
+        ]
+      },
+      {
+        "market_or_asset": "台灣外資現貨",
+        "observation": "11/9–13 週合計約賣超 NT$96.79B；但 11/13 單日轉為買超約 NT$28.84B，代表週線仍偏賣、週末出現回補，應觀察是否延續。",
+        "confidence": "中高；週度統計彙整並可回查 TWSE 每日法人資料",
+        "evidence_urls": [
+          "https://www.twse.com.tw/en/fund/BFI82U?dayDate=&monthDate=&response=html&type=day&weekDate=",
+          "https://taipeiticker.com/en/2026-11-14.html"
+        ]
+      },
+      {
+        "market_or_asset": "台灣投信",
+        "observation": "11/9–13 週合計買超約 NT$111.90B，週內連續買超；需進一步拆解買超集中於大型權值股或中小型產業股，不能直接推論整體市場風險偏好已全面回升。",
+        "confidence": "中高；週度統計彙整，建議搭配 TWSE 每日資料核對",
+        "evidence_urls": [
+          "https://taipeiticker.com/en/2026-11-14.html",
+          "https://www.twse.com.tw/en/fund/BFI82U?dayDate=&monthDate=&response=html&type=day&weekDate="
+        ]
+      },
+      {
+        "market_or_asset": "台灣櫃買市場",
+        "observation": "11/9–13 櫃買指數週漲約 12.63%；中小型股反彈幅度較大，但高波動環境下仍需以個股成交量、DMI 與回檔承接確認。",
+        "confidence": "中；週度市場資料",
+        "evidence_urls": [
+          "https://taipeiticker.com/en/2026-11-14.html"
+        ]
+      },
+      {
+        "market_or_asset": "外資跨境資金匯出",
+        "observation": "央行總裁於 11/10 表示 11 月以來外資匯出約 US$10B，並說明其中包含獲利了結與股利匯出等正常資金調度；匯出金額不可直接等同外資股票賣超。",
+        "confidence": "高；中央社報導央行總裁說明",
+        "evidence_urls": [
+          "https://focustaiwan.tw/business/202611100013"
+        ]
+      },
+      {
+        "market_or_asset": "美國 AI／半導體風險偏好",
+        "observation": "本週 AI 資料中心建置成本、融資與投資回收期成為市場焦點；股價波動是風險偏好訊號，並非基金淨流量統計。",
+        "confidence": "中；RSS 新聞線索，需配合市場行情與基金流量資料",
+        "evidence_urls": [
+          "https://news.google.com/"
+        ]
+      }
+    ],
+    "watchlist": [
+      {
+        "ticker": "3711",
+        "company": "日月光投控",
+        "industry": "先進封裝／測試",
+        "category": "A_trend_beneficiary",
+        "role": "高雄新廠擴產主體",
+        "thesis": "本週確認高雄路竹兩座新廠、投資約 NT$1,000 億元，是本週最具體的台灣 AI 半導體供應鏈擴產事件。",
+        "score_rationale": "有公司層級投資事件，但缺少本週完整個股行情、財報與估值交叉資料，不填入推測分數。",
+        "price_reflection": "未知；未取得完整行情與估值資料。",
+        "risk": "資本支出轉化為營收與獲利的時間差、產能利用率與折舊負擔。",
+        "evidence_urls": [
+          "https://www.taipeitimes.com/News/biz/archives/2026/11/14/2003867696"
+        ]
+      },
+      {
+        "ticker": "1815",
+        "company": "富喬",
+        "industry": "電子級玻纖／高階 PCB 材料",
+        "category": "B_early_potential",
+        "role": "電子級玻纖材料",
+        "thesis": "與高速 PCB 材料需求方向相關，且 11/13 市場彙整資料出現單日外資買超焦點；需確認後續法人延續性及高階產品獲利。",
+        "score_rationale": "只有產業連結與單日資金線索，尚不足以評定起漲分數。",
+        "price_reflection": "未知；未取得完整日線與估值資料。",
+        "risk": "高階產品營收占比、客戶認證、毛利率與單日資金流入未延續風險。",
+        "evidence_urls": [
+          "https://blave.org/studio/twstock/en/dashboard"
+        ]
+      },
+      {
+        "ticker": "3363",
+        "company": "上詮",
+        "industry": "光通訊／CPO",
+        "category": "A_trend_beneficiary",
+        "role": "FAU／CPO 供應鏈",
+        "thesis": "光學互連是 AI 基礎建設的長期研究方向；公司層級客戶驗證及量產證據仍須補齊。",
+        "score_rationale": "產業趨勢不等於公司訂單，資料不足不評分。",
+        "price_reflection": "未知；未取得完整行情與估值資料。",
+        "risk": "客戶認證、量產時程與營收認列。",
+        "evidence_urls": [
+          "https://www.marvell.com/company/newsroom.html"
+        ]
+      },
+      {
+        "ticker": "2308",
+        "company": "台達電",
+        "industry": "AI 電源／資料中心",
+        "category": "A_trend_beneficiary",
+        "role": "電源與電力電子",
+        "thesis": "AI 資料中心電力密度提高帶來長期需求，但本週沒有足夠公司層級新訂單資料。",
+        "score_rationale": "結構性需求觀察，不代表短線起漲；行情與估值資料不足。",
+        "price_reflection": "未知；未取得完整行情與估值資料。",
+        "risk": "資料中心營收占比、毛利率、估值與市場風險偏好。",
+        "evidence_urls": []
+      },
+      {
+        "ticker": "3017",
+        "company": "奇鋐",
+        "industry": "AI 散熱／液冷",
+        "category": "A_trend_beneficiary",
+        "role": "AI 伺服器散熱",
+        "thesis": "AI 機櫃散熱需求的長期觀察股，需以月營收、產品組合及客戶拉貨驗證。",
+        "score_rationale": "本週 RSS 缺少公司新增訂單與完整行情籌碼，總分不評。",
+        "price_reflection": "未知；未取得完整行情與估值資料。",
+        "risk": "客戶拉貨、液冷產品占比、良率與毛利率。",
+        "evidence_urls": []
+      },
+      {
+        "ticker": "3324",
+        "company": "雙鴻",
+        "industry": "AI 散熱／液冷",
+        "category": "A_trend_beneficiary",
+        "role": "伺服器散熱與液冷",
+        "thesis": "液冷供應鏈觀察股，重點檢查量產出貨、產品組合與獲利轉換。",
+        "score_rationale": "缺少本週個股訂單、技術籌碼與估值資料，不填入推測分數。",
+        "price_reflection": "未知；未取得完整行情與估值資料。",
+        "risk": "量產良率、客戶集中、訂單能見度與估值。",
+        "evidence_urls": []
+      },
+      {
+        "ticker": "1519",
+        "company": "華城",
+        "industry": "電網／電力設備",
+        "category": "A_trend_beneficiary",
+        "role": "變壓器與電力設備",
+        "thesis": "資料中心與電網擴建的長期觀察方向；本週未取得公司新增標案或訂單的直接證據。",
+        "score_rationale": "只有產業方向，缺少公司層級訂單與技術資料，不評分。",
+        "price_reflection": "未知；未取得完整行情與估值資料。",
+        "risk": "專案交期、原物料成本、驗收認列及股價提前反映。",
+        "evidence_urls": []
+      },
+      {
+        "ticker": "4979",
+        "company": "華星光",
+        "industry": "光通訊／CPO",
+        "category": "B_early_potential",
+        "role": "光通訊元件",
+        "thesis": "光通訊供應鏈延伸觀察，需確認高速產品出貨、客戶結構與毛利率。",
+        "score_rationale": "缺少公司層級訂單、財報及技術資料，不評分。",
+        "price_reflection": "未知；未取得完整行情與估值資料。",
+        "risk": "產品與客戶結構、量產進度及估值風險。",
+        "evidence_urls": []
+      },
+      {
+        "ticker": "3081",
+        "company": "聯亞",
+        "industry": "光通訊／CPO",
+        "category": "B_early_potential",
+        "role": "光通訊磊晶／光電元件",
+        "thesis": "光通訊需求升級的供應鏈觀察標的，需追蹤高速產品營收與客戶拉貨。",
+        "score_rationale": "缺少個股訂單、財報、技術與估值資料，不評分。",
+        "price_reflection": "未知；未取得完整行情與估值資料。",
+        "risk": "產品組合、客戶集中與資本支出風險。",
+        "evidence_urls": []
+      },
+      {
+        "ticker": "2330",
+        "company": "台積電",
+        "industry": "先進製程／AI 半導體",
+        "category": "A_trend_beneficiary",
+        "role": "AI 晶片製造核心供應鏈",
+        "thesis": "AI 晶片需求與先進製程投資的核心觀察標的；本週 RSS 與產業消息不能取代公司法說及資本支出資料。",
+        "score_rationale": "產業核心地位明確，但本週報未完成個股行情、估值與籌碼量化，不評分。",
+        "price_reflection": "未知；未取得完整行情與估值資料。",
+        "risk": "AI 資本支出集中度、地緣政治、先進製程成本與估值。",
+        "evidence_urls": []
+      }
+    ],
+    "priority_research": [
+      {
+        "ticker": "3711",
+        "company": "日月光投控",
+        "reason": "本週最直接的公司層級擴產事件；優先追蹤新廠建置時程、設備採購、先進封裝產能、客戶認證與折舊後獲利。"
+      },
+      {
+        "ticker": "1815",
+        "company": "富喬",
+        "reason": "電子級玻纖材料方向具產業連結，且 11/13 有單日法人買超線索；需確認後續 3–5 個交易日資金是否延續，並核對高階產品營收占比與毛利率。"
+      },
+      {
+        "ticker": "3363",
+        "company": "上詮",
+        "reason": "光通訊／FAU／CPO 方向具長期研究價值；下一步應查證客戶驗證、量產出貨及營收認列，未有直接證據前不列為已取得訂單。"
+      }
+    ],
+    "avoid_chasing": [
+      {
+        "ticker": "光通訊／CPO 題材股",
+        "company": "產業類別提醒",
+        "reason": "本週 RSS 的產業交易與技術升級消息不能證明個別台廠已取得量產訂單；未完成個股漲幅、成交量與估值檢查前，不宜因題材直接追價。",
+        "evidence_urls": [
+          "https://www.marvell.com/company/newsroom.html"
+        ]
+      }
+    ],
+    "next_week_events": [
+      {
+        "event": "NVIDIA 財報與管理層後續說明",
+        "when": "2026/11/17（依公司公告時程）",
+        "why_it_matters": "確認資料中心需求、下一季展望及管理層變動對客戶與供應鏈的影響；避免以市場傳聞替代公司指引。",
+        "source_url": "https://investor.nvidia.com/"
+      },
+      {
+        "event": "台灣上市櫃公司 10 月營收後續檢查",
+        "when": "2026/11/16 起持續追蹤",
+        "why_it_matters": "檢查高階玻纖、光通訊、AI 電源與液冷供應鏈的月營收年增、月增及毛利率變化。",
+        "source_url": "https://mops.twse.com.tw/"
+      },
+      {
+        "event": "台股法人資金是否延續回補",
+        "when": "2026/11/16–20",
+        "why_it_matters": "重點觀察外資是否延續 11/13 單日買超、投信買超是否擴散至中小型股，以及櫃買指數反彈後的量價結構。",
+        "source_url": "https://www.twse.com.tw/en/fund/BFI82U?dayDate=&monthDate=&response=html&type=day&weekDate="
+      }
+    ],
+    "methodology_notes": [
+      "資料期間：2026-11-07 至 2026-11-14；Google News RSS 共 178 則。市場週度行情比較採 2026-11-06 至 2026-11-13 的交易日資料。",
+      "本週報使用 RSS 標題與摘要作為新聞線索，並以公司公告、SEC 文件、TWSE 行情／法人資料及可信新聞來源交叉查核；RSS 並非完整新聞全文。",
+      "NVIDIA CEO 變動已由 NVIDIA 公司公告及 SEC 8-K 確認：黃仁勳於 11/11 辭任，CFO Colette Kress 暫代 CEO。不可把相關事件當作未證實謠言，也不可將未經證實的後續人事傳聞寫成事實。",
+      "台股 11/9–13 加權指數週漲約 10.01%，櫃買指數週漲約 12.63%；外資週賣超約 NT$96.79B，投信週買超約 NT$111.90B。數字為週度彙整，必要時應回查 TWSE 每日資料。",
+      "央行總裁提及 11 月外資匯出約 US$10B，並指出包含獲利與股利匯出；跨境匯款與股票市場法人買賣超是不同統計，不可混為一談。",
+      "台股候選名單是產業研究清單，不等於買進訊號。沒有完整日線、法人、營收、財報與估值交叉資料時，不填入 100 分制分數，也不推估股價已反映程度。",
+      "日月光投控高雄新廠是本週具體公司投資事件；對設備、材料與其他供應鏈公司的受惠程度仍需以採購、認證或公司公告驗證。",
+      "RSS 文章可能重複、標題聳動或摘要資訊不足；本週不以新聞數量作為產業熱度或資金流入的唯一依據。",
+      "本報告不提供目標價、進場價或保證報酬；應搭配網站第一頁 DMI、法人籌碼、近 5 日漲幅、MA5/10/20 與 ATR(14) 進行個股驗證。"
+    ]
+  },
+  "source_articles": [
+    {
+      "title": "ASE investing NT$100 billion in Kaohsiung",
+      "url": "https://www.taipeitimes.com/News/biz/archives/2026/11/14/2003867696",
+      "published": "Sat, 14 Nov 2026",
+      "summary": "日月光投控宣布高雄路竹兩座新廠投資約 NT$100B。",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "NVIDIA Announces CEO Transition",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+      "published": "Thu, 12 Nov 2026",
+      "summary": "NVIDIA 公告黃仁勳辭任 CEO、Colette Kress 暫代 CEO。",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "NVIDIA Form 8-K: Departure of CEO",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm",
+      "published": "Wed, 11 Nov 2026",
+      "summary": "SEC 申報文件確認董事會接受黃仁勳辭任並任命暫代 CEO。",
+      "query": "global AI data center semiconductor investment"
+    },
+    {
+      "title": "Taiwan sees US$10 billion in capital outflows in November",
+      "url": "https://focustaiwan.tw/business/202611100013",
+      "published": "Tue, 10 Nov 2026",
+      "summary": "央行總裁說明 11 月外資匯出約 US$10B，包含獲利與股利匯出等正常資金調度。",
+      "query": "global financial markets central banks interest rates capital flows"
+    },
+    {
+      "title": "SOX −3.43%, NVDA −12.75% on Week; TAIEX +3,973 Pts Week",
+      "url": "https://taipeiticker.com/en/2026-11-14.html",
+      "published": "Sat, 14 Nov 2026",
+      "summary": "整理 11/9–13 台股指數與三大法人週度流向。",
+      "query": "global financial markets central banks interest rates capital flows"
+    },
+    {
+      "title": "TWSE 2026/11 Highlights of Daily Trading",
+      "url": "https://www.twse.com.tw/en/exchangeReport/FMTQIK?response=html",
+      "published": "2026-11-13",
+      "summary": "證交所每日行情：11/6 加權指數 39,701.64，11/13 為 43,675.12。",
+      "query": "global financial markets central banks interest rates capital flows"
+    },
+    {
+      "title": "TWSE Trading Value of Foreign & Other Investors",
+      "url": "https://www.twse.com.tw/en/fund/BFI82U?dayDate=&monthDate=&response=html&type=day&weekDate=",
+      "published": "2026-11-13",
+      "summary": "證交所 11/13 外資與投信單日交易資料。",
+      "query": "global financial markets central banks interest rates capital flows"
+    },
+    {
+      "title": "Institutional flows · Taiwan market dashboard",
+      "url": "https://blave.org/studio/twstock/en/dashboard",
+      "published": "2026-11-13",
+      "summary": "市場彙整資料列出 11/13 富喬為單日外資買超焦點之一；屬第三方彙整，應回查交易所原始資料。",
+      "query": "Taiwan listed companies AI server power cooling optical communication supply chain"
+    }
+  ]
+}

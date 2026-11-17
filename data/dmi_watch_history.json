@@ -164,6 +164,10 @@
           "score": 66
         }
       ]
+    },
+    {
+      "date": "20261117",
+      "stocks": []
     }
   ],
   "picks": [
@@ -222,6 +226,10 @@
         {
           "date": "20261116",
           "close": 6.78
+        },
+        {
+          "date": "20261117",
+          "close": 6.71
         }
       ],
       "outcomes": {
@@ -294,6 +302,10 @@
         {
           "date": "20261116",
           "close": 166.0
+        },
+        {
+          "date": "20261117",
+          "close": 165.0
         }
       ],
       "outcomes": {
@@ -362,6 +374,10 @@
         {
           "date": "20261116",
           "close": 26.8
+        },
+        {
+          "date": "20261117",
+          "close": 26.3
         }
       ],
       "outcomes": {
@@ -426,6 +442,10 @@
         {
           "date": "20261116",
           "close": 30.9
+        },
+        {
+          "date": "20261117",
+          "close": 30.95
         }
       ],
       "outcomes": {
@@ -434,6 +454,12 @@
           "max_close_gain_pct": -1.57,
           "max_close_drawdown_pct": -10.14,
           "end_date": "20261110"
+        },
+        "10": {
+          "return_pct": -11.57,
+          "max_close_gain_pct": -1.57,
+          "max_close_drawdown_pct": -11.71,
+          "end_date": "20261117"
         }
       }
     },
@@ -464,9 +490,20 @@
         {
           "date": "20261116",
           "close": 459.0
+        },
+        {
+          "date": "20261117",
+          "close": 413.5
         }
       ],
-      "outcomes": {}
+      "outcomes": {
+        "5": {
+          "return_pct": -17.96,
+          "max_close_gain_pct": 4.17,
+          "max_close_drawdown_pct": -17.96,
+          "end_date": "20261117"
+        }
+      }
     },
     {
       "date": "20261110",
@@ -495,9 +532,20 @@
         {
           "date": "20261116",
           "close": 76.6
+        },
+        {
+          "date": "20261117",
+          "close": 69.0
         }
       ],
-      "outcomes": {}
+      "outcomes": {
+        "5": {
+          "return_pct": -1.15,
+          "max_close_gain_pct": 21.92,
+          "max_close_drawdown_pct": -1.15,
+          "end_date": "20261117"
+        }
+      }
     },
     {
       "date": "20261110",
@@ -526,9 +574,20 @@
         {
           "date": "20261116",
           "close": 67.0
+        },
+        {
+          "date": "20261117",
+          "close": 67.5
         }
       ],
-      "outcomes": {}
+      "outcomes": {
+        "5": {
+          "return_pct": -3.43,
+          "max_close_gain_pct": 1.72,
+          "max_close_drawdown_pct": -4.15,
+          "end_date": "20261117"
+        }
+      }
     },
     {
       "date": "20261111",
@@ -553,6 +612,10 @@
         {
           "date": "20261116",
           "close": 60.0
+        },
+        {
+          "date": "20261117",
+          "close": 59.9
         }
       ],
       "outcomes": {}
@@ -580,6 +643,10 @@
         {
           "date": "20261116",
           "close": 91.4
+        },
+        {
+          "date": "20261117",
+          "close": 84.5
         }
       ],
       "outcomes": {}
@@ -603,6 +670,10 @@
         {
           "date": "20261116",
           "close": 78.5
+        },
+        {
+          "date": "20261117",
+          "close": 79.2
         }
       ],
       "outcomes": {}
@@ -626,6 +697,10 @@
         {
           "date": "20261116",
           "close": 42.35
+        },
+        {
+          "date": "20261117",
+          "close": 42.1
         }
       ],
       "outcomes": {}
@@ -641,6 +716,10 @@
         {
           "date": "20261116",
           "close": 50.7
+        },
+        {
+          "date": "20261117",
+          "close": 50.8
         }
       ],
       "outcomes": {}
@@ -648,14 +727,14 @@
   ],
   "stats": {
     "5": {
-      "sample_size": 4,
+      "sample_size": 7,
       "win_rate_pct": 0.0,
-      "average_return_pct": -2.5
+      "average_return_pct": -4.65
     },
     "10": {
-      "sample_size": 3,
-      "win_rate_pct": 33.3,
-      "average_return_pct": -5.0
+      "sample_size": 4,
+      "win_rate_pct": 25.0,
+      "average_return_pct": -6.64
     },
     "15": {
       "sample_size": 0,
@@ -663,5 +742,5 @@
       "average_return_pct": null
     }
   },
-  "updated_at": "2026-11-16 19:31 Taipei"
+  "updated_at": "2026-11-17 19:11 Taipei"
 }

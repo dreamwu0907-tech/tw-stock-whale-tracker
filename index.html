@@ -23,7 +23,7 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 </head>
 <body><main>
 <div class="top"><div><h1>台股大戶動向觀察站</h1><p class="sub">免費公開資料｜收盤後更新｜以籌碼與量價訊號篩選觀察股</p></div><span class="pill">MVP v0.1 · 上市股票</span></div>
-<nav class="page-nav"><button class="page-tab active" data-page="marketPage">第一頁｜市場排行</button><button class="page-tab" data-page="watchPage">第二頁｜自選個股評估</button><button class="page-tab" data-page="globalPage">第三頁｜全球產業週報</button></nav><section id="marketPage" class="page-view"><div class="cards">
+<nav class="page-nav"><button class="page-tab active" data-page="marketPage">第一頁｜市場排行</button><button class="page-tab" data-page="watchPage">第二頁｜自選個股評估</button><button class="page-tab" data-page="globalPage">第三頁｜全球產業週報</button><button class="page-tab" data-page="whalePage">第四頁｜大戶與資金流向</button></nav><section id="marketPage" class="page-view"><div class="cards">
  <div class="card"><div class="k">行情資料日期</div><div class="v" id="date">—</div></div>
  <div class="card"><div class="k">策略合格股票</div><div class="v" id="count">—</div></div>
  <div class="card"><div class="k">優先觀察（80分以上）</div><div class="v" id="bull">—</div></div>
@@ -67,7 +67,28 @@ table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{padding:11px 
 <section class="panel"><h2>下週重要事件與觀察</h2><div id="weeklyEvents" class="watchlist-grid"></div></section>
 <section class="panel"><h2>資料來源與研究限制</h2><div id="weeklyMethod" class="watch-detail">資料來源、涵蓋範圍與限制將隨週報顯示。</div></section>
 <section class="panel"><h2>歷史週報</h2><p class="note">每週報告與原始蒐集資料均依日期歸檔。</p><div id="weeklyArchive" class="watchlist-grid"><div class="muted">讀取歷史週報清單…</div></div></section>
-</section></section><p class="note" style="margin-top:18px">這是個人研究工具。資料來源或 API 可能調整，請勿單憑單一訊號交易。</p>
+</section><section id="whalePage" class="page-view" hidden>
+<section class="panel"><h2>大戶持股與法人資金流向</h2>
+<p class="note">全市場早期布局掃描。集保資料依每週公告基準日更新；法人資金採每日資料彙總。大額持股比例是持股級距分布，不代表能辨識特定主力或實際買賣人。</p>
+<div class="cards">
+ <div class="card"><div class="k">集保資料日期</div><div class="v" id="whaleDate">—</div></div>
+ <div class="card"><div class="k">符合早期觀察條件</div><div class="v" id="whaleCount">—</div></div>
+ <div class="card"><div class="k">大額持股增加</div><div class="v" id="whaleIncrease">—</div></div>
+ <div class="card"><div class="k">資料更新時間</div><div class="v" style="font-size:16px" id="whaleUpdated">—</div></div>
+</div>
+<div id="whaleStatus" class="status">正在讀取大戶與資金流向資料…</div>
+</section>
+<section class="panel"><h2>早期布局候選排行</h2>
+<p class="note">初版 100 分制：大額持股變化 30、法人資金 20、DMI 20、股價位置 20、成交量 10。這是觀察排序，不是已驗證的勝率模型；缺少資料不補零，資料不完整者不列為高優先。</p>
+<div class="filters"><input id="whaleSearch" placeholder="輸入代號或名稱搜尋"><select id="whaleSort"><option value="score">依總分排序</option><option value="holder_change">大額持股增加排序</option><option value="institutional_score">法人資金排序</option><option value="foreign_5d">外資近5日排序</option><option value="trust_5d">投信近5日排序</option></select></div>
+<div class="scroll"><table><thead><tr><th>排名</th><th>股票</th><th>總分</th><th>400張以上變化</th><th>1000張以上變化</th><th>外資5日</th><th>投信5日</th><th>DMI</th><th>5日漲幅</th><th>成交量比</th><th>判讀</th></tr></thead><tbody id="whaleRows"><tr><td colspan="11" class="muted">等待資料</td></tr></tbody></table></div>
+<div class="mobile-list" id="whaleMobile"></div>
+</section>
+<section class="panel"><h2>指標說明與資料限制</h2>
+<ul><li>400張以上：合計持股級距 400,001 股以上；1000張以上：1,000,001 股以上。</li><li>大額持股變化以最新一期與前一期的「占集保庫存比例」差值計算，單位為百分點。</li><li>法人資金採現有排行資料中的外資、投信近5日累計；尚未納入20日歷史與連續買超天數。</li><li>DMI採現有日線模型訊號；股價位置檢查近5日與近20日漲幅，成交量比沿用現有資料。</li><li>TDCC每週資料僅保存最新下載快照，網站從本次部署起逐週累積；不會假稱已有多年歷史。</li><li>本頁先以TWSE/TPEx現有行情清單與TDCC可對應股票交集呈現；無法取得或未對應資料的股票會排除並顯示涵蓋數。</li></ul>
+<p class="note">官方資料：<a href="https://www.tdcc.com.tw/portal/zh/smWeb/qryStock" target="_blank" rel="noreferrer">集保戶股權分散表</a>｜<a href="https://www.twse.com.tw/" target="_blank" rel="noreferrer">證交所</a>｜<a href="https://www.tpex.org.tw/" target="_blank" rel="noreferrer">櫃買中心</a></p>
+</section>
+</section><p class="note" style="margin-top:18px">這是個人研究工具。資料來源或 API 可能調整，請勿單憑單一訊號交易。</p>
 </main>
 <script>
 const DATA_URL = './data/ranking.json';
@@ -314,6 +335,29 @@ async function renderStockAnalysis(){
   el.innerHTML='<div class="watch-item"><strong>目前無法完成歷史行情查詢</strong><p class="watch-detail">'+safeText(e.message)+'</p><p class="watch-detail">系統會保留已知最新收盤行情，但不會在缺少歷史 K 線時虛構 DMI、均線或買賣區間。可稍後重試，或查看證交所／櫃買中心公開行情。</p><div class="stock-footer"><a href="https://www.twse.com.tw/" target="_blank" rel="noreferrer">證交所</a><a href="https://www.tpex.org.tw/" target="_blank" rel="noreferrer">櫃買中心</a>'+(code?'<a href="https://tw.stock.yahoo.com/quote/'+code+'.TW/technical-analysis" target="_blank" rel="noreferrer">Yahoo 技術分析頁</a>':"")+'</div></div>';
  }finally{button.disabled=false;button.textContent="開始分析";}
 }
+async function loadWhaleFlow(){
+ const status=document.getElementById("whaleStatus");
+ try{
+  const r=await fetch("./data/whale_flow.json?t="+Date.now(),{cache:"no-store"});
+  if(!r.ok)throw new Error("尚未產生 whale_flow.json（HTTP "+r.status+"）");
+  const d=await r.json(),rows=d.rows||[];
+  document.getElementById("whaleDate").textContent=d.tdcc_date||"—";
+  document.getElementById("whaleCount").textContent=rows.filter(x=>x.early_candidate).length;
+  document.getElementById("whaleIncrease").textContent=rows.filter(x=>Number(x.holder_change)>0).length;
+  document.getElementById("whaleUpdated").textContent=d.updated_at||"—";
+  status.textContent="已載入 "+rows.length+" 檔可比對資料；行情資料日："+(d.market_date||"—")+"；集保資料日："+(d.tdcc_date||"—")+"；集保對應率："+(d.coverage_pct??"—")+"%。"+(d.note||"");
+  const renderRows=()=>{
+   const q=document.getElementById("whaleSearch").value.trim().toLowerCase(),sort=document.getElementById("whaleSort").value;
+   const list=rows.filter(x=>(String(x.code).toLowerCase().includes(q)||String(x.name||"").toLowerCase().includes(q)));
+   list.sort((a,b)=>(Number(b[sort]??-Infinity)-Number(a[sort]??-Infinity)));
+   document.getElementById("whaleRows").innerHTML=list.slice(0,250).map((x,i)=>'<tr><td>'+(i+1)+'</td><td><strong>'+safeText(x.code)+'</strong><br>'+safeText(x.name||"")+'</td><td><span class="score">'+(x.score??"—")+'</span></td><td class="'+(x.holder_change>0?"pos":x.holder_change<0?"neg":"")+'">'+fmt(x.holder_change,3)+' pp</td><td>'+fmt(x.holder_1000_change,3)+' pp</td><td>'+fmt(x.foreign_5d,0)+'</td><td>'+fmt(x.trust_5d,0)+'</td><td>'+safeText(x.dmi_label||"—")+'</td><td>'+fmt(x.return_5d_pct)+'%</td><td>'+fmt(x.volume_ratio)+'</td><td>'+safeText(x.signal||"—")+'</td></tr>').join("")||'<tr><td colspan="11" class="muted">沒有符合資料</td></tr>';
+   document.getElementById("whaleMobile").innerHTML=list.slice(0,100).map((x,i)=>'<article class="stock-card"><div class="stock-card-head"><strong>#'+(i+1)+' '+safeText(x.code+" "+(x.name||""))+'</strong><span class="score">'+(x.score??"—")+'</span></div><div class="stock-metrics"><div class="stock-metric"><span>400張以上變化</span><strong>'+fmt(x.holder_change,3)+' pp</strong></div><div class="stock-metric"><span>1000張以上變化</span><strong>'+fmt(x.holder_1000_change,3)+' pp</strong></div><div class="stock-metric"><span>外資／投信5日</span><strong>'+fmt(x.foreign_5d,0)+'／'+fmt(x.trust_5d,0)+'</strong></div><div class="stock-metric"><span>近5日漲幅</span><strong>'+fmt(x.return_5d_pct)+'%</strong></div></div><div class="stock-signal">'+safeText(x.signal||"—")+'</div></article>').join("");
+  };
+  document.getElementById("whaleSearch").addEventListener("input",renderRows);
+  document.getElementById("whaleSort").addEventListener("change",renderRows);
+  renderRows();
+ }catch(e){status.textContent="目前尚未有可用資料："+e.message+"。請先執行 GitHub Actions 的 Update stock data。";}
+}
 function renderDmiTracking(d, tracking){
  const picks=(d.dmi_daily_picks||[]);
  const picksEl=document.getElementById('dmiPicks');
@@ -355,7 +399,7 @@ document.getElementById('date').textContent=d.data_date||'—';
 document.getElementById('refresh').addEventListener('click',load);
 document.getElementById('analyzeStock').addEventListener('click',renderStockAnalysis);
 document.getElementById('analysisInput').addEventListener('keydown',e=>{if(e.key==='Enter')renderStockAnalysis();});
-document.querySelectorAll('.page-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.page-tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page-view').forEach(x=>x.hidden=x.id!==b.dataset.page);if(b.dataset.page==="globalPage"){makeWeeklyPanelsCollapsible();loadWeeklyReport();loadWeeklyArchive();}}));
+document.querySelectorAll('.page-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.page-tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page-view').forEach(x=>x.hidden=x.id!==b.dataset.page);if(b.dataset.page==="globalPage"){makeWeeklyPanelsCollapsible();loadWeeklyReport();loadWeeklyArchive();}if(b.dataset.page==="whalePage"){loadWhaleFlow();}}));
 document.getElementById('search').addEventListener('input',()=>{mobileLimit=50;render()});
 document.getElementById('filter').addEventListener('change',()=>{mobileLimit=50;render()});
 document.getElementById('sort').addEventListener('change',()=>{mobileLimit=50;render()});

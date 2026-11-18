@@ -9,6 +9,7 @@ import csv, io, json, re, time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.request import Request, urlopen
+from urllib.error import URLError
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -18,14 +19,23 @@ TZ = timezone(timedelta(hours=8))
 
 def fetch_csv():
     req = Request(SOURCE_URL, headers={"User-Agent": "Mozilla/5.0 (compatible; TWStockWhaleTracker/1.0)"})
-    with urlopen(req, timeout=45) as response:
-        raw = response.read()
-    for encoding in ("utf-8-sig", "cp950", "big5"):
+    last_error = None
+    for attempt in range(1, 4):
         try:
-            return list(csv.DictReader(io.StringIO(raw.decode(encoding))))
-        except UnicodeDecodeError:
-            continue
-    raise RuntimeError("無法解碼 TDCC CSV")
+            with urlopen(req, timeout=45) as response:
+                raw = response.read()
+            for encoding in ("utf-8-sig", "cp950", "big5"):
+                try:
+                    return list(csv.DictReader(io.StringIO(raw.decode(encoding))))
+                except UnicodeDecodeError:
+                    continue
+            raise RuntimeError("無法解碼 TDCC CSV")
+        except (URLError, TimeoutError, OSError) as exc:
+            last_error = exc
+            print(f"TDCC download attempt {attempt}/3 failed: {exc}")
+            if attempt < 3:
+                time.sleep(attempt * 5)
+    raise RuntimeError(f"TDCC 暫時無法連線，已重試 3 次：{last_error}")
 
 def keyval(row, candidates):
     for key, value in row.items():
@@ -146,7 +156,14 @@ def score_row(market, now, old):
 
 def main():
     DATA.mkdir(exist_ok=True); HISTORY.mkdir(exist_ok=True)
-    raw = fetch_csv()
+    try:
+        raw = fetch_csv()
+    except RuntimeError as exc:
+        existing = DATA / "whale_flow.json"
+        if existing.exists():
+            print(f"WARNING: {exc}. Keep the previous whale_flow.json; skip this week's TDCC refresh.")
+            return
+        raise
     tdcc_date, stocks = normalize(raw)
     if not tdcc_date: raise RuntimeError("TDCC CSV 缺少資料日期，停止發布")
     previous, previous_date = load_previous(tdcc_date)

@@ -168,6 +168,10 @@
     {
       "date": "20261117",
       "stocks": []
+    },
+    {
+      "date": "20261118",
+      "stocks": []
     }
   ],
   "picks": [
@@ -230,6 +234,10 @@
         {
           "date": "20261117",
           "close": 6.71
+        },
+        {
+          "date": "20261118",
+          "close": 6.57
         }
       ],
       "outcomes": {
@@ -306,6 +314,10 @@
         {
           "date": "20261117",
           "close": 165.0
+        },
+        {
+          "date": "20261118",
+          "close": 166.0
         }
       ],
       "outcomes": {
@@ -378,6 +390,10 @@
         {
           "date": "20261117",
           "close": 26.3
+        },
+        {
+          "date": "20261118",
+          "close": 25.75
         }
       ],
       "outcomes": {
@@ -446,6 +462,10 @@
         {
           "date": "20261117",
           "close": 30.95
+        },
+        {
+          "date": "20261118",
+          "close": 30.75
         }
       ],
       "outcomes": {
@@ -494,6 +514,10 @@
         {
           "date": "20261117",
           "close": 413.5
+        },
+        {
+          "date": "20261118",
+          "close": 405.0
         }
       ],
       "outcomes": {
@@ -536,6 +560,10 @@
         {
           "date": "20261117",
           "close": 69.0
+        },
+        {
+          "date": "20261118",
+          "close": 65.2
         }
       ],
       "outcomes": {
@@ -578,6 +606,10 @@
         {
           "date": "20261117",
           "close": 67.5
+        },
+        {
+          "date": "20261118",
+          "close": 64.4
         }
       ],
       "outcomes": {
@@ -616,9 +648,20 @@
         {
           "date": "20261117",
           "close": 59.9
+        },
+        {
+          "date": "20261118",
+          "close": 60.5
         }
       ],
-      "outcomes": {}
+      "outcomes": {
+        "5": {
+          "return_pct": 2.37,
+          "max_close_gain_pct": 2.37,
+          "max_close_drawdown_pct": -1.52,
+          "end_date": "20261118"
+        }
+      }
     },
     {
       "date": "20261111",
@@ -647,9 +690,20 @@
         {
           "date": "20261117",
           "close": 84.5
+        },
+        {
+          "date": "20261118",
+          "close": 83.5
         }
       ],
-      "outcomes": {}
+      "outcomes": {
+        "5": {
+          "return_pct": -9.83,
+          "max_close_gain_pct": 9.61,
+          "max_close_drawdown_pct": -9.83,
+          "end_date": "20261118"
+        }
+      }
     },
     {
       "date": "20261112",
@@ -674,6 +728,10 @@
         {
           "date": "20261117",
           "close": 79.2
+        },
+        {
+          "date": "20261118",
+          "close": 78.8
         }
       ],
       "outcomes": {}
@@ -701,6 +759,10 @@
         {
           "date": "20261117",
           "close": 42.1
+        },
+        {
+          "date": "20261118",
+          "close": 42.1
         }
       ],
       "outcomes": {}
@@ -720,6 +782,10 @@
         {
           "date": "20261117",
           "close": 50.8
+        },
+        {
+          "date": "20261118",
+          "close": 48.2
         }
       ],
       "outcomes": {}
@@ -727,9 +793,9 @@
   ],
   "stats": {
     "5": {
-      "sample_size": 7,
-      "win_rate_pct": 0.0,
-      "average_return_pct": -4.65
+      "sample_size": 9,
+      "win_rate_pct": 11.1,
+      "average_return_pct": -4.44
     },
     "10": {
       "sample_size": 4,
@@ -742,5 +808,5 @@
       "average_return_pct": null
     }
   },
-  "updated_at": "2026-11-17 19:11 Taipei"
+  "updated_at": "2026-11-18 19:41 Taipei"
 }

@@ -1,0 +1,15 @@
+{
+  "version": "whale-flow-v1.0",
+  "tdcc_date": null,
+  "previous_tdcc_date": null,
+  "market_date": null,
+  "updated_at": "2026-11-18 19:55 Taipei",
+  "source": "https://smart.tdcc.com.tw/opendata/getOD.ashx?id=1-5",
+  "total_tdcc_stocks": 0,
+  "market_universe": "等待 TDCC 資料來源恢復",
+  "matched_stocks": 0,
+  "coverage_pct": 0,
+  "status": "source_unavailable",
+  "note": "TDCC 首次資料下載失敗，尚無歷史快照；本頁暫無大戶持股資料，待來源恢復後自動建立。",
+  "rows": []
+}

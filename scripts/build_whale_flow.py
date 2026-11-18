@@ -44,13 +44,23 @@ def tier_lower(label):
     m = re.search(r"(\d+)", s)
     return int(m.group(1)) if m else None
 
+def normalize_date(value):
+    parts = re.split(r"[/\\-]", str(value or "").strip())
+    if len(parts) != 3: return str(value or "").strip()
+    try:
+        y, m, d = (int(x) for x in parts)
+        if y < 1911: y += 1911
+        return f"{y:04d}-{m:02d}-{d:02d}"
+    except ValueError:
+        return str(value or "").strip()
+
 def normalize(rows):
     stocks = {}
     dates = []
     for row in rows:
         code = str(keyval(row, ["證券代號", "股票代號"]) or "").strip()
         if not re.fullmatch(r"\d{4,6}", code): continue
-        date = str(keyval(row, ["資料日期", "日期"]) or "").strip()
+        date = normalize_date(keyval(row, ["資料日期", "日期"]))
         if date: dates.append(date)
         tier = str(keyval(row, ["持股分級", "持股級距"]) or "").strip()
         pct = number(keyval(row, ["占集保庫存數比例", "佔集保庫存數比例", "比例"]))
@@ -142,7 +152,7 @@ def main():
     previous, previous_date = load_previous(tdcc_date)
     snapshot = {"tdcc_date": tdcc_date, "source": SOURCE_URL, "downloaded_at":
                 datetime.now(TZ).strftime("%Y-%m-%d %H:%M Taipei"), "stocks": stocks}
-    snapshot_path = HISTORY / (re.sub(r"[^0-9]", "", tdcc_date) + ".json")
+    snapshot_path = HISTORY / (tdcc_date.replace("-", "") + ".json")
     snapshot_path.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8")
     ranking = json.loads((DATA / "ranking.json").read_text(encoding="utf-8"))
     market_rows = ranking.get("rows", [])

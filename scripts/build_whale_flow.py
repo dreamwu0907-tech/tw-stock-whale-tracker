@@ -163,7 +163,20 @@ def main():
         if existing.exists():
             print(f"WARNING: {exc}. Keep the previous whale_flow.json; skip this week's TDCC refresh.")
             return
-        raise
+        fallback = {
+            "version": "whale-flow-v1.0", "tdcc_date": None,
+            "previous_tdcc_date": None, "market_date": None,
+            "updated_at": datetime.now(TZ).strftime("%Y-%m-%d %H:%M Taipei"),
+            "source": SOURCE_URL, "total_tdcc_stocks": 0,
+            "market_universe": "等待 TDCC 資料來源恢復",
+            "matched_stocks": 0, "coverage_pct": 0,
+            "status": "source_unavailable",
+            "note": "TDCC 首次資料下載失敗，尚無歷史快照；本頁暫無大戶持股資料，待來源恢復後自動建立。",
+            "rows": []
+        }
+        existing.write_text(json.dumps(fallback, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"WARNING: {exc}. Created an empty, explicitly unavailable dataset so the rest of the workflow can continue.")
+        return
     tdcc_date, stocks = normalize(raw)
     if not tdcc_date: raise RuntimeError("TDCC CSV 缺少資料日期，停止發布")
     previous, previous_date = load_previous(tdcc_date)

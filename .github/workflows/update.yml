@@ -5,6 +5,7 @@ on:
     paths:
       - "scripts/update_data.py"
       - "scripts/build_weekly_technical.py"
+      - "scripts/build_whale_flow.py"
       - ".github/workflows/update.yml"
   schedule:
     # 10:00 UTC = 18:00 Taiwan time, Monday-Friday; TWSE daily closing data is produced again around 17:30.

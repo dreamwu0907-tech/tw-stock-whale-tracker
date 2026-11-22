@@ -1,0 +1,541 @@
+{
+  "status": "published",
+  "generated_at": "2026-11-22T19:42:21+08:00",
+  "period_start": "2026-11-14T18:37:05.765677+08:00",
+  "period_end": "2026-11-21T18:37:05.765677+08:00",
+  "article_count": 180,
+  "model": "ChatGPT manual analysis with source verification",
+  "source_method": "Google News RSS 週資料（180 則、10 個搜尋主題）＋公司官方公告／IR、臺灣證券交易所、中央社及可信財經媒體交叉查核；RSS 僅作新聞線索，不視為完整新聞全文。",
+  "collection_errors": [],
+  "report": {
+    "executive_summary": "本週（11/14–11/21）最重要的訊號是「產業基本面仍有擴張證據，但金融市場正在大幅去風險」。AI 半導體需求並未因一週股價下跌而消失：Applied Materials FY2026 Q4 營收創高、日月光 11/13 宣布路竹先進封裝一期啟用與二期動土、台灣 10 月 ICT 出口年增 72.9%；Micron 新加坡 HBM 封裝廠也已進入設備進駐階段。不過，美國 11/16 新增 AI 晶片出口許可限制，可能影響東南亞資料中心供應鏈與部分專案時程。台股 11/16–11/20 加權指數下跌 17.50%，三大法人週合計賣超約 3,303 億元，代表現階段不宜把產業成長直接等同股價已止跌。優先追蹤日月光投控（3711）、弘塑（3131）、大銀微系統（4576）、上銀（2049）及中興電（1513）；本週未取得完整個股 DMI 與籌碼序列，因此不提供總分、進場價或勝率。",
+    "global_macro": "市場環境由 AI 投資成長敘事，轉向同時檢驗出口管制、資料中心投資回收、電力供應與估值。Reuters 報導，美國 11/16 對輸往新加坡、馬來西亞、泰國、印尼及巴西的特定先進 AI 晶片新增許可要求，並要求部分服務中國企業的海外資料中心申請許可；這是區域性政策風險，不代表全球 AI 晶片需求全面消失。Reuters 另報導 NVIDIA 暫停向中國出貨美國核准的資料中心晶片，顯示政策與市場准入仍可能快速變動。台灣市場風險更為直接：加權指數 11/20 收 36,033.29 點、單日跌 6.23%，本週較 11/13 收盤下跌 7,641.83 點、跌幅約 17.50%。因此，本週研究排序以「公司營運證據」優先，技術面確認延後至市場波動收斂後。",
+    "industries": [
+      {
+        "name": "AI 半導體／先進封裝／HBM",
+        "direction": "中長期偏多；短線高波動、需防政策與估值再定價",
+        "trend_stage": "產能擴張與資本支出落地，從建廠轉向設備進駐及量產爬坡",
+        "short_term": "Applied Materials 於 11/12 公布 FY2026 Q4 營收 104.1 億美元、年增 53%，非 GAAP EPS 4.16 美元，並表示 2026 年曆年 Semiconductor Systems 業務預期成長超過 40%。日月光 11/13 公告路竹廠一期啟用、二期動土，兩期滿載後整體投資規模預估約新台幣 1,000 億元、年營收約 800 億元。台灣 10 月 ICT 出口年增 72.9%、電子零組件出口年增 61.4%、機械出口年增 35.5%。另一方面，Micron 新加坡 HBM 封裝廠 11/19 完成首台製程設備進駐，初期產出目標仍為 2027 年初；這也代表先進封裝產能競爭不只發生在台灣。",
+        "long_term": "AI 加速器、HBM、Chiplet 與高頻寬互連持續提高封裝、測試、濕製程、檢測與高階材料需求。受惠的台廠必須真正轉化為設備出貨、客戶驗證、產能利用率與獲利；產業資本支出公告不能直接推論任一供應商已取得訂單。",
+        "evidence": [
+          {
+            "claim": "日月光 2026/11/13 官方公告：路竹廠一期啟用、二期動土，兩期滿載後整體投資規模約 NT$1,000 億、年營收約 NT$800 億。這是封測主體的擴產事實，不是供應商訂單證明。",
+            "url": "https://ase.aseglobal.com/ch/press-room/lujhu-plant-phase-1-inauguration-and-phase-2-groundbreaking/"
+          },
+          {
+            "claim": "Applied Materials 2026/11/12 官方公布 FY2026 Q4 營收 US$10.41B、年增 53%，非 GAAP EPS US$4.16；公司預期 2026 曆年 Semiconductor Systems 業務成長超過 40%。",
+            "url": "https://ir.appliedmaterials.com/news-releases/news-release-details/applied-materials-announces-fourth-quarter-and-fiscal-year-2026"
+          },
+          {
+            "claim": "台灣財政部 10 月出口資料：ICT 產品 US$47.60B、年增 72.9%；電子零組件 US$32.68B、年增 61.4%；機械出口年增 35.5%。出口分類不等於全數來自 AI。",
+            "url": "https://focustaiwan.tw/business/202611090020"
+          },
+          {
+            "claim": "Micron 新加坡 HBM 先進封裝廠於 2026/11/19 首台製程設備進駐，初期產出目標為 2027 年初；US$7B 投資計畫可追溯至 Micron 官方 2025/1/8 公告。",
+            "url": "https://technode.global/2026/11/20/us-micron-moves-first-tool-into-singapore-hbm-advanced-packaging-plant-output-due-early-2027/"
+          }
+        ],
+        "risks": [
+          "美國晶片出口許可限制可能延長東南亞資料中心專案採購、客戶審查及部署時程。",
+          "全球 HBM 與先進封裝擴產可能增加供應，需觀察實際稼動率、良率、客戶需求及資本支出回收。",
+          "產業需求強不代表所有台灣設備、材料、PCB 或封測供應商都取得訂單；需以公司公告、法說及營收結構逐一確認。",
+          "本週台股整體風險偏高，急跌後的反彈不等於個股技術底部成立。"
+        ],
+        "taiwan_candidates": [
+          {
+            "ticker": "3711",
+            "company": "日月光投控",
+            "category": "A_trend_beneficiary",
+            "role": "先進封裝與測試擴產主體",
+            "why_benefit": "公司本身就是先進封裝與測試服務供應商，路竹一期啟用、二期動土是直接的產能擴張證據；2026 年 10 月營收約 886.15 億元、年增 47.12%，2026 Q3 EPS 6.13 元。",
+            "catalyst": "路竹二期建置、先進封裝產能開出、AI/HPC 客戶需求與 2027 年資本支出執行。",
+            "evidence_urls": [
+              "https://ase.aseglobal.com/ch/press-room/lujhu-plant-phase-1-inauguration-and-phase-2-groundbreaking/",
+              "https://tw.stock.yahoo.com/quote/3711/revenue",
+              "https://stockwon.tw/stock/3711"
+            ],
+            "risks": [
+              "擴產投入與折舊先於產能滿載，需追蹤毛利率與資本支出回收。",
+              "公司規模大，成長已受市場關注，不能只因回檔就視為低估。"
+            ],
+            "price_reflection": "2026/11/20 收盤約 NT$457，單日 -9.33%；本益比約 26.23 倍，較 52 週高點 NT$765 低約 40%。價格已有明顯修正，但仍非低估證明；需等待大盤、法人流向與個股技術面穩定。",
+            "score": {
+              "industry_trend": 24,
+              "fundamentals": 23,
+              "capital_flow": null,
+              "technical_position": null,
+              "valuation_risk": 6,
+              "total_score": null
+            },
+            "score_rationale": "產業與公司基本面分數依官方擴產公告、10 月營收及 Q3 EPS 作質化評估；個股法人流向與 DMI 未完成查核，故不計算總分。"
+          },
+          {
+            "ticker": "3131",
+            "company": "弘塑",
+            "category": "A_trend_beneficiary",
+            "role": "半導體濕製程與先進封裝設備",
+            "why_benefit": "2026 年 10 月營收約 7.53 億元、年增 30.54%，前 10 月累計年增 27.44%；2026 Q3 EPS 13.36 元，前三季 EPS 40.65 元。媒體引述法人資料稱訂單能見度延伸至 2028 年，屬第三方產業資訊，仍應以公司法說及正式公告持續核對。",
+            "catalyst": "晶圓代工、封測與記憶體客戶擴產；CoWoS、SoIC、CoPoS、PLP 等封裝製程設備需求與新產能交機。",
+            "evidence_urls": [
+              "https://www.ttv.com.tw/finance/view/112026120835DE7D1DD14E3F4F66BAB359E683310117D990/587",
+              "https://money.udn.com/money/amp/story/11074/9805344",
+              "https://tw.stock.yahoo.com/quote/3131.TW/revenue"
+            ],
+            "risks": [
+              "訂單能見度與實際營收認列存在時間差，交機、驗收及客戶擴產進度會影響季營收。",
+              "股價波動極大，估值資料來源間有差異，本週不採單一本益比判斷便宜與否。"
+            ],
+            "price_reflection": "2026/11/20 收盤約 NT$1,315，單日 -9.93%；9 月月收曾約 NT$2,525、10 月約 NT$1,880，至 11/20 已大幅回檔。回檔不等於估值便宜或技術止跌，需重新確認量價與 DMI。",
+            "score": {
+              "industry_trend": 24,
+              "fundamentals": 23,
+              "capital_flow": null,
+              "technical_position": null,
+              "valuation_risk": 4,
+              "total_score": null
+            },
+            "score_rationale": "營收、EPS 與設備需求能見度支持較高產業/基本面評價；股價波動及估值資料不一致使估值風險分數保守。法人與 DMI 未取得，總分留白。"
+          }
+        ]
+      },
+      {
+        "name": "機器人／自動化／精密傳動",
+        "direction": "中長期偏多；由募資與展示轉向工廠導入、重複採購及量產驗證",
+        "trend_stage": "早期商業化擴張，工業應用先於大規模人形機器人普及",
+        "short_term": "德國 Agile Robots 宣布完成 US$500M Series F，SoftBank 領投、NVIDIA 與 Hitachi 等參與，公司稱全球已部署超過 20,000 套機器人解決方案。台灣方面，上銀董事長 11/10 表示取得美系人形機器人大廠小批量訂單，滾珠螺桿與線性滑軌交期已延伸至 2027 年年中；大銀微系統 11/11 表示 CPO 高階檢測定位平台訂單排至 2027 年中。這些公司層級訊號比單純人形機器人展演更有參考價值。",
+        "long_term": "工業機器人、精密定位、線性傳動、伺服與視覺整合的需求可望受惠於缺工與製造自動化；人形機器人長期潛力大，但單機成本、可靠度、安全認證、維護成本與投資回收仍決定量產速度。",
+        "evidence": [
+          {
+            "claim": "Agile Robots 官方 2026/11/12 公告完成 US$500M Series F，估值 US$8.5B，資金用於美國擴張及增加德國產能；公司稱全球部署超過 20,000 套機器人解決方案。",
+            "url": "https://www.agile-robots.com/en/news/detail/physical-ai-leader-agile-robots-raises-500-million-series-f-funding/"
+          },
+          {
+            "claim": "中央社 2026/11/10 報導上銀董事長表示取得美系人形機器人大廠小批量訂單，產品交期及訂單能見度延伸至 2027 年年中。",
+            "url": "https://www.cna.com.tw/news/afe/202611100191.aspx"
+          },
+          {
+            "claim": "中央社 2026/11/11 報導大銀微系統 CPO 高階檢測定位平台訂單排至 2027 年中，並說明矽光子檢測定位平台自 2026 年 8 月起量產訂單增加。",
+            "url": "https://www.cna.com.tw/news/afe/202611110282.aspx"
+          },
+          {
+            "claim": "中央社 2026/11/5 報導上銀 10 月營收創單月新高，年增 35.66%；大銀微系統 10 月營收年增 68.75%。",
+            "url": "https://www.cna.com.tw/news/afe/202611050177.aspx"
+          }
+        ],
+        "risks": [
+          "Agile Robots 的募資及部署數據是全球需求訊號，不能推論台灣廠商已成為其供應商。",
+          "上銀所稱人形機器人訂單為小批量，仍需觀察後續量產規模與營收占比。",
+          "大銀微系統的 CPO 檢測平台不等同已取得所有 CPO 客戶或長期大量訂單。",
+          "本週股價大幅修正，短線可能仍受市場流動性與融資調整影響。"
+        ],
+        "taiwan_candidates": [
+          {
+            "ticker": "4576",
+            "company": "大銀微系統",
+            "category": "B_early_potential",
+            "role": "精密定位平台、矽光子與 CPO 檢測設備",
+            "why_benefit": "2026 年 10 月營收約 4.10 億元、年增 68.75%，前 10 月累計年增 59.29%；Q3 EPS 2.14 元創高，Q3 毛利率約 42.4%。公司表示 CPO 高階檢測定位平台訂單排至 2027 年中，且矽光子檢測定位平台量產訂單增加。",
+            "catalyst": "CPO/矽光子檢測設備客戶量產、平台出貨增加及先進封裝精密定位需求。",
+            "evidence_urls": [
+              "https://www.cna.com.tw/news/afe/202611110282.aspx",
+              "https://tw.stock.yahoo.com/quote/4576.TW/announcement",
+              "https://stockwon.tw/stock/4576"
+            ],
+            "risks": [
+              "CPO/矽光子相關營收占比、客戶名稱及單一平台出貨量仍未完整公開。",
+              "高成長可能伴隨客戶拉貨波動；需追蹤毛利率、應收帳款與存貨。",
+              "股價急跌期間技術面尚未確認止跌。"
+            ],
+            "price_reflection": "2026/11/20 收盤約 NT$147.5，單日 -8.39%；近六個交易日累計跌幅約 30.91%，本益比約 30.6 倍，較 52 週高點約低 49%。股價已大幅修正，但估值仍反映成長期待，不能直接視為便宜。",
+            "score": {
+              "industry_trend": 22,
+              "fundamentals": 23,
+              "capital_flow": null,
+              "technical_position": null,
+              "valuation_risk": 4,
+              "total_score": null
+            },
+            "score_rationale": "10 月營收、Q3 EPS 與公司說明的訂單能見度提供基本面依據；個股資金流與 DMI 未取得，故不計總分。"
+          },
+          {
+            "ticker": "2049",
+            "company": "上銀",
+            "category": "B_early_potential",
+            "role": "線性滑軌、滾珠螺桿與機器人傳動元件",
+            "why_benefit": "2026 年 10 月營收約 28.50 億元、年增 35.66%，前 10 月累計年增 25.11%；Q3 EPS 約 3.48 元。公司董事長表示取得美系人形機器人大廠小批量訂單，滾珠螺桿及線性滑軌交期延伸至 2027 年年中。",
+            "catalyst": "人形機器人小批量訂單後續放量、半導體設備與晶圓機器人需求，以及 2027 年交期延續。",
+            "evidence_urls": [
+              "https://www.cna.com.tw/news/afe/202611100191.aspx",
+              "https://www.cna.com.tw/news/afe/202611050177.aspx",
+              "https://stockwon.tw/stock/2049"
+            ],
+            "risks": [
+              "人形機器人目前仍是小批量訂單，尚未證明成為主要營收來源。",
+              "工具機與半導體設備需求具景氣循環，交期長不代表訂單不會取消或延後。",
+              "估值仍需與 2027 年獲利預估及毛利率改善一起檢視。"
+            ],
+            "price_reflection": "2026/11/20 收盤約 NT$242.5，單日 -7.09%；近 5 日約 -22.77%、近 20 日約 -21.27%，本益比約 27.49 倍，較 52 週高點約低 43%。修正幅度大，但仍需等待成交量與 DMI 止跌確認。",
+            "score": {
+              "industry_trend": 21,
+              "fundamentals": 21,
+              "capital_flow": null,
+              "technical_position": null,
+              "valuation_risk": 5,
+              "total_score": null
+            },
+            "score_rationale": "營收成長、Q3 獲利及小批量人形機器人訂單支持觀察；資金與技術分數缺資料，總分不計。"
+          }
+        ]
+      },
+      {
+        "name": "電網／重電／能源基礎設施",
+        "direction": "中長期偏多；專案執行與獲利認列比題材更重要",
+        "trend_stage": "電網擴建與 AI 用電需求推升長期投資，供應商進入交貨與驗收階段",
+        "short_term": "世界經濟論壇 11/18 指出，全球電力需求預計至 2030 年每年增加約 1,100 TWh，且超過 2,500GW 的再生能源、儲能與大型用電專案卡在電網併網排隊。這支持電網設備、變壓器、開關設備、儲能及電力電子的長期需求，但不代表本週已出現台灣公司新增訂單。台灣中興電 10 月營收年增 18.21%，前 10 月累計年增 6.27%，2026 前三季 EPS 7.11 元；11/20 收盤 127.5 元，接近其 52 週低點。",
+        "long_term": "AI 資料中心、半導體擴廠、電氣化與能源安全提高電網韌性、變壓器、配電、儲能與電力電子的重要性。中長期需求方向明確，但專案交期、原物料、驗收與應收帳款會決定獲利品質。",
+        "evidence": [
+          {
+            "claim": "世界經濟論壇 2026/11/18 指出全球電力需求至 2030 年預計每年增加約 1,100 TWh，且超過 2,500GW 電力專案受電網併網排隊限制。",
+            "url": "https://www.weforum.org/stories/energy-transition/future-ready-electricity-system-grid-infrastructure"
+          },
+          {
+            "claim": "中興電 2026 年 10 月營收約 NT$2.622B、年增 18.21%；前 10 月累計年增 6.27%。",
+            "url": "https://tw.stock.yahoo.com/quote/1513/revenue"
+          },
+          {
+            "claim": "中興電 2026 前三季累計 EPS 7.11 元，2026/11/20 收盤約 NT$127.5、本益比約 13.86 倍；價格接近 52 週低點，僅代表位置偏低，不代表已止跌。",
+            "url": "https://stockwon.tw/stock/1513"
+          }
+        ],
+        "risks": [
+          "電網投資計畫轉為實際營收需經招標、交貨、安裝、驗收與認列，存在時間差。",
+          "銅、鋼材、電工材料及海外專案匯率可能影響毛利率。",
+          "中興電前 10 月累計營收增幅低於單月年增幅，需觀察成長是否持續。"
+        ],
+        "taiwan_candidates": [
+          {
+            "ticker": "1513",
+            "company": "中興電",
+            "category": "B_early_potential",
+            "role": "電網設備、變電與重電系統",
+            "why_benefit": "台灣電網韌性與 AI/半導體用電需求提供長期市場；公司 10 月營收年增 18.21%、前 10 月累計年增 6.27%，前三季 EPS 7.11 元，具備可查核的營運數據。",
+            "catalyst": "台電電網建置、半導體與資料中心供電設備出貨、專案驗收及在手訂單轉換。",
+            "evidence_urls": [
+              "https://tw.stock.yahoo.com/quote/1513/revenue",
+              "https://tw.stock.yahoo.com/quote/1513/announcement",
+              "https://stockwon.tw/stock/1513"
+            ],
+            "risks": [
+              "前 10 月累計營收成長僅 6.27%，仍需確認單月回升能否持續。",
+              "重電專案交期、成本與驗收可能使季度營收波動。",
+              "市場恐慌期間股價可能與基本面短期脫鉤。"
+            ],
+            "price_reflection": "2026/11/20 收盤約 NT$127.5，單日 -7.94%，接近 52 週低點 NT$127；本益比約 13.86 倍。估值相對較低，但低點附近不等於底部，需觀察外資賣壓與成交量收斂。",
+            "score": {
+              "industry_trend": 18,
+              "fundamentals": 18,
+              "capital_flow": null,
+              "technical_position": null,
+              "valuation_risk": 7,
+              "total_score": null
+            },
+            "score_rationale": "電網需求為長期結構性方向，營收與 EPS 支持基本面觀察；累計營收成長溫和，且法人/技術資料未齊，故總分不計。"
+          }
+        ]
+      },
+      {
+        "name": "國防／航太／無人系統",
+        "direction": "全球政策與採購方向偏多；台灣個股本週缺少足夠新增公司級證據",
+        "trend_stage": "多年度預算與供應鏈擴產期，關鍵在交付能力而非僅有訂單公告",
+        "short_term": "本週 RSS 涵蓋 2027 國防航太展望、歐洲國防工業轉型、韓國軍工外銷與無人系統議題。Deloitte 的 2027 展望強調產業焦點正由取得訂單轉向能否如期交付、擴大產能並維持供應鏈韌性。惟本週未找到足以確認台灣上市櫃公司新增大型訂單、認證或量產的直接證據，因此不硬列台股候選。",
+        "long_term": "無人機、反無人機、感測器、通訊、航太維修與彈藥產能仍可能受國防預算支持；但台廠的營收轉換須逐案檢查合約、交付、驗收與毛利率。",
+        "evidence": [
+          {
+            "claim": "Deloitte 2027 航太與國防展望指出，產業下一階段重點在把預算、訂單與民間資本轉化為實際交付能力，並處理產能、人才與供應鏈瓶頸。",
+            "url": "https://www.deloitte.com/global/en/insights/industry/aerospace-defense/aerospace-and-defense-industry-outlook.html"
+          }
+        ],
+        "risks": [
+          "軍工訂單週期長，訂單金額不等於當期營收或現金流。",
+          "出口許可、國際合作、最終使用者審查與技術認證可能延遲交付。",
+          "台灣個股需確認國防業務占比，不能把整體國防預算直接套用到公司 EPS。"
+        ],
+        "taiwan_candidates": []
+      },
+      {
+        "name": "醫療／生技／AI 藥物研發",
+        "direction": "技術方向偏正面，但本週台股投資證據不足",
+        "trend_stage": "AI 藥物探索合作擴張，仍處早期研發與臨床轉換階段",
+        "short_term": "本週可查證的代表事件是 Merck 與 Isomorphic Labs 於 11/19 宣布 AI 藥物設計合作，目標為腫瘤相關小分子候選藥物。這是研發合作，不是已完成臨床試驗或上市藥品；本週 RSS 未提供足以連結台灣上市櫃生技公司的具體授權金、臨床進度或商業訂單。",
+        "long_term": "AI 藥物設計、臨床資料分析、CDMO 與高階檢測可能提高研發效率，但生技價值仍由臨床結果、法規審查、授權條件與現金流決定。",
+        "evidence": [
+          {
+            "claim": "Merck 與 Isomorphic Labs 於 2026/11/19 公告 AI 藥物設計研究合作，針對腫瘤靶點探索小分子候選藥物；後續臨床與商業化仍由 Merck 負責。",
+            "url": "https://www.merck.com/news/merck-and-isomorphic-labs-enter-strategic-research-collaboration/"
+          }
+        ],
+        "risks": [
+          "早期 AI drug discovery 合作距離臨床驗證與商業收入仍有多年時間差。",
+          "本週缺少台灣公司層級可核實的直接受惠證據。"
+        ],
+        "taiwan_candidates": []
+      },
+      {
+        "name": "能源安全／關鍵原物料／供應鏈韌性",
+        "direction": "中性偏多但高度取決於地緣政治與成本傳導",
+        "trend_stage": "供應鏈重組與能源安全再配置",
+        "short_term": "本週 RSS 提及荷姆茲海峽能源供應風險、銅供應鏈戰略化及關鍵礦物加工投資。IEA 相關報導指出能源安全與供應路線分散的重要性提高；WEF 亦列出電池、工業熱儲能、電網數位化、海底電力互聯與模組化核能等技術方向。由於本週未取得可交叉驗證的原物料價格序列與台灣公司新增採購/訂單資料，不將此題材轉成個股推薦。",
+        "long_term": "關鍵礦物加工、儲能、電網互聯、核能與電力轉換設備可能因能源安全需求獲得長期資本支出；真正受惠者取決於原料成本轉嫁能力、技術成熟度與專案融資。",
+        "evidence": [
+          {
+            "claim": "WEF 2026/11/13 能源技術報告涵蓋數位電網、電池、工業熱儲能、海底電力互聯、模組化核能與離岸風電，並強調融資、標準及基礎設施是擴大部署的必要條件。",
+            "url": "https://www.weforum.org/publications/top-10-emerging-technologies-for-planetary-health-energy-edition"
+          },
+          {
+            "claim": "IEA World Energy Outlook 2026 的公開報導指出荷姆茲海峽中斷可能長期改變能源貿易路線與能源安全政策。",
+            "url": "https://www.worldoil.com/news/2026/11/19/iea-no-credible-pathway-back-to-pre-hormuz-energy-world-latest-outlook-finds"
+          }
+        ],
+        "risks": [
+          "地緣政治溢價可能快速反轉，原油、天然氣與金屬價格波動會增加成本不確定性。",
+          "技術示範與政策倡議不等於商業化專案或台廠訂單。",
+          "本週未取得可信、同口徑的原物料週價格及 ETF 資金流資料。"
+        ],
+        "taiwan_candidates": []
+      }
+    ],
+    "capital_flow": [
+      {
+        "market_or_asset": "台灣上市市場｜三大法人週買賣金額（11/16–11/20）",
+        "observation": "證交所週統計顯示外資及陸資賣超約 NT$2,186.69 億；投信賣超約 NT$84.68 億；自營商自行買賣買超約 NT$80.47 億，但避險賣超約 NT$1,112.34 億；三大法人合計賣超約 NT$3,303.24 億。這是明確的風險趨避訊號，不能用單日外資賣壓收斂解讀成資金已回流。",
+        "evidence_urls": [
+          "https://www.twse.com.tw/rwd/zh/fund/BFI82U?dayDate=20261120&monthDate=20261101&response=html&type=week&weekDate=20261116"
+        ],
+        "confidence": "高｜交易所官方週統計",
+        "data_type": "TWSE 週買賣金額",
+        "limitations": "僅涵蓋集中市場三大法人金額統計，不含上櫃全市場；自營商避險部位可能包含 ETF、期貨及其他風險管理交易，不等同單純看空現股。"
+      },
+      {
+        "market_or_asset": "台灣加權指數｜週價格與市場廣度",
+        "observation": "加權指數 11/13 收 43,675.12 點，11/20 收 36,033.29 點，一週下跌 7,641.83 點、約 17.50%；11/20 單日下跌 6.23%，上漲家數僅 16 家、下跌 1,080 家。這代表本週是全面性流動性與風險重估，不是只有少數 AI 個股回檔。",
+        "evidence_urls": [
+          "https://www.cna.com.tw/news/afe/202611200120.aspx",
+          "https://tw.news.yahoo.com/%E6%9C%AC%E9%80%B1%E5%8A%A0%E6%AC%8A%E6%8C%87%E6%95%B8%E8%B7%8C%E5%B9%8517-50-%E7%94%A2%E6%A5%AD%E5%88%A5%E6%8C%87%E6%95%B8%E5%85%A8%E8%B7%8C-%E5%B8%82%E5%80%BC%E8%92%B8%E7%99%BC24%E5%85%869-665%E5%84%84%E5%85%83-072858602.html"
+        ],
+        "confidence": "高｜CNA 收盤資料與 TWSE 統計交叉確認",
+        "data_type": "指數價格與漲跌家數",
+        "limitations": "價格統計不能單獨辨識賣出原因；需搭配融資、期貨未平倉、ETF 申贖與全球市場數據。"
+      },
+      {
+        "market_or_asset": "全球 AI 資本配置與科技股風險",
+        "observation": "RSS 出現美國機構投資人降低資料中心股票曝險、但仍關注半導體的報導；由於 13F 是季度末持倉且有申報延遲，本週未取得可直接計算的 ETF 淨流入/流出數字，因此只列為市場情緒線索，不視為即時資金流。",
+        "evidence_urls": [
+          "https://news.google.com/"
+        ],
+        "confidence": "低｜僅作情緒線索",
+        "data_type": "延遲的季度持倉報導，非即時基金流量",
+        "limitations": "缺少基金每日申贖、產業 ETF 淨流量及完整 13F 原始申報比對；不據此推論全球資金已從 AI 全面撤出。"
+      }
+    ],
+    "watchlist": [],
+    "priority_research": [
+      {
+        "ticker": "3711",
+        "company": "日月光投控",
+        "reason": "本週最完整的「產業擴產＋公司官方公告＋營收/EPS」證據鏈；下一步追蹤路竹二期時程、先進封裝稼動率與 2027 年資本支出轉化。"
+      },
+      {
+        "ticker": "3131",
+        "company": "弘塑",
+        "reason": "10 月營收年增 30.54%、Q3 EPS 13.36 元，設備需求與交機能見度具支撐；需查核訂單能見度來源、交機/驗收及股價大幅回檔後的技術結構。"
+      },
+      {
+        "ticker": "4576",
+        "company": "大銀微系統",
+        "reason": "10 月營收年增 68.75%、Q3 EPS 創高，CPO/矽光子檢測定位平台訂單排至 2027 年中；需確認相關營收占比、客戶集中與急跌後的止跌訊號。"
+      }
+    ],
+    "avoid_chasing": [],
+    "next_week_events": [
+      {
+        "event": "台股大幅修正後的首週交易與資金流向",
+        "when": "2026/11/23–11/27（觀察期間）",
+        "why_it_matters": "重點不是猜反彈點，而是觀察加權指數能否停止創低、成交值是否降溫、外資與投信是否由連續賣超轉為穩定，以及上櫃中小型股是否同步止跌。",
+        "source_url": "https://www.cna.com.tw/news/afe/202611200120.aspx"
+      },
+      {
+        "event": "日月光路竹一期啟用與二期擴建後續進度",
+        "when": "後續建置與產能爬坡；公司尚未公布下一個固定里程碑日期",
+        "why_it_matters": "追蹤二期建置、設備進駐、客戶認證、量產稼動率與營收貢獻，避免把投資額直接當成供應鏈訂單。",
+        "source_url": "https://ase.aseglobal.com/ch/press-room/lujhu-plant-phase-1-inauguration-and-phase-2-groundbreaking/"
+      },
+      {
+        "event": "Micron 新加坡 HBM 封裝廠設備安裝",
+        "when": "初期產出目標為 2027 年初；本週已完成首台設備進駐",
+        "why_it_matters": "觀察全球 HBM 封裝產能新增速度與台灣封測/設備供應鏈的相對競爭位置。",
+        "source_url": "https://technode.global/2026/11/20/us-micron-moves-first-tool-into-singapore-hbm-advanced-packaging-plant-output-due-early-2027/"
+      }
+    ],
+    "methodology_notes": [
+      "資料期間為 2026/11/14 18:37 至 2026/11/21 18:37（台灣時間）；本週 RSS 收集 180 則文章、10 個搜尋主題，無 feed collection error。RSS 只提供標題與摘要，不代表已讀取完整新聞全文。",
+      "本週交叉查核重點使用公司官方公告/IR、TWSE 週法人統計、中央社、Reuters、台灣財政部出口資料及公開市場行情。市場行情基準日為 2026/11/20 收盤。",
+      "本週 RSS 出現 NVIDIA 人事變動等聳動標題，但未取得足以支持該說法的公司正式公告，因此未將該類未確認標題列為事實。",
+      "台股本週全面性急跌，外資、投信與自營商避險部位皆呈現淨賣出；不能因個股營收成長就推定短線股價已止跌。",
+      "候選股的產業/基本面/估值風險分數是質化研究評估；個股法人資金流與 DMI/完整技術序列本次未完成，因此 technical_position、capital_flow 及 total_score 留白，不補造總分。",
+      "本週沒有足夠證據支持 6G/NTN、低軌衛星、台灣生技或台灣國防個股新增訂單/認證的結論，故不為填滿名單而硬列候選。",
+      "候選股為研究觀察，不是買進訊號；未提供進場價、目標價、停損價或勝率。"
+    ]
+  },
+  "source_articles": [
+    {
+      "title": "US to curb China's access to AI chips as Trump heads to Asia",
+      "url": "https://www.reuters.com/legal/litigation/us-issues-rule-protect-advanced-ai-chips-being-accessed-remotely-2026-11-16/",
+      "published": "2026-11-16",
+      "query": "AI export controls"
+    },
+    {
+      "title": "US AI chip curbs threaten Southeast Asia data centre boom, shares slump",
+      "url": "https://www.livemint.com/technology/us-ai-chip-curbs-threaten-southeast-asia-data-centre-boom-shares-slump-11794896626332.html",
+      "published": "2026-11-17",
+      "query": "AI data centers"
+    },
+    {
+      "title": "Nvidia stops shipping US-approved AI chips to China",
+      "url": "https://www.reuters.com/world/china/nvidia-stops-shipping-us-approved-ai-chips-china-2026-11-18/",
+      "published": "2026-11-18",
+      "query": "AI export controls"
+    },
+    {
+      "title": "Applied Materials Announces Fourth Quarter and Fiscal Year 2026 Results",
+      "url": "https://ir.appliedmaterials.com/news-releases/news-release-details/applied-materials-announces-fourth-quarter-and-fiscal-year-2026",
+      "published": "2026-11-12",
+      "query": "semiconductor capex"
+    },
+    {
+      "title": "日月光路竹廠一期啟用、二期動土　千億布局擴大先進封裝量能",
+      "url": "https://ase.aseglobal.com/ch/press-room/lujhu-plant-phase-1-inauguration-and-phase-2-groundbreaking/",
+      "published": "2026-11-13",
+      "query": "Taiwan advanced packaging"
+    },
+    {
+      "title": "Micron moves first tool into Singapore HBM packaging facility",
+      "url": "https://technode.global/2026/11/20/us-micron-moves-first-tool-into-singapore-hbm-advanced-packaging-plant-output-due-early-2027/",
+      "published": "2026-11-20",
+      "query": "HBM advanced packaging"
+    },
+    {
+      "title": "Taiwan's October exports hit high, jump nearly 60% on AI demand",
+      "url": "https://focustaiwan.tw/business/202611090020",
+      "published": "2026-11-09",
+      "query": "Taiwan exports"
+    },
+    {
+      "title": "115年11月16日至115年11月20日 三大法人買賣金額統計表",
+      "url": "https://www.twse.com.tw/rwd/zh/fund/BFI82U?dayDate=20261120&monthDate=20261101&response=html&type=week&weekDate=20261116",
+      "published": "2026-11-20",
+      "query": "Taiwan institutional flows"
+    },
+    {
+      "title": "台股開低走低　跌2393.60點",
+      "url": "https://www.cna.com.tw/news/afe/202611200120.aspx",
+      "published": "2026-11-20",
+      "query": "Taiwan market"
+    },
+    {
+      "title": "Agile Robots raises $500 million Series F at $8.5 billion valuation",
+      "url": "https://www.agile-robots.com/en/news/detail/physical-ai-leader-agile-robots-raises-500-million-series-f-funding/",
+      "published": "2026-11-12",
+      "query": "robotics"
+    },
+    {
+      "title": "上銀明年營運看佳產品交期拉長　獲人形機器人小批訂單",
+      "url": "https://www.cna.com.tw/news/afe/202611100191.aspx",
+      "published": "2026-11-10",
+      "query": "Taiwan robotics supply chain"
+    },
+    {
+      "title": "大銀微系統：CPO製程檢測定位平台訂單排到明年中",
+      "url": "https://www.cna.com.tw/news/afe/202611110282.aspx",
+      "published": "2026-11-11",
+      "query": "CPO inspection"
+    },
+    {
+      "title": "上銀10月營收寫新猷　受惠AI半導體設備應用拉貨",
+      "url": "https://www.cna.com.tw/news/afe/202611050177.aspx",
+      "published": "2026-11-05",
+      "query": "Taiwan robotics and semiconductor equipment"
+    },
+    {
+      "title": "大銀第三季EPS2.14元創新高 AI相關客戶無放緩計畫",
+      "url": "https://tw.news.yahoo.com/%E5%A4%A7%E9%8A%80%E7%AC%AC%E4%B8%89%E5%AD%A3eps2-14%E5%85%83%E5%89%B5%E6%96%B0%E9%AB%98-ai%E7%9B%B8%E9%97%9C%E5%AE%A2%E6%88%B6%E7%84%A1%E6%94%BE%E7%B7%A9%E8%A8%88%E7%95%AB-102330899.html",
+      "published": "2026-11-11",
+      "query": "Taiwan precision automation"
+    },
+    {
+      "title": "弘塑Q4營運拚續向上；明年仍擁好光景",
+      "url": "https://www.ttv.com.tw/finance/view/112026120835DE7D1DD14E3F4F66BAB359E683310117D990/587",
+      "published": "2026-11-12",
+      "query": "Taiwan semiconductor equipment"
+    },
+    {
+      "title": "中興電 2026年10月合併營收26.22億元 年增18.21%",
+      "url": "https://tw.stock.yahoo.com/quote/1513/revenue",
+      "published": "2026-11-09",
+      "query": "Taiwan power grid"
+    },
+    {
+      "title": "中興電 1513 股價、K線、新聞",
+      "url": "https://stockwon.tw/stock/1513",
+      "published": "2026-11-20",
+      "query": "Taiwan power grid"
+    },
+    {
+      "title": "日月光投控 3711 股價、K線、新聞",
+      "url": "https://stockwon.tw/stock/3711",
+      "published": "2026-11-20",
+      "query": "Taiwan advanced packaging stock"
+    },
+    {
+      "title": "弘塑 3131 月營收與股價資料",
+      "url": "https://tw.stock.yahoo.com/quote/3131.TW/revenue",
+      "published": "2026-11-20",
+      "query": "Taiwan semiconductor equipment stock"
+    },
+    {
+      "title": "大銀微系統 4576 股價與估值資料",
+      "url": "https://stockwon.tw/stock/4576",
+      "published": "2026-11-20",
+      "query": "Taiwan CPO precision platform"
+    },
+    {
+      "title": "上銀 2049 股價與營收資料",
+      "url": "https://stockwon.tw/stock/2049",
+      "published": "2026-11-20",
+      "query": "Taiwan robotics stock"
+    },
+    {
+      "title": "Future-ready electricity system: 10 actions for grids",
+      "url": "https://www.weforum.org/stories/energy-transition/future-ready-electricity-system-grid-infrastructure",
+      "published": "2026-11-18",
+      "query": "energy and grid"
+    },
+    {
+      "title": "2027 Aerospace and Defense Industry Outlook",
+      "url": "https://www.deloitte.com/global/en/insights/industry/aerospace-defense/aerospace-and-defense-industry-outlook.html",
+      "published": "2026-11-17",
+      "query": "defense and aerospace"
+    },
+    {
+      "title": "Merck and Isomorphic Labs Enter Strategic Research Collaboration",
+      "url": "https://www.merck.com/news/merck-and-isomorphic-labs-enter-strategic-research-collaboration/",
+      "published": "2026-11-19",
+      "query": "healthcare and AI drug discovery"
+    },
+    {
+      "title": "Top 10 Emerging Technologies for Planetary Health: Energy Edition",
+      "url": "https://www.weforum.org/publications/top-10-emerging-technologies-for-planetary-health-energy-edition",
+      "published": "2026-11-13",
+      "query": "energy and critical materials"
+    }
+  ]
+}
